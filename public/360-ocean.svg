@@ -1,0 +1,16 @@
+<svg width="4096" height="2048" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="oceanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0c4a6e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0ea5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#67e8f9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="4096" height="2048" fill="url(#oceanGrad)"/>
+  <g opacity="0.1">
+    <path d="M0,512 L4096,512 M0,1024 L4096,1024 M0,1536 L4096,1536" stroke="white" stroke-width="2"/>
+    <path d="M512,0 L512,2048 M1024,0 L1024,2048 M1536,0 L1536,2048 M2048,0 L2048,2048 M2560,0 L2560,2048 M3072,0 L3072,2048 M3584,0 L3584,2048" stroke="white" stroke-width="2"/>
+  </g>
+  <text x="2048" y="1000" font-family="Arial" font-size="180" fill="white" text-anchor="middle" font-weight="bold">OCEAN VIEW 360°</text>
+  <text x="2048" y="1200" font-family="Arial" font-size="100" fill="rgba(255,255,255,0.8)" text-anchor="middle">Drag to look around</text>
+</svg>
