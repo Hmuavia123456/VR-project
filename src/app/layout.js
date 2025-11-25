@@ -19,17 +19,22 @@ export const metadata = {
   title: "Virtualii - Immersive 360° Virtual Tours",
   description: "Explore breathtaking 360° virtual tours from anywhere. Step into stunning locations with our immersive VR experience.",
   keywords: "virtual tours, 360 tours, VR tours, virtual reality, 360 video, panoramic tours",
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${playfair.variable} antialiased`}
+        className={`${inter.variable} ${playfair.variable} antialiased w-full overflow-x-hidden`}
         suppressHydrationWarning
       >
         <Navbar />
-        <main>{children}</main>
+        <main className="w-full overflow-x-hidden">{children}</main>
         <Footer />
       </body>
     </html>

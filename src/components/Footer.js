@@ -57,8 +57,8 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="bg-[#173142] text-white">
-      <div className="container-custom py-12 md:py-16">
+    <footer className="bg-[#173142] text-white w-full max-w-full overflow-x-hidden">
+      <div className="container-custom py-12 md:py-16 w-full">
         {/* Top Section - Newsletter */}
         <div className="mb-12 pb-12 border-b border-white/20">
           <div className="grid md:grid-cols-2 gap-8 items-center">

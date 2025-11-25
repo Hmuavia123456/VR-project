@@ -494,16 +494,16 @@ export default function ExplorePage() {
   ]
 
   return (
-    <div className="min-h-screen pt-20 bg-neutral-50">
-      {/* Top Navigation Tabs - Kuula Style */}
-      <div className="bg-white border-b border-neutral-200 sticky top-20 z-40">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-center gap-8">
+    <div className="min-h-screen pt-20 bg-neutral-50 w-full max-w-full overflow-x-hidden">
+      {/* Top Navigation Tabs - Kuula Style with Mobile Scroll */}
+      <div className="bg-white border-b border-neutral-200 sticky top-20 z-40 w-full max-w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-start sm:justify-center gap-4 sm:gap-8 overflow-x-auto scrollbar-hide pb-px">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`relative px-4 py-5 font-medium text-[15px] transition-colors ${
+                className={`relative px-3 sm:px-4 py-4 sm:py-5 font-medium text-sm sm:text-[15px] transition-colors whitespace-nowrap flex-shrink-0 ${
                   activeTab === tab.id
                     ? 'text-primary-600'
                     : 'text-neutral-600 hover:text-neutral-900'
@@ -524,8 +524,8 @@ export default function ExplorePage() {
       </div>
 
       {/* Tours Grid - EXACT Kuula Style (4 columns with IMAGES) */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
           {tours.map((tour, index) => (
             <motion.div
               key={tour.id}
