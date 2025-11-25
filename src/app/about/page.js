@@ -48,14 +48,14 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="section bg-gradient-to-br from-primary-50 to-accent-50">
+      <section className="section bg-[#CFE0DA]/30">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-neutral-900 mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-[#173142] mb-6">
               Transforming How People Experience Spaces
             </h1>
             <p className="text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto">
@@ -79,7 +79,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="text-4xl md:text-5xl font-bold text-primary-600 mb-2">
+                <div className="text-4xl md:text-5xl font-bold text-[#173142] mb-2">
                   {stat.number}
                 </div>
                 <div className="text-neutral-600 font-medium">{stat.label}</div>
@@ -98,12 +98,12 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-neutral-900 mb-6">
+              <h2 className="text-3xl md:text-4xl font-sans font-bold text-[#173142] mb-6">
                 Our Story
               </h2>
               <div className="space-y-4 text-neutral-600">
                 <p>
-                  VirtualTours was founded in 2020 with a simple idea: what if anyone could
+                  Virtualii was founded in 2020 with a simple idea: what if anyone could
                   create stunning, immersive virtual experiences without needing expensive
                   equipment or technical expertise?
                 </p>
@@ -138,7 +138,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-neutral-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-sans font-bold text-[#173142] mb-4">
               Our Values
             </h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
@@ -157,7 +157,7 @@ export default function AboutPage() {
                 className="card text-center"
               >
                 <div className="text-5xl mb-4">{value.icon}</div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-2">
+                <h3 className="text-xl font-bold text-[#173142] mb-2">
                   {value.title}
                 </h3>
                 <p className="text-neutral-600">{value.description}</p>
@@ -176,11 +176,11 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-neutral-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-sans font-bold text-[#173142] mb-4">
               Meet Our Team
             </h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              The passionate people behind VirtualTours
+              The passionate people behind Virtualii
             </p>
           </motion.div>
 
@@ -195,7 +195,7 @@ export default function AboutPage() {
                 className="card text-center"
               >
                 <div className="text-7xl mb-4">{member.avatar}</div>
-                <h3 className="text-xl font-bold text-neutral-900 mb-1">
+                <h3 className="text-xl font-bold text-[#173142] mb-1">
                   {member.name}
                 </h3>
                 <p className="text-neutral-600">{member.role}</p>
@@ -206,23 +206,28 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section bg-gradient-primary text-white">
+      <section className="section bg-gradient-to-br from-[#4A9FB3] to-[#236476] text-white">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-sans font-bold mb-6">
               Join Us on This Journey
             </h2>
             <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
               Whether you're a creator, business owner, or just curious about virtual tours,
               we'd love to have you on board.
             </p>
-            <Link href="/register" className="btn-accent text-lg px-8 py-4">
-              Get Started Today
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/register" className="bg-[#7DAD3F] text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-[#6a9636] transition-colors">
+                Get Started Today
+              </Link>
+              <Link href="/pricing" className="bg-[#236476] text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-[#1a4f5e] transition-colors">
+                View Pricing
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>

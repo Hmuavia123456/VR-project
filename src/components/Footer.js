@@ -57,16 +57,16 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="bg-neutral-900 text-neutral-300">
+    <footer className="bg-[#173142] text-white">
       <div className="container-custom py-12 md:py-16">
         {/* Top Section - Newsletter */}
-        <div className="mb-12 pb-12 border-b border-neutral-800">
+        <div className="mb-12 pb-12 border-b border-white/20">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
-              <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-2">
+              <h3 className="text-2xl md:text-3xl font-sans font-bold text-white mb-2">
                 Stay in the Loop
               </h3>
-              <p className="text-neutral-400">
+              <p className="text-white/80">
                 Get the latest tours, features, and VR news delivered to your inbox.
               </p>
             </div>
@@ -77,12 +77,12 @@ export default function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 bg-neutral-800 border border-neutral-700 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="flex-1 px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white"
                   required
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors whitespace-nowrap"
+                  className="px-6 py-3 bg-[#7DAD3F] text-white rounded-lg font-medium hover:bg-[#6a9636] transition-colors whitespace-nowrap"
                 >
                   {subscribed ? '✓ Subscribed!' : 'Subscribe'}
                 </button>
@@ -96,14 +96,14 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-white text-xl font-bold">VR</span>
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                <span className="text-[#173142] text-xl font-bold">V</span>
               </div>
-              <span className="text-xl font-display font-bold text-white">
-                VirtualTours
+              <span className="text-xl font-sans font-bold text-white">
+                Virtualii
               </span>
             </div>
-            <p className="text-sm text-neutral-400 mb-6">
+            <p className="text-sm text-white/80 mb-6">
               Immersive 360° virtual tours that transport you anywhere.
             </p>
             {/* Social Links */}
@@ -113,7 +113,7 @@ export default function Footer() {
                   key={social.name}
                   href={social.href}
                   aria-label={social.name}
-                  className="w-9 h-9 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-primary-600 transition-colors"
+                  className="w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30 transition-colors"
                 >
                   <span className="text-sm">{social.icon}</span>
                 </a>
@@ -130,7 +130,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-neutral-400 hover:text-white transition-colors"
+                      className="text-sm text-white/80 hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -142,18 +142,18 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section - Copyright */}
-        <div className="pt-8 border-t border-neutral-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-neutral-400">
-            © {new Date().getFullYear()} VirtualTours. All rights reserved.
+        <div className="pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-white/80">
+            © {new Date().getFullYear()} Virtualii. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
-            <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
+            <Link href="#" className="text-white/80 hover:text-white transition-colors">
               Privacy
             </Link>
-            <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
+            <Link href="#" className="text-white/80 hover:text-white transition-colors">
               Terms
             </Link>
-            <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
+            <Link href="#" className="text-white/80 hover:text-white transition-colors">
               Cookies
             </Link>
           </div>

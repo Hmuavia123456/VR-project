@@ -107,11 +107,11 @@ export default function RegisterPage() {
         >
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-display font-bold text-neutral-900 mb-2">
+            <h1 className="text-3xl md:text-4xl font-sans font-bold text-neutral-900 mb-2">
               Get Started Free
             </h1>
             <p className="text-neutral-600">
-              Create your VirtualTours account in seconds
+              Create your Virtualii account in seconds
             </p>
           </div>
 

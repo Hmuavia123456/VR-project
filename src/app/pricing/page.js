@@ -85,14 +85,14 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen pt-20">
       {/* Header */}
-      <section className="section bg-gradient-to-br from-primary-50 to-accent-50">
+      <section className="section bg-[#CFE0DA]/30">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-neutral-900 mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-[#173142] mb-6">
               Simple, Transparent Pricing
             </h1>
             <p className="text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto mb-8">
@@ -105,7 +105,7 @@ export default function PricingPage() {
                 onClick={() => setBillingCycle('monthly')}
                 className={`px-6 py-2 rounded-full font-medium transition-all ${
                   billingCycle === 'monthly'
-                    ? 'bg-primary-600 text-white'
+                    ? 'bg-[#236476] text-white'
                     : 'text-neutral-700'
                 }`}
               >
@@ -115,12 +115,12 @@ export default function PricingPage() {
                 onClick={() => setBillingCycle('yearly')}
                 className={`px-6 py-2 rounded-full font-medium transition-all ${
                   billingCycle === 'yearly'
-                    ? 'bg-primary-600 text-white'
+                    ? 'bg-[#236476] text-white'
                     : 'text-neutral-700'
                 }`}
               >
                 Yearly
-                <span className="ml-2 text-xs bg-accent-100 text-accent-700 px-2 py-1 rounded-full">
+                <span className="ml-2 text-xs bg-[#7DAD3F]/20 text-[#7DAD3F] px-2 py-1 rounded-full">
                   Save 20%
                 </span>
               </button>
@@ -141,37 +141,39 @@ export default function PricingPage() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className={`relative rounded-2xl p-8 ${
                   plan.popular
-                    ? 'bg-gradient-primary text-white shadow-glow'
-                    : 'bg-white shadow-medium'
+                    ? 'bg-gradient-to-br from-[#236476] to-[#1a5060] text-white shadow-glow'
+                    : index === 0
+                    ? 'bg-gradient-to-br from-[#4A9FB3] to-[#236476] text-white shadow-glow'
+                    : 'bg-gradient-to-br from-[#7DAD3F] to-[#5a8a2f] text-white shadow-glow'
                 }`}
               >
                 {/* Popular Badge */}
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-accent-500 text-white px-4 py-1 rounded-full text-sm font-medium">
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#7DAD3F] text-white px-4 py-1 rounded-full text-sm font-medium">
                     Most Popular
                   </div>
                 )}
 
                 <div>
-                  <h3 className={`text-2xl font-bold mb-2 ${plan.popular ? 'text-white' : 'text-neutral-900'}`}>
+                  <h3 className="text-2xl font-bold mb-2 text-white">
                     {plan.name}
                   </h3>
-                  <p className={`mb-6 ${plan.popular ? 'text-white/90' : 'text-neutral-600'}`}>
+                  <p className="mb-6 text-white/90">
                     {plan.tagline}
                   </p>
 
                   {/* Price */}
                   <div className="mb-6">
                     <div className="flex items-baseline">
-                      <span className={`text-5xl font-bold ${plan.popular ? 'text-white' : 'text-neutral-900'}`}>
+                      <span className="text-5xl font-bold text-white">
                         ${plan.price[billingCycle]}
                       </span>
-                      <span className={`ml-2 ${plan.popular ? 'text-white/80' : 'text-neutral-600'}`}>
+                      <span className="ml-2 text-white/80">
                         /month
                       </span>
                     </div>
                     {billingCycle === 'yearly' && (
-                      <p className={`text-sm mt-1 ${plan.popular ? 'text-white/80' : 'text-neutral-500'}`}>
+                      <p className="text-sm mt-1 text-white/80">
                         Billed ${plan.price.yearly * 12}/year
                       </p>
                     )}
@@ -182,8 +184,10 @@ export default function PricingPage() {
                     href="/register"
                     className={`block w-full text-center py-3 rounded-lg font-medium mb-8 transition-all ${
                       plan.popular
-                        ? 'bg-white text-primary-600 hover:bg-neutral-100'
-                        : 'bg-primary-600 text-white hover:bg-primary-700'
+                        ? 'bg-white text-[#236476] hover:bg-neutral-100'
+                        : index === 0
+                        ? 'bg-white text-[#236476] hover:bg-neutral-100'
+                        : 'bg-white text-[#7DAD3F] hover:bg-neutral-100'
                     }`}
                   >
                     {plan.cta}
@@ -194,7 +198,7 @@ export default function PricingPage() {
                     {plan.features.map((feature) => (
                       <li key={feature} className="flex items-start">
                         <svg
-                          className={`w-5 h-5 mr-3 mt-0.5 flex-shrink-0 ${plan.popular ? 'text-white' : 'text-primary-600'}`}
+                          className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0 text-white"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -204,7 +208,7 @@ export default function PricingPage() {
                             clipRule="evenodd"
                           />
                         </svg>
-                        <span className={plan.popular ? 'text-white/90' : 'text-neutral-600'}>
+                        <span className="text-white/90">
                           {feature}
                         </span>
                       </li>
@@ -220,7 +224,7 @@ export default function PricingPage() {
       {/* Comparison Table */}
       <section className="section bg-background-gray">
         <div className="container-custom">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-center text-neutral-900 mb-12">
+          <h2 className="text-3xl md:text-4xl font-sans font-bold text-center text-[#173142] mb-12">
             Compare Plans
           </h2>
 
@@ -241,7 +245,7 @@ export default function PricingPage() {
                     <td className="p-4 text-center text-neutral-600">
                       {typeof feature.basic === 'boolean' ? (
                         feature.basic ? (
-                          <span className="text-green-600">✓</span>
+                          <span className="text-[#7DAD3F]">✓</span>
                         ) : (
                           <span className="text-neutral-400">—</span>
                         )
@@ -252,7 +256,7 @@ export default function PricingPage() {
                     <td className="p-4 text-center text-neutral-600">
                       {typeof feature.pro === 'boolean' ? (
                         feature.pro ? (
-                          <span className="text-green-600">✓</span>
+                          <span className="text-[#7DAD3F]">✓</span>
                         ) : (
                           <span className="text-neutral-400">—</span>
                         )
@@ -263,7 +267,7 @@ export default function PricingPage() {
                     <td className="p-4 text-center text-neutral-600">
                       {typeof feature.business === 'boolean' ? (
                         feature.business ? (
-                          <span className="text-green-600">✓</span>
+                          <span className="text-[#7DAD3F]">✓</span>
                         ) : (
                           <span className="text-neutral-400">—</span>
                         )
@@ -282,7 +286,7 @@ export default function PricingPage() {
       {/* FAQ Section */}
       <section className="section">
         <div className="container-custom max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-center text-neutral-900 mb-12">
+          <h2 className="text-3xl md:text-4xl font-sans font-bold text-center text-[#173142] mb-12">
             Frequently Asked Questions
           </h2>
 
@@ -306,7 +310,7 @@ export default function PricingPage() {
               },
             ].map((faq, index) => (
               <div key={index} className="card">
-                <h4 className="text-lg font-bold text-neutral-900 mb-2">{faq.q}</h4>
+                <h4 className="text-lg font-bold text-[#173142] mb-2">{faq.q}</h4>
                 <p className="text-neutral-600">{faq.a}</p>
               </div>
             ))}
@@ -315,26 +319,26 @@ export default function PricingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section bg-gradient-primary text-white">
+      <section className="section bg-gradient-to-br from-[#7DAD3F] to-[#5a8a2f] text-white">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-sans font-bold mb-6">
               Ready to Get Started?
             </h2>
             <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
               Start your 14-day free trial. No credit card required.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/register" className="btn-accent text-lg px-8 py-4 shadow-xl">
+              <Link href="/register" className="bg-white text-[#7DAD3F] px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-neutral-100 transition-colors">
                 Start Free Trial
               </Link>
               <Link
                 href="/explore"
-                className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 rounded-lg font-medium hover:bg-white/20 transition-colors text-lg"
+                className="px-8 py-4 bg-white/10 border-2 border-white text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-white/20 transition-colors"
               >
                 View Demo Tours
               </Link>

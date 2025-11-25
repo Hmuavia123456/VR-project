@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
-import TourCard from '@/components/TourCard'
 
 // Dynamically import TourViewer (contains Three.js)
 const TourViewer = dynamic(() => import('@/components/TourViewer'), {
@@ -11,480 +10,620 @@ const TourViewer = dynamic(() => import('@/components/TourViewer'), {
 })
 
 /**
- * Explore Page
- * Browse and view 360° tours with filtering and search
+ * Explore Page - EXACT Kuula Style
+ * Browse 360° tours with tabs, grid layout, images and stats
  */
 export default function ExplorePage() {
   const [selectedTour, setSelectedTour] = useState(null)
-  const [searchQuery, setSearchQuery] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('all')
+  const [activeTab, setActiveTab] = useState('featured-photos')
 
-  // Sample 360° VR tour data (Mock data - replace with real tours later)
-  const tours = [
+  // Sample tour data with user info, stats, and categories
+  const allTours = [
+    // FEATURED PHOTOS (8 tours - variety of best photos)
     {
       id: 1,
-      title: 'Ocean Paradise 360°',
-      description: 'Immerse yourself in crystal-clear ocean waters with stunning coral reefs and marine life.',
-      image: '/360-real-ocean.jpg',
-      url: '/360-real-ocean.jpg',
+      title: 'Magical Mountain Castle at Sunset',
+      description: 'Fantasy castle in mountain peaks',
+      image: '/360-real-mountain.jpg',
+      url: '/360-real-mountain.jpg',
       type: 'photo',
-      category: 'travel',
-      tags: ['Ocean', 'Beach', 'Paradise', 'Nature'],
-      hotspots: [
-        {
-          position: [100, 0, 0],
-          title: 'Coral Reef',
-          description: 'Vibrant coral formations teeming with tropical fish',
-        },
-        {
-          position: [-100, 20, 50],
-          title: 'Horizon View',
-          description: 'Endless ocean meeting the sky',
-        },
-        {
-          position: [0, -50, 100],
-          title: 'Sandy Beach',
-          description: 'Pristine white sand beach shore',
-        },
-      ],
+      category: 'featured-photos',
+      user: { name: 'Sarah Hunter', initials: 'SH', color: 'bg-purple-600' },
+      stats: { reactions: 156, views: 8456 },
     },
     {
       id: 2,
-      title: 'Mountain Summit 360°',
-      description: 'Stand atop majestic mountain peaks and experience breathtaking panoramic views.',
-      image: '/360-real-mountain.jpg',
-      url: '/360-real-mountain.jpg',
+      title: 'Minimal 3D Architectural Design',
+      description: 'Modern interior design excellence',
+      image: '/360-real-interior.jpg',
+      url: '/360-real-interior.jpg',
       type: 'photo',
-      category: 'travel',
-      tags: ['Mountains', 'Adventure', 'Nature', 'Hiking'],
-      hotspots: [
-        {
-          position: [80, 0, -80],
-          title: 'North Peak',
-          description: 'Snow-capped peak at 4000m elevation',
-        },
-        {
-          position: [-80, 30, 0],
-          title: 'Valley Below',
-          description: 'Lush green valley stretching for miles',
-        },
-      ],
+      category: 'featured-photos',
+      user: { name: 'Fuji Gakseran LLC', initials: 'FG', color: 'bg-blue-600' },
+      stats: { reactions: 213, views: 12130 },
     },
     {
       id: 3,
-      title: 'Modern City Skyline 360°',
-      description: 'Explore stunning urban architecture and city lights from a rooftop perspective.',
+      title: 'Stunning Sunrise Over City',
+      description: 'Aerial city view at golden hour',
       image: '/360-real-city.jpg',
       url: '/360-real-city.jpg',
       type: 'photo',
-      category: 'realestate',
-      tags: ['City', 'Architecture', 'Urban', 'Skyline'],
-      hotspots: [
-        {
-          position: [120, 10, 0],
-          title: 'Downtown District',
-          description: 'Modern skyscrapers and business centers',
-        },
-        {
-          position: [-90, 0, 60],
-          title: 'Harbor View',
-          description: 'City harbor with boats and waterfront',
-        },
-      ],
+      category: 'featured-photos',
+      user: { name: 'Top Yat Hong Kong 360', initials: 'TY', color: 'bg-indigo-600' },
+      stats: { reactions: 317, views: 15672 },
     },
     {
       id: 4,
-      title: 'Nature Trail 360°',
-      description: 'Walk through serene forest paths with stunning natural beauty all around.',
-      image: '/360-real-nature.jpg',
-      url: '/360-real-nature.jpg',
-      type: 'photo',
-      category: 'travel',
-      tags: ['Nature', 'Forest', 'Trail', 'Hiking'],
-      hotspots: [
-        {
-          position: [100, 0, 0],
-          title: 'Forest Path',
-          description: 'Lush green forest trail ahead',
-        },
-        {
-          position: [-80, 20, 60],
-          title: 'Mountain View',
-          description: 'Distant peaks visible through the trees',
-        },
-      ],
-    },
-    {
-      id: 5,
-      title: 'Luxury Apartment Interior 360°',
-      description: 'Tour a premium penthouse with modern design and city views.',
-      image: '/360-real-interior.jpg',
-      url: '/360-real-interior.jpg',
-      type: 'photo',
-      category: 'realestate',
-      tags: ['Apartment', 'Luxury', 'Interior', 'Real Estate'],
-      hotspots: [
-        {
-          position: [80, 0, -80],
-          title: 'Living Room',
-          description: 'Spacious living area with panoramic windows',
-        },
-        {
-          position: [-70, 0, 50],
-          title: 'Kitchen',
-          description: 'State-of-the-art modern kitchen',
-        },
-      ],
-    },
-    {
-      id: 6,
-      title: 'Tropical Resort 360°',
-      description: 'Experience paradise at a luxury beach resort with infinity pools.',
+      title: 'Crystal Clear Coastal Waters',
+      description: 'Perfect tropical paradise',
       image: '/360-real-ocean.jpg',
       url: '/360-real-ocean.jpg',
       type: 'photo',
-      category: 'travel',
-      tags: ['Resort', 'Luxury', 'Beach', 'Vacation'],
-      hotspots: [
-        {
-          position: [100, -20, 0],
-          title: 'Infinity Pool',
-          description: 'Stunning pool overlooking the ocean',
-        },
-      ],
+      category: 'featured-photos',
+      user: { name: 'Coastal Photography', initials: 'CP', color: 'bg-cyan-600' },
+      stats: { reactions: 278, views: 18234 },
+    },
+    {
+      id: 5,
+      title: 'Untouched Natural Beauty',
+      description: 'Serene forest landscape',
+      image: '/360-real-nature.jpg',
+      url: '/360-real-nature.jpg',
+      type: 'photo',
+      category: 'featured-photos',
+      user: { name: 'Nature Lens', initials: 'NL', color: 'bg-lime-600' },
+      stats: { reactions: 234, views: 14678 },
+    },
+    {
+      id: 6,
+      title: 'Historic European Architecture',
+      description: 'Timeless architectural design',
+      image: '/360-neuer-zollhof-day.jpg',
+      url: '/360-neuer-zollhof-day.jpg',
+      type: 'photo',
+      category: 'featured-photos',
+      user: { name: 'Heritage Photos', initials: 'HP', color: 'bg-amber-600' },
+      stats: { reactions: 189, views: 11201 },
     },
     {
       id: 7,
-      title: 'Art Gallery Exhibition 360°',
-      description: 'Explore world-class art collections in an immersive gallery setting.',
-      image: '/360-real-interior.jpg',
-      url: '/360-real-interior.jpg',
+      title: 'Evening Cobblestone Street',
+      description: 'Charming old town atmosphere',
+      image: '/360-cobblestone-night.jpg',
+      url: '/360-cobblestone-night.jpg',
       type: 'photo',
-      category: 'culture',
-      tags: ['Art', 'Gallery', 'Museum', 'Exhibition'],
-      hotspots: [
-        {
-          position: [90, 0, 0],
-          title: 'Modern Art Section',
-          description: 'Contemporary artworks and installations',
-        },
-        {
-          position: [-90, 0, 60],
-          title: 'Classical Paintings',
-          description: 'Historic masterpieces collection',
-        },
-      ],
+      category: 'featured-photos',
+      user: { name: 'Street Photography', initials: 'SP', color: 'bg-violet-600' },
+      stats: { reactions: 192, views: 10345 },
     },
     {
       id: 8,
-      title: 'Historic Museum Tour 360°',
-      description: 'Discover ancient artifacts and cultural heritage in this museum experience.',
-      image: '/360-real-city.jpg',
-      url: '/360-real-city.jpg',
-      type: 'photo',
-      category: 'culture',
-      tags: ['Museum', 'History', 'Culture', 'Heritage'],
-      hotspots: [
-        {
-          position: [80, 10, -70],
-          title: 'Ancient Artifacts',
-          description: 'Historical relics from various civilizations',
-        },
-        {
-          position: [-70, 0, 80],
-          title: 'Cultural Exhibits',
-          description: 'Traditional art and cultural displays',
-        },
-      ],
-    },
-    {
-      id: 9,
-      title: 'Luxury Spa & Wellness 360°',
-      description: 'Step into tranquility with this premium spa and wellness center tour.',
-      image: '/360-real-interior.jpg',
-      url: '/360-real-interior.jpg',
-      type: 'photo',
-      category: 'lifestyle',
-      tags: ['Spa', 'Wellness', 'Luxury', 'Relaxation'],
-      hotspots: [
-        {
-          position: [100, 0, 0],
-          title: 'Treatment Rooms',
-          description: 'Private spa treatment areas',
-        },
-        {
-          position: [-80, -10, 60],
-          title: 'Relaxation Lounge',
-          description: 'Peaceful relaxation spaces',
-        },
-      ],
-    },
-    {
-      id: 10,
-      title: 'Modern Fitness Center 360°',
-      description: 'Tour a state-of-the-art fitness facility with premium equipment.',
-      image: '/360-real-nature.jpg',
-      url: '/360-real-nature.jpg',
-      type: 'photo',
-      category: 'lifestyle',
-      tags: ['Fitness', 'Gym', 'Health', 'Lifestyle'],
-      hotspots: [
-        {
-          position: [90, 0, -60],
-          title: 'Cardio Zone',
-          description: 'Modern cardio equipment area',
-        },
-        {
-          position: [-90, 10, 70],
-          title: 'Weight Training',
-          description: 'Free weights and strength equipment',
-        },
-      ],
-    },
-    {
-      id: 11,
-      title: 'Gourmet Restaurant 360°',
-      description: 'Experience fine dining ambiance in this upscale restaurant setting.',
-      image: '/360-real-interior.jpg',
-      url: '/360-real-interior.jpg',
-      type: 'photo',
-      category: 'lifestyle',
-      tags: ['Restaurant', 'Fine Dining', 'Gourmet', 'Food'],
-      hotspots: [
-        {
-          position: [80, 0, 0],
-          title: 'Main Dining Area',
-          description: 'Elegant dining space with premium seating',
-        },
-        {
-          position: [-70, 20, 50],
-          title: 'Private Dining',
-          description: 'Exclusive private dining rooms',
-        },
-      ],
-    },
-    {
-      id: 12,
-      title: 'Countryside Villa 360°',
-      description: 'Explore a peaceful countryside retreat with scenic mountain views.',
+      title: 'Alpine Mountain Vista',
+      description: 'Breathtaking peak views',
       image: '/360-real-mountain.jpg',
       url: '/360-real-mountain.jpg',
       type: 'photo',
-      category: 'travel',
-      tags: ['Villa', 'Countryside', 'Retreat', 'Nature'],
-      hotspots: [
+      category: 'featured-photos',
+      user: { name: 'Mountain Explorer', initials: 'ME', color: 'bg-emerald-600' },
+      stats: { reactions: 203, views: 13340 },
+    },
+
+    // FEATURED TOURS (8 tours - complete virtual tours)
+
+    // MULTI-SCENE TOUR EXAMPLE - AirPano Style with Multiple Viewpoints
+    {
+      id: 9,
+      title: 'Complete Neuer Zollhof Experience',
+      description: 'Multi-scene architectural tour with 5 stunning viewpoints',
+      image: '/360-neuer-zollhof-day.jpg',
+      type: 'tour',
+      category: 'featured-tours',
+      user: { name: 'Dreamtory Architect', initials: 'DA', color: 'bg-purple-700' },
+      stats: { reactions: 245, views: 15858 },
+      // Multi-scene data structure
+      scenes: [
         {
-          position: [100, 0, 0],
-          title: 'Mountain Panorama',
-          description: 'Breathtaking views of surrounding peaks',
+          id: 'scene-1',
+          title: 'Main Entrance - Daytime',
+          description: 'Iconic Gehry buildings in natural daylight',
+          url: '/360-neuer-zollhof-day.jpg',
+          thumbnail: '/360-neuer-zollhof-day.jpg',
+          type: 'photo',
+          hotspots: [
+            {
+              position: [100, 0, 0],
+              title: 'Building Details',
+              description: 'Frank Gehry\'s architectural masterpiece'
+            }
+          ]
         },
         {
-          position: [-90, -20, 80],
-          title: 'Garden Terrace',
-          description: 'Beautiful landscaped outdoor spaces',
+          id: 'scene-2',
+          title: 'Evening View - Golden Hour',
+          description: 'Warm sunset lighting on architecture',
+          url: '/360-neuer-zollhof-bright.jpg',
+          thumbnail: '/360-neuer-zollhof-bright.jpg',
+          type: 'photo',
         },
-      ],
+        {
+          id: 'scene-3',
+          title: 'Night Scene - Illuminated',
+          description: 'Stunning night lighting and reflections',
+          url: '/360-neuer-zollhof.jpg',
+          thumbnail: '/360-neuer-zollhof.jpg',
+          type: 'photo',
+        },
+        {
+          id: 'scene-4',
+          title: 'Cobblestone Street View',
+          description: 'Historic street perspective at night',
+          url: '/360-cobblestone-night.jpg',
+          thumbnail: '/360-cobblestone-night.jpg',
+          type: 'photo',
+        },
+        {
+          id: 'scene-5',
+          title: 'Lounge Bar Interior',
+          description: 'Elegant interior space',
+          url: '/360-lounge-bar.jpg',
+          thumbnail: '/360-lounge-bar.jpg',
+          type: 'photo',
+        }
+      ]
+    },
+
+    {
+      id: 10,
+      title: 'Contemporary Architectural Space',
+      description: 'Modern building walkthrough',
+      image: '/360-neuer-zollhof-day.jpg',
+      url: '/360-neuer-zollhof-day.jpg',
+      type: 'tour',
+      category: 'featured-tours',
+      user: { name: 'Urban Architecture', initials: 'UA', color: 'bg-slate-700' },
+      stats: { reactions: 145, views: 9858 },
+    },
+    {
+      id: 11,
+      title: 'Luxury Beachfront Property Tour',
+      description: 'Coastal real estate showcase',
+      image: '/360-real-ocean.jpg',
+      url: '/360-real-ocean.jpg',
+      type: 'tour',
+      category: 'featured-tours',
+      user: { name: 'Beach Realty 360', initials: 'BR', color: 'bg-sky-700' },
+      stats: { reactions: 267, views: 21234 },
+    },
+    {
+      id: 12,
+      title: 'Modern Home Interior Showcase',
+      description: 'Premium residential design',
+      image: '/360-real-interior.jpg',
+      url: '/360-real-interior.jpg',
+      type: 'tour',
+      category: 'featured-tours',
+      user: { name: 'Home Tours Pro', initials: 'HT', color: 'bg-pink-700' },
+      stats: { reactions: 198, views: 14823 },
     },
     {
       id: 13,
-      title: 'Downtown Penthouse 360°',
-      description: 'Luxury high-rise living with panoramic city views.',
+      title: 'Downtown Urban Experience',
+      description: 'City center exploration',
       image: '/360-real-city.jpg',
       url: '/360-real-city.jpg',
-      type: 'photo',
-      category: 'realestate',
-      tags: ['Penthouse', 'Luxury', 'City', 'Apartment'],
-      hotspots: [
-        {
-          position: [100, 20, 0],
-          title: 'Floor-to-Ceiling Windows',
-          description: 'Stunning city skyline views',
-        },
-        {
-          position: [-80, 0, 70],
-          title: 'Modern Interiors',
-          description: 'Contemporary design and finishes',
-        },
-      ],
+      type: 'tour',
+      category: 'featured-tours',
+      user: { name: 'Urban Tours', initials: 'UT', color: 'bg-indigo-700' },
+      stats: { reactions: 223, views: 18945 },
     },
     {
       id: 14,
-      title: 'Cultural Heritage Site 360°',
-      description: 'Journey through ancient architecture and historical landmarks.',
-      image: '/360-real-nature.jpg',
-      url: '/360-real-nature.jpg',
-      type: 'photo',
-      category: 'culture',
-      tags: ['Heritage', 'History', 'Architecture', 'Landmarks'],
-      hotspots: [
-        {
-          position: [90, 0, -60],
-          title: 'Ancient Structure',
-          description: 'Historic architectural marvel',
-        },
-        {
-          position: [-90, 20, 50],
-          title: 'Heritage Courtyard',
-          description: 'Traditional architectural elements',
-        },
-      ],
+      title: 'Mountain Resort Complete Tour',
+      description: 'Alpine lodge experience',
+      image: '/360-real-mountain.jpg',
+      url: '/360-real-mountain.jpg',
+      type: 'tour',
+      category: 'featured-tours',
+      user: { name: 'Resort Tours Inc', initials: 'RT', color: 'bg-teal-700' },
+      stats: { reactions: 176, views: 12567 },
     },
     {
       id: 15,
-      title: 'Cozy Coffee Shop 360°',
-      description: 'Immerse yourself in the warm atmosphere of a charming café.',
+      title: 'Nature Reserve Walkthrough',
+      description: 'Eco-tourism experience',
+      image: '/360-real-nature.jpg',
+      url: '/360-real-nature.jpg',
+      type: 'tour',
+      category: 'featured-tours',
+      user: { name: 'Eco Tours', initials: 'ET', color: 'bg-green-700' },
+      stats: { reactions: 189, views: 13456 },
+    },
+    {
+      id: 16,
+      title: 'Historic District Walking Tour',
+      description: 'Step back in time',
+      image: '/360-neuer-zollhof-day.jpg',
+      url: '/360-neuer-zollhof-day.jpg',
+      type: 'tour',
+      category: 'featured-tours',
+      user: { name: 'History Tours', initials: 'HT', color: 'bg-yellow-700' },
+      stats: { reactions: 134, views: 8765 },
+    },
+    {
+      id: 17,
+      title: 'Nightlife Street Experience',
+      description: 'Evening city atmosphere',
+      image: '/360-cobblestone-night.jpg',
+      url: '/360-cobblestone-night.jpg',
+      type: 'tour',
+      category: 'featured-tours',
+      user: { name: 'Night Tours', initials: 'NT', color: 'bg-purple-700' },
+      stats: { reactions: 156, views: 9890 },
+    },
+
+    // MOST LIKED (8 tours - highest engagement content)
+    {
+      id: 18,
+      title: 'Tropical Beach Paradise',
+      description: 'Perfect ocean escape',
+      image: '/360-real-ocean.jpg',
+      url: '/360-real-ocean.jpg',
+      type: 'photo',
+      category: 'most-liked',
+      user: { name: 'Island Views', initials: 'IV', color: 'bg-teal-600' },
+      stats: { reactions: 523, views: 25678 },
+    },
+    {
+      id: 19,
+      title: 'Sunset Mountain Vista',
+      description: 'Golden hour perfection',
+      image: '/360-real-mountain.jpg',
+      url: '/360-real-mountain.jpg',
+      type: 'photo',
+      category: 'most-liked',
+      user: { name: 'Golden Hour Photos', initials: 'GH', color: 'bg-yellow-600' },
+      stats: { reactions: 489, views: 20123 },
+    },
+    {
+      id: 20,
+      title: 'Metropolitan City Skyline',
+      description: 'Iconic urban view',
+      image: '/360-real-city.jpg',
+      url: '/360-real-city.jpg',
+      type: 'photo',
+      category: 'most-liked',
+      user: { name: 'Metro Views', initials: 'MV', color: 'bg-blue-600' },
+      stats: { reactions: 478, views: 22345 },
+    },
+    {
+      id: 21,
+      title: 'Alpine Mountain Lodge',
+      description: 'Stunning mountain retreat',
+      image: '/360-real-mountain.jpg',
+      url: '/360-real-mountain.jpg',
+      type: 'photo',
+      category: 'most-liked',
+      user: { name: 'Alpine Photos', initials: 'AP', color: 'bg-slate-600' },
+      stats: { reactions: 445, views: 19234 },
+    },
+    {
+      id: 22,
+      title: 'Architectural Masterpiece',
+      description: 'Award-winning design',
+      image: '/360-neuer-zollhof-day.jpg',
+      url: '/360-neuer-zollhof-day.jpg',
+      type: 'photo',
+      category: 'most-liked',
+      user: { name: 'Design Awards', initials: 'DA', color: 'bg-orange-600' },
+      stats: { reactions: 398, views: 17234 },
+    },
+    {
+      id: 23,
+      title: 'Designer Penthouse Interior',
+      description: 'Ultra-modern luxury living',
       image: '/360-real-interior.jpg',
       url: '/360-real-interior.jpg',
       type: 'photo',
-      category: 'lifestyle',
-      tags: ['Café', 'Coffee', 'Cozy', 'Social'],
-      hotspots: [
-        {
-          position: [80, 0, 0],
-          title: 'Seating Area',
-          description: 'Comfortable café seating with warm ambiance',
-        },
-        {
-          position: [-70, 10, 60],
-          title: 'Barista Counter',
-          description: 'Coffee preparation and service area',
-        },
-      ],
+      category: 'most-liked',
+      user: { name: 'Luxury Spaces', initials: 'LS', color: 'bg-red-600' },
+      stats: { reactions: 356, views: 16789 },
+    },
+    {
+      id: 24,
+      title: 'Forest Nature Sanctuary',
+      description: 'Peaceful natural retreat',
+      image: '/360-real-nature.jpg',
+      url: '/360-real-nature.jpg',
+      type: 'photo',
+      category: 'most-liked',
+      user: { name: 'Forest Photography', initials: 'FP', color: 'bg-emerald-600' },
+      stats: { reactions: 334, views: 14890 },
+    },
+    {
+      id: 25,
+      title: 'Historic Old Town Night',
+      description: 'Preserved heritage site',
+      image: '/360-cobblestone-night.jpg',
+      url: '/360-cobblestone-night.jpg',
+      type: 'photo',
+      category: 'most-liked',
+      user: { name: 'Heritage Sites', initials: 'HS', color: 'bg-amber-600' },
+      stats: { reactions: 312, views: 13567 },
+    },
+
+    // COLLECTIONS (8 tours - curated themed collections)
+    {
+      id: 26,
+      title: 'European Architecture Collection',
+      description: 'Historic buildings tour',
+      image: '/360-neuer-zollhof-day.jpg',
+      url: '/360-neuer-zollhof-day.jpg',
+      type: 'tour',
+      category: 'collections',
+      collection: 'Architecture',
+      user: { name: 'Heritage Collection', initials: 'HC', color: 'bg-amber-500' },
+      stats: { reactions: 234, views: 15234 },
+    },
+    {
+      id: 27,
+      title: 'World Cities Travel Collection',
+      description: 'Urban gems worldwide',
+      image: '/360-real-city.jpg',
+      url: '/360-real-city.jpg',
+      type: 'tour',
+      category: 'collections',
+      collection: 'Travel',
+      user: { name: 'City Explorer', initials: 'CE', color: 'bg-indigo-500' },
+      stats: { reactions: 298, views: 18890 },
+    },
+    {
+      id: 28,
+      title: 'Coastal Destinations Showcase',
+      description: 'Best beaches worldwide',
+      image: '/360-real-ocean.jpg',
+      url: '/360-real-ocean.jpg',
+      type: 'tour',
+      category: 'collections',
+      collection: 'Travel',
+      user: { name: 'Beach Destinations', initials: 'BD', color: 'bg-cyan-500' },
+      stats: { reactions: 278, views: 16234 },
+    },
+    {
+      id: 29,
+      title: 'Mountain Adventure Collection',
+      description: 'Complete trail guide',
+      image: '/360-real-mountain.jpg',
+      url: '/360-real-mountain.jpg',
+      type: 'tour',
+      category: 'collections',
+      collection: 'Adventure',
+      user: { name: 'Trail Guides', initials: 'TG', color: 'bg-green-500' },
+      stats: { reactions: 245, views: 14234 },
+    },
+    {
+      id: 30,
+      title: 'Interior Design Portfolio',
+      description: 'Best of modern interiors',
+      image: '/360-real-interior.jpg',
+      url: '/360-real-interior.jpg',
+      type: 'tour',
+      category: 'collections',
+      collection: 'Design',
+      user: { name: 'Design Collective', initials: 'DC', color: 'bg-pink-500' },
+      stats: { reactions: 189, views: 12567 },
+    },
+    {
+      id: 31,
+      title: 'Nature Wonders Collection',
+      description: 'Earth\'s natural beauty',
+      image: '/360-real-nature.jpg',
+      url: '/360-real-nature.jpg',
+      type: 'tour',
+      category: 'collections',
+      collection: 'Nature',
+      user: { name: 'Nature Wonders', initials: 'NW', color: 'bg-lime-500' },
+      stats: { reactions: 212, views: 13678 },
+    },
+    {
+      id: 32,
+      title: 'Night Photography Series',
+      description: 'After dark magic',
+      image: '/360-cobblestone-night.jpg',
+      url: '/360-cobblestone-night.jpg',
+      type: 'tour',
+      category: 'collections',
+      collection: 'Photography',
+      user: { name: 'Night Shots', initials: 'NS', color: 'bg-violet-500' },
+      stats: { reactions: 198, views: 11456 },
+    },
+    {
+      id: 33,
+      title: 'Premium Real Estate Portfolio',
+      description: 'Luxury properties showcase',
+      image: '/360-real-interior.jpg',
+      url: '/360-real-interior.jpg',
+      type: 'tour',
+      category: 'collections',
+      collection: 'Real Estate',
+      user: { name: 'Property Tours', initials: 'PT', color: 'bg-rose-500' },
+      stats: { reactions: 223, views: 14789 },
     },
   ]
 
-  const categories = [
-    { id: 'all', label: 'All Tours' },
-    { id: 'travel', label: 'Travel' },
-    { id: 'realestate', label: 'Real Estate' },
-    { id: 'culture', label: 'Culture' },
-    { id: 'lifestyle', label: 'Lifestyle' },
+  // Filter and sort tours based on active tab
+  const getFilteredTours = () => {
+    let filtered = [...allTours]
+
+    switch (activeTab) {
+      case 'featured-photos':
+        // Show only photos that are featured
+        filtered = filtered.filter(tour => tour.category === 'featured-photos')
+        break
+
+      case 'featured-tours':
+        // Show only tours that are featured
+        filtered = filtered.filter(tour => tour.category === 'featured-tours')
+        break
+
+      case 'most-liked':
+        // Sort by reactions (most liked first)
+        filtered = filtered.filter(tour => tour.category === 'most-liked')
+        filtered.sort((a, b) => b.stats.reactions - a.stats.reactions)
+        break
+
+      case 'collections':
+        // Show tours that belong to collections
+        filtered = filtered.filter(tour => tour.category === 'collections')
+        break
+
+      default:
+        filtered = filtered
+    }
+
+    return filtered
+  }
+
+  const tours = getFilteredTours()
+
+  const tabs = [
+    { id: 'featured-photos', label: 'Featured Photos' },
+    { id: 'featured-tours', label: 'Featured Tours' },
+    { id: 'most-liked', label: 'Most Liked' },
+    { id: 'collections', label: 'Collections' },
   ]
 
-  // Filter tours based on search and category
-  const filteredTours = tours.filter((tour) => {
-    const matchesSearch =
-      tour.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      tour.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      tour.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-
-    const matchesCategory =
-      selectedCategory === 'all' || tour.category === selectedCategory
-
-    return matchesSearch && matchesCategory
-  })
-
-  const handleTourClick = (tour) => {
-    setSelectedTour(tour)
-  }
-
-  const handleCloseTour = () => {
-    setSelectedTour(null)
-  }
-
-  const handleNextTour = () => {
-    const currentIndex = tours.findIndex((t) => t.id === selectedTour.id)
-    const nextIndex = (currentIndex + 1) % tours.length
-    setSelectedTour(tours[nextIndex])
-  }
-
-  const handlePrevTour = () => {
-    const currentIndex = tours.findIndex((t) => t.id === selectedTour.id)
-    const prevIndex = currentIndex === 0 ? tours.length - 1 : currentIndex - 1
-    setSelectedTour(tours[prevIndex])
-  }
-
   return (
-    <div className="min-h-screen pt-20">
-      {/* Header */}
-      <section className="section bg-gradient-to-br from-primary-50 to-accent-50">
-        <div className="container-custom text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-neutral-900 mb-6">
-              Explore Virtual Tours
-            </h1>
-            <p className="text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto">
-              Discover immersive 360° experiences from around the world.
-              Click any tour to start exploring.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Filters Section */}
-      <section className="section pt-8">
-        <div className="container-custom">
-          {/* Search Bar */}
-          <div className="mb-8">
-            <input
-              type="text"
-              placeholder="Search tours, locations, or tags..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="input text-lg"
-            />
-          </div>
-
-          {/* Category Filters */}
-          <div className="flex flex-wrap gap-3 mb-12">
-            {categories.map((category) => (
+    <div className="min-h-screen pt-20 bg-neutral-50">
+      {/* Top Navigation Tabs - Kuula Style */}
+      <div className="bg-white border-b border-neutral-200 sticky top-20 z-40">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-center gap-8">
+            {tabs.map((tab) => (
               <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-3 rounded-lg font-medium transition-all ${
-                  selectedCategory === category.id
-                    ? 'bg-primary-600 text-white shadow-md'
-                    : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`relative px-4 py-5 font-medium text-[15px] transition-colors ${
+                  activeTab === tab.id
+                    ? 'text-primary-600'
+                    : 'text-neutral-600 hover:text-neutral-900'
                 }`}
               >
-                {category.label}
+                {tab.label}
+                {activeTab === tab.id && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-600"
+                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                  />
+                )}
               </button>
             ))}
           </div>
-
-          {/* Results Count */}
-          <div className="mb-6 text-neutral-600">
-            Showing <span className="font-bold">{filteredTours.length}</span> tour
-            {filteredTours.length !== 1 ? 's' : ''}
-          </div>
-
-          {/* Tours Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredTours.map((tour) => (
-              <TourCard
-                key={tour.id}
-                tour={tour}
-                onClick={() => handleTourClick(tour)}
-              />
-            ))}
-          </div>
-
-          {/* No Results */}
-          {filteredTours.length === 0 && (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-bold text-neutral-900 mb-2">
-                No tours found
-              </h3>
-              <p className="text-neutral-600">
-                Try adjusting your search or filters
-              </p>
-            </div>
-          )}
         </div>
-      </section>
+      </div>
+
+      {/* Tours Grid - EXACT Kuula Style (4 columns with IMAGES) */}
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {tours.map((tour, index) => (
+            <motion.div
+              key={tour.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.05 }}
+              className="group bg-white rounded-lg overflow-hidden shadow hover:shadow-xl transition-all duration-300 cursor-pointer"
+              onClick={() => setSelectedTour(tour)}
+            >
+              {/* Tour Image with 360° Badge */}
+              <div className="relative w-full h-48 bg-neutral-200 overflow-hidden">
+                <img
+                  src={tour.image}
+                  alt={tour.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                {/* 360° Badge */}
+                <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-sm text-white px-2 py-1 rounded text-xs font-bold">
+                  360°
+                </div>
+              </div>
+
+              {/* Card Content */}
+              <div className="p-4">
+                {/* Title */}
+                <h3 className="font-semibold text-neutral-900 text-[15px] mb-2 line-clamp-2 leading-tight">
+                  {tour.title}
+                </h3>
+
+                {/* User Info */}
+                <div className="flex items-center gap-2 mb-3">
+                  {/* Avatar with colored background */}
+                  <div className={`w-6 h-6 rounded-full ${tour.user.color} flex items-center justify-center text-white text-xs font-bold`}>
+                    {tour.user.initials}
+                  </div>
+                  {/* Username */}
+                  <span className="text-neutral-600 text-xs truncate">
+                    {tour.user.name}
+                  </span>
+                </div>
+
+                {/* Stats Row */}
+                <div className="flex items-center justify-between text-neutral-500 text-sm">
+                  <div className="flex items-center gap-4">
+                    {/* Reactions (Heart) */}
+                    <div className="flex items-center gap-1">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                      </svg>
+                      <span className="text-xs">{tour.stats.reactions}</span>
+                    </div>
+                    {/* Views (Eye) */}
+                    <div className="flex items-center gap-1">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                      <span className="text-xs">{tour.stats.views.toLocaleString()}</span>
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex items-center gap-2">
+                    {/* Bookmark */}
+                    <button
+                      className="hover:text-primary-600 transition-colors"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                      }}
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                      </svg>
+                    </button>
+                    {/* Menu (3 dots) */}
+                    <button
+                      className="hover:text-neutral-900 transition-colors"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                      }}
+                    >
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
 
       {/* Tour Viewer Modal */}
       {selectedTour && (
         <TourViewer
           tour={selectedTour}
-          onClose={handleCloseTour}
-          onNext={handleNextTour}
-          onPrev={handlePrevTour}
+          onClose={() => setSelectedTour(null)}
         />
       )}
     </div>

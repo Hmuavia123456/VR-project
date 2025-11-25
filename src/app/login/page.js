@@ -80,11 +80,11 @@ export default function LoginPage() {
         >
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-display font-bold text-neutral-900 mb-2">
+            <h1 className="text-3xl md:text-4xl font-sans font-bold text-neutral-900 mb-2">
               Welcome Back
             </h1>
             <p className="text-neutral-600">
-              Sign in to your VirtualTours account
+              Sign in to your Virtualii account
             </p>
           </div>
 

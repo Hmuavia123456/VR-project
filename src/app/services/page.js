@@ -168,14 +168,14 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="section bg-gradient-to-br from-primary-50 to-accent-50">
+      <section className="section bg-[#CFE0DA]/30">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-neutral-900 mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-[#173142] mb-6">
               Virtual Tour Platform for Any Industry
             </h1>
             <p className="text-lg md:text-xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
@@ -227,7 +227,7 @@ export default function ServicesPage() {
                 transition={{ duration: 0.6 }}
                 className={index % 2 === 1 ? 'lg:order-1' : ''}
               >
-                <h2 className="text-3xl md:text-4xl font-display font-bold text-neutral-900 mb-4">
+                <h2 className="text-3xl md:text-4xl font-sans font-bold text-[#173142] mb-4">
                   {service.title}
                 </h2>
                 <div className="flex items-center gap-2 mb-4">
@@ -243,7 +243,7 @@ export default function ServicesPage() {
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <svg
-                        className="w-6 h-6 text-primary-600 flex-shrink-0 mt-0.5"
+                        className="w-6 h-6 text-[#7DAD3F] flex-shrink-0 mt-0.5"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -267,26 +267,26 @@ export default function ServicesPage() {
       ))}
 
       {/* CTA Section */}
-      <section className="section bg-gradient-primary text-white">
+      <section className="section bg-gradient-to-br from-[#236476] to-[#1a5060] text-white">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-sans font-bold mb-6">
               Ready to Transform Your Industry?
             </h2>
             <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
               Join thousands of professionals creating stunning 360° virtual experiences across every industry.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/register" className="btn-accent text-lg px-8 py-4 shadow-xl">
+              <a href="/register" className="bg-[#7DAD3F] text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-[#6a9636] transition-colors">
                 Start Free Trial
               </a>
               <a
                 href="/explore"
-                className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 rounded-lg font-medium hover:bg-white/20 transition-colors text-lg"
+                className="px-8 py-4 bg-[#236476] text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-[#1a4f5e] transition-colors"
               >
                 View Examples
               </a>

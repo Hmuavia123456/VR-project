@@ -42,18 +42,54 @@ function Hotspot({ position, title, description, onClick }) {
 }
 
 /**
- * 360 Photo Sphere Component
+ * 360 Photo Sphere Component with Fade Transition
  * Renders equirectangular image on inward-facing sphere
  */
-function PhotoSphere({ imageUrl, hotspots, onHotspotClick }) {
+function PhotoSphere({ imageUrl, hotspots, onHotspotClick, opacity = 1 }) {
   const meshRef = useRef()
+  const materialRef = useRef()
+  const [texture, setTexture] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setLoading(true)
+    const loader = new THREE.TextureLoader()
+    loader.load(
+      imageUrl,
+      (loadedTexture) => {
+        setTexture(loadedTexture)
+        setLoading(false)
+      },
+      undefined,
+      (error) => {
+        console.error('Error loading texture:', error)
+        setLoading(false)
+      }
+    )
+  }, [imageUrl])
+
+  // Smooth opacity transition
+  useFrame(() => {
+    if (materialRef.current) {
+      materialRef.current.opacity = THREE.MathUtils.lerp(
+        materialRef.current.opacity,
+        opacity,
+        0.1
+      )
+    }
+  })
+
+  if (!texture) return null
 
   return (
     <>
       <Sphere ref={meshRef} args={[500, 60, 40]} scale={[-1, 1, 1]}>
         <meshBasicMaterial
-          map={new THREE.TextureLoader().load(imageUrl)}
+          ref={materialRef}
+          map={texture}
           side={THREE.BackSide}
+          transparent={true}
+          opacity={opacity}
         />
       </Sphere>
 
@@ -98,16 +134,41 @@ function VideoSphere({ videoUrl }) {
 
 /**
  * TourViewer Component
- * Full-featured 360 viewer with controls, hotspots, and VR mode
- * @param {object} tour - Tour data { type: 'photo'|'video', url, hotspots, title }
+ * Full-featured 360 viewer with multi-scene support, controls, hotspots, and VR mode
+ * @param {object} tour - Tour data {
+ *   title: string,
+ *   description: string,
+ *   scenes: [{ type: 'photo'|'video', url, thumbnail, title, hotspots }]
+ * }
  * @param {function} onClose - Close handler
- * @param {function} onNext - Next tour handler
- * @param {function} onPrev - Previous tour handler
+ * @param {function} onNext - Next tour handler (optional)
+ * @param {function} onPrev - Previous tour handler (optional)
  */
 export default function TourViewer({ tour, onClose, onNext, onPrev }) {
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [showInfo, setShowInfo] = useState(true)
+  const [currentSceneIndex, setCurrentSceneIndex] = useState(0)
+  const [showThumbnails, setShowThumbnails] = useState(true)
   const containerRef = useRef()
+
+  // Support both old single-scene format and new multi-scene format
+  const scenes = tour.scenes || [tour]
+  const currentScene = scenes[currentSceneIndex]
+  const hasMultipleScenes = scenes.length > 1
+
+  // Keyboard navigation for scenes
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowLeft' && currentSceneIndex > 0) {
+        setCurrentSceneIndex(currentSceneIndex - 1)
+      } else if (e.key === 'ArrowRight' && currentSceneIndex < scenes.length - 1) {
+        setCurrentSceneIndex(currentSceneIndex + 1)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [currentSceneIndex, scenes.length])
 
   // Toggle fullscreen
   const toggleFullscreen = () => {
@@ -150,12 +211,12 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
           camera={{ position: [0, 0, 0.1], fov: 75 }}
           gl={{ antialias: true }}
         >
-          {tour.type === 'video' ? (
-            <VideoSphere videoUrl={tour.url} />
+          {currentScene.type === 'video' ? (
+            <VideoSphere videoUrl={currentScene.url} />
           ) : (
             <PhotoSphere
-              imageUrl={tour.url}
-              hotspots={tour.hotspots}
+              imageUrl={currentScene.url}
+              hotspots={currentScene.hotspots}
               onHotspotClick={handleHotspotClick}
             />
           )}
@@ -173,6 +234,67 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
         </Canvas>
       </Suspense>
 
+      {/* Thumbnail Sidebar - AirPano Style */}
+      {hasMultipleScenes && showThumbnails && (
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent hover:scrollbar-thumb-white/50 pr-1">
+          {scenes.map((scene, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSceneIndex(index)}
+              className={`relative w-24 h-20 rounded-lg overflow-hidden transition-all duration-300 border-2 ${
+                currentSceneIndex === index
+                  ? 'border-rose-500 ring-2 ring-rose-500/50 scale-105'
+                  : 'border-white/30 hover:border-white/60 hover:scale-105'
+              }`}
+              title={scene.title || `Scene ${index + 1}`}
+            >
+              {/* Thumbnail Image */}
+              <img
+                src={scene.thumbnail || scene.url}
+                alt={scene.title || `Scene ${index + 1}`}
+                className="w-full h-full object-cover"
+              />
+
+              {/* Overlay on active */}
+              {currentSceneIndex === index && (
+                <div className="absolute inset-0 bg-gradient-to-t from-rose-500/30 to-transparent" />
+              )}
+
+              {/* Scene number badge */}
+              <div className={`absolute top-1 left-1 text-xs font-bold px-1.5 py-0.5 rounded ${
+                currentSceneIndex === index
+                  ? 'bg-rose-500 text-white'
+                  : 'bg-black/70 text-white'
+              }`}>
+                {index + 1}
+              </div>
+
+              {/* Video indicator */}
+              {scene.type === 'video' && (
+                <div className="absolute bottom-1 right-1 text-white">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" />
+                  </svg>
+                </div>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Toggle Thumbnails Button */}
+      {hasMultipleScenes && (
+        <button
+          onClick={() => setShowThumbnails(!showThumbnails)}
+          className="absolute right-4 top-20 z-20 p-2 bg-black/50 hover:bg-black/70 backdrop-blur-sm text-white rounded-lg transition-all border border-white/20"
+          title={showThumbnails ? 'Hide Thumbnails' : 'Show Thumbnails'}
+        >
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+          </svg>
+        </button>
+      )}
+
       {/* Top Controls Bar */}
       <div className="absolute top-0 left-0 right-0 bg-gradient-to-b from-black/80 to-transparent p-4 z-10">
         <div className="flex items-center justify-between text-white">
@@ -180,9 +302,23 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
           <div className="flex-1">
             {showInfo && (
               <div>
-                <h2 className="text-xl font-bold">{tour.title}</h2>
-                {tour.description && (
-                  <p className="text-sm text-neutral-300">{tour.description}</p>
+                <h2 className="text-xl font-bold">
+                  {tour.title}
+                  {hasMultipleScenes && (
+                    <span className="text-rose-500 ml-2 text-sm">
+                      ({currentSceneIndex + 1}/{scenes.length})
+                    </span>
+                  )}
+                </h2>
+                {currentScene.title && (
+                  <p className="text-sm text-white/90 mt-1">
+                    📍 {currentScene.title}
+                  </p>
+                )}
+                {(tour.description || currentScene.description) && (
+                  <p className="text-xs text-neutral-300 mt-1">
+                    {currentScene.description || tour.description}
+                  </p>
                 )}
               </div>
             )}

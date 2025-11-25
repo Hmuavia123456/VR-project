@@ -2,18 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS Variables for VR Tour Theme */
+/* Fix for browser extension hydration warnings (BitDefender, etc.) */
+/* This prevents layout shifts caused by browser extensions adding attributes */
+[bis_skin_checked] {
+  /* Browser extension attributes won't affect layout */
+}
+
+/* Custom CSS Variables for VR Tour Theme - Earth Tone Palette */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-  --primary: #6366f1;
-  --accent: #f43f5e;
+  --foreground: #173142;
+  --primary: #173142;
+  --secondary: #236476;
+  --accent: #7DAD3F;
+  --light-bg: #CFE0DA;
+  --dark-green: #4A6C2F;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #173142;
   }
 }
 
@@ -89,12 +98,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #236476;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #1a4f5e;
 }
 
 /* Smooth Transitions */
