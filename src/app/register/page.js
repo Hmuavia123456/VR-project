@@ -97,7 +97,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen pt-20 flex items-center justify-center bg-background-gray py-12">
+    <div className="min-h-screen pt-20 flex items-center justify-center bg-gradient-to-br from-primary-50 via-background-light to-accent-50 py-12">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -107,22 +107,22 @@ export default function RegisterPage() {
         >
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-sans font-bold text-neutral-900 mb-2">
+            <h1 className="text-3xl md:text-4xl font-sans font-bold text-primary-900 mb-2">
               Get Started Free
             </h1>
             <p className="text-neutral-600">
-              Create your Virtualii account in seconds
+              Create your Virtulee account in seconds
             </p>
           </div>
 
           {/* Registration Form */}
-          <div className="bg-white rounded-2xl shadow-medium p-8">
+          <div className="bg-white rounded-2xl shadow-xl p-8 border border-primary-100">
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Name Field */}
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-neutral-900 mb-2"
+                  className="block text-sm font-medium text-primary-900 mb-2"
                 >
                   Full Name
                 </label>
@@ -132,7 +132,7 @@ export default function RegisterPage() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`input ${errors.name ? 'border-red-500' : ''}`}
+                  className={`input focus:border-primary-500 focus:ring-primary-500 ${errors.name ? 'border-red-500' : ''}`}
                   placeholder="John Doe"
                 />
                 {errors.name && (
@@ -144,7 +144,7 @@ export default function RegisterPage() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-neutral-900 mb-2"
+                  className="block text-sm font-medium text-primary-900 mb-2"
                 >
                   Email Address
                 </label>
@@ -154,7 +154,7 @@ export default function RegisterPage() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`input ${errors.email ? 'border-red-500' : ''}`}
+                  className={`input focus:border-primary-500 focus:ring-primary-500 ${errors.email ? 'border-red-500' : ''}`}
                   placeholder="you@example.com"
                 />
                 {errors.email && (
@@ -166,7 +166,7 @@ export default function RegisterPage() {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-neutral-900 mb-2"
+                  className="block text-sm font-medium text-primary-900 mb-2"
                 >
                   Password
                 </label>
@@ -176,7 +176,7 @@ export default function RegisterPage() {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className={`input ${errors.password ? 'border-red-500' : ''}`}
+                  className={`input focus:border-primary-500 focus:ring-primary-500 ${errors.password ? 'border-red-500' : ''}`}
                   placeholder="Create a strong password"
                 />
                 {errors.password && (
@@ -191,7 +191,7 @@ export default function RegisterPage() {
               <div>
                 <label
                   htmlFor="confirmPassword"
-                  className="block text-sm font-medium text-neutral-900 mb-2"
+                  className="block text-sm font-medium text-primary-900 mb-2"
                 >
                   Confirm Password
                 </label>
@@ -201,7 +201,7 @@ export default function RegisterPage() {
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className={`input ${errors.confirmPassword ? 'border-red-500' : ''}`}
+                  className={`input focus:border-primary-500 focus:ring-primary-500 ${errors.confirmPassword ? 'border-red-500' : ''}`}
                   placeholder="Re-enter your password"
                 />
                 {errors.confirmPassword && (
@@ -217,17 +217,17 @@ export default function RegisterPage() {
                     name="agreeToTerms"
                     checked={formData.agreeToTerms}
                     onChange={handleChange}
-                    className={`mt-1 w-4 h-4 text-primary-600 border-neutral-300 rounded focus:ring-primary-500 ${
+                    className={`mt-1 w-4 h-4 text-primary-700 border-neutral-300 rounded focus:ring-primary-500 ${
                       errors.agreeToTerms ? 'border-red-500' : ''
                     }`}
                   />
                   <span className="ml-2 text-sm text-neutral-700">
                     I agree to the{' '}
-                    <Link href="#" className="text-primary-600 hover:text-primary-700">
+                    <Link href="#" className="font-medium text-accent-600 hover:text-accent-700">
                       Terms of Service
                     </Link>{' '}
                     and{' '}
-                    <Link href="#" className="text-primary-600 hover:text-primary-700">
+                    <Link href="#" className="font-medium text-accent-600 hover:text-accent-700">
                       Privacy Policy
                     </Link>
                   </span>
@@ -241,7 +241,7 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-primary-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? 'Creating account...' : 'Create Account'}
               </button>
@@ -250,7 +250,7 @@ export default function RegisterPage() {
             {/* Divider */}
             <div className="relative my-6">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-neutral-300" />
+                <div className="w-full border-t border-neutral-200" />
               </div>
               <div className="relative flex justify-center text-sm">
                 <span className="px-2 bg-white text-neutral-500">Or sign up with</span>
@@ -259,13 +259,13 @@ export default function RegisterPage() {
 
             {/* Social Signup Buttons */}
             <div className="grid grid-cols-2 gap-4">
-              <button className="flex items-center justify-center px-4 py-2 border border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors">
+              <button className="flex items-center justify-center px-4 py-2 border border-primary-200 rounded-lg hover:bg-primary-50 transition-colors">
                 <span className="mr-2">🔵</span>
-                <span className="text-sm font-medium">Google</span>
+                <span className="text-sm font-medium text-primary-800">Google</span>
               </button>
-              <button className="flex items-center justify-center px-4 py-2 border border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors">
+              <button className="flex items-center justify-center px-4 py-2 border border-primary-200 rounded-lg hover:bg-primary-50 transition-colors">
                 <span className="mr-2">⚫</span>
-                <span className="text-sm font-medium">GitHub</span>
+                <span className="text-sm font-medium text-primary-800">GitHub</span>
               </button>
             </div>
 
@@ -274,7 +274,7 @@ export default function RegisterPage() {
               Already have an account?{' '}
               <Link
                 href="/login"
-                className="font-medium text-primary-600 hover:text-primary-700"
+                className="font-semibold text-accent-600 hover:text-accent-700"
               >
                 Sign in
               </Link>

@@ -122,7 +122,7 @@ function CanvasFallback() {
     <div className="absolute inset-0">
       {/* Theme-based gradient background */}
       <div
-        className="absolute inset-0 bg-gradient-to-br from-[#236476] via-[#173142] to-[#1a5060]"
+        className="absolute inset-0 bg-gradient-to-br from-[#9e7540] via-[#4a3424] to-[#6b4d32]"
         style={{
           animation: 'gradientShift 8s ease infinite',
         }}
@@ -182,22 +182,25 @@ export default function Hero360({ imageUrl = '/360-hero.jpg', videoUrl = null })
   return (
     <div className="relative min-h-[100vh] sm:h-[90vh] md:h-[85vh] w-full max-w-full overflow-hidden">
       {/* 360 Background Canvas */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#236476] via-[#173142] to-[#1a5060] w-full max-w-full">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#9e7540] via-[#4a3424] to-[#6b4d32] w-full max-w-full">
         <Suspense fallback={<CanvasFallback />}>
           <Canvas
             camera={{ position: [0, 0, 0.1], fov: 75 }}
             gl={{
               antialias: true,
               alpha: false,
-              preserveDrawingBuffer: true
+              preserveDrawingBuffer: true,
+              powerPreference: 'high-performance',
+              stencil: false
             }}
+            dpr={[1, 2]}
             onCreated={({ gl, scene }) => {
-              gl.setClearColor('#236476')
-              scene.background = new THREE.Color('#236476')
+              gl.setClearColor('#9e7540')
+              scene.background = new THREE.Color('#9e7540')
             }}
           >
             <Hero360Sphere mediaUrl={mediaUrl} isVideo={isVideo} />
-            {/* OrbitControls for ultra-smooth 360° interaction */}
+            {/* OrbitControls for ultra-smooth 360° interaction with mobile support */}
             <OrbitControls
               enableZoom={true}
               enablePan={false}
@@ -213,6 +216,10 @@ export default function Hero360({ imageUrl = '/360-hero.jpg', videoUrl = null })
               maxPolarAngle={Math.PI}
               enableRotate={true}
               makeDefault={true}
+              touches={{
+                ONE: THREE.TOUCH.ROTATE,
+                TWO: THREE.TOUCH.DOLLY_PAN
+              }}
             />
           </Canvas>
         </Suspense>
@@ -229,15 +236,17 @@ export default function Hero360({ imageUrl = '/360-hero.jpg', videoUrl = null })
           transition={{ duration: 1, delay: 0.3 }}
           className="text-center max-w-4xl mx-auto px-4 sm:px-6 pointer-events-auto"
         >
-          {/* Main Heading without Container */}
+          {/* Main Heading - Beautiful Virtulee Logo Text */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
             className="mb-6 sm:mb-8"
           >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-3 sm:mb-4 drop-shadow-2xl leading-tight" style={{textShadow: '0 4px 20px rgba(0,0,0,0.8)'}}>
-              IMMERSIVE VIRTUAL TOURS
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold mb-3 sm:mb-4 leading-tight uppercase">
+              <span className="text-white">
+                Virtulee
+              </span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white font-light drop-shadow-lg" style={{textShadow: '0 2px 10px rgba(0,0,0,0.8)'}}>
               Create, Share & Explore in 360°
@@ -253,7 +262,7 @@ export default function Hero360({ imageUrl = '/360-hero.jpg', videoUrl = null })
           >
             <Link
               href="/register"
-              className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white/95 backdrop-blur-xl text-neutral-900 rounded-2xl font-semibold text-base sm:text-lg shadow-2xl hover:shadow-3xl hover:bg-white transition-all duration-300 transform hover:scale-105 border border-white/20"
+              className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-[#85603f] backdrop-blur-xl text-white rounded-2xl font-semibold text-base sm:text-lg shadow-2xl hover:shadow-3xl hover:bg-[#6b4d32] transition-all duration-300 transform hover:scale-105 border border-[#bd9354]/30"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 Start Free Trial
@@ -265,7 +274,7 @@ export default function Hero360({ imageUrl = '/360-hero.jpg', videoUrl = null })
 
             <Link
               href="/explore"
-              className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white/10 backdrop-blur-xl text-white rounded-2xl font-semibold text-base sm:text-lg border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-300 shadow-lg"
+              className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white/10 backdrop-blur-xl text-white rounded-2xl font-semibold text-base sm:text-lg border-2 border-[#bd9354]/50 hover:bg-[#bd9354]/20 hover:border-[#bd9354] transition-all duration-300 shadow-lg"
             >
               <span className="flex items-center justify-center gap-2">
                 Explore Tours
@@ -274,24 +283,6 @@ export default function Hero360({ imageUrl = '/360-hero.jpg', videoUrl = null })
                 </svg>
               </span>
             </Link>
-          </motion.div>
-
-          {/* Feature Pills with Better Contrast */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            className="mt-8 sm:mt-12 flex flex-wrap gap-2 sm:gap-3 justify-center px-4"
-          >
-            <span className="px-3 sm:px-4 py-1.5 sm:py-2 bg-black/60 backdrop-blur-md text-white font-medium rounded-full text-xs sm:text-sm border border-white/30 shadow-lg whitespace-nowrap">
-              ✓ No Credit Card Required
-            </span>
-            <span className="px-3 sm:px-4 py-1.5 sm:py-2 bg-black/60 backdrop-blur-md text-white font-medium rounded-full text-xs sm:text-sm border border-white/30 shadow-lg whitespace-nowrap">
-              ✓ 14-Day Free Trial
-            </span>
-            <span className="px-3 sm:px-4 py-1.5 sm:py-2 bg-black/60 backdrop-blur-md text-white font-medium rounded-full text-xs sm:text-sm border border-white/30 shadow-lg whitespace-nowrap">
-              ✓ Unlimited Tours
-            </span>
           </motion.div>
         </motion.div>
       </div>

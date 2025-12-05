@@ -14,13 +14,13 @@ export default function ServicesPage() {
       title: 'Real Estate',
       tagline: 'Transform Property Marketing with Immersive Tours',
       icon: '🏠',
-      description: 'Revolutionize how you showcase properties with our cutting-edge 360° virtual tour technology. Enable potential buyers to explore listings remotely, saving time while generating more qualified leads. Real estate professionals worldwide trust our platform to deliver engaging property presentations that drive faster sales.',
-      image: '/360-real-city.jpg',
+      description: 'Showcase stunning properties with breathtaking 360° virtual tours that capture every architectural detail and luxurious feature. Our platform enables real estate agents and brokers to present homes in their best light, allowing potential buyers to explore beautiful interiors, modern designs, and elegant spaces from anywhere in the world. Create compelling virtual experiences that highlight the unique character and premium quality of each property.',
+      image: '/real-estate-modern.jpg',
       features: [
-        'Remote property viewing - Buyers can explore homes anytime, anywhere without scheduling conflicts',
-        'Higher quality leads - Filter serious prospects who have already virtually toured the property',
-        'Competitive advantage - Distinguish your listings with premium interactive experiences',
-        'Enhanced online presence - Properties with virtual tours receive significantly more engagement',
+        'Stunning property showcases - Display luxurious interiors and architectural beauty in immersive detail',
+        'Remote viewing experience - Buyers explore properties 24/7 from the comfort of their homes',
+        'Qualified lead generation - Attract serious buyers who have already experienced the property virtually',
+        'Competitive market edge - Stand out with premium virtual tours that sell properties faster',
       ],
     },
     {
@@ -28,13 +28,13 @@ export default function ServicesPage() {
       title: 'Hospitality',
       tagline: 'Elevate Guest Confidence and Drive Reservations',
       icon: '🏨',
-      description: 'Transform how travelers discover your venue with immersive 360° experiences. Our platform enables hotels, resorts, and vacation rentals to showcase their spaces authentically, building trust with potential guests before they book. Create memorable first impressions that convert browsers into confirmed reservations.',
-      image: '/360-real-interior.jpg',
+      description: 'Present your hospitality venue with inviting 360° virtual tours that showcase comfortable accommodations, welcoming interiors, and thoughtfully designed spaces. Our platform helps hotels, resorts, bed & breakfasts, and vacation rentals build trust with potential guests by offering authentic virtual walkthroughs of rooms, common areas, and amenities. Create warm, engaging experiences that inspire confidence and drive bookings.',
+      image: '/hospitality-interior.jpg',
       features: [
-        'Build booking confidence - Guests can virtually walk through rooms and amenities before reserving',
-        'Captivating visual presentation - Create memorable impressions with interactive venue showcases',
-        'Brand customization - Design tours that reflect your unique hospitality brand identity',
-        'Google integration - Enhance discoverability through seamless Street View publishing',
+        'Welcoming space presentation - Showcase comfortable rooms and inviting interiors that appeal to guests',
+        'Virtual room previews - Let travelers explore accommodations and amenities before booking',
+        'Trust building experience - Authentic tours that accurately represent your hospitality offering',
+        'Booking conversion boost - Convert browsers into guests with immersive virtual experiences',
       ],
     },
     {
@@ -42,13 +42,13 @@ export default function ServicesPage() {
       title: 'Architecture',
       tagline: 'Showcase Architectural Vision in Stunning Detail',
       icon: '🏛️',
-      description: 'Transform static blueprints into immersive experiences that bring your designs to life. Our platform empowers architects and designers to present projects in ways that truly communicate spatial relationships and design intent, helping clients visualize the final result before construction begins.',
-      image: '/360-real-nature.jpg',
+      description: 'Present architectural masterpieces with immersive 360° virtual tours that capture striking designs, innovative structures, and bold geometric forms. Our platform enables architects and designers to showcase modern buildings, creative spaces, and cutting-edge architectural concepts in ways that truly communicate vision and spatial brilliance. Transform how you present contemporary architecture, from concept to completion.',
+      image: '/architecture-modern.jpg',
       features: [
-        'Immersive client presentations - Enable stakeholders to experience designs from within',
-        'Complete design control - Tailor every aspect to perfectly represent your architectural vision',
-        'Enhanced project marketing - Developers gain powerful tools to attract investors and buyers',
-        'VR compatibility - Present designs using cutting-edge virtual reality technology',
+        'Stunning architectural showcase - Present modern designs and innovative structures in immersive detail',
+        'Spatial storytelling - Communicate design intent and architectural vision through virtual experiences',
+        'Client engagement - Enable stakeholders to explore and appreciate architectural creativity',
+        'Portfolio excellence - Create compelling presentations that win projects and attract clients',
       ],
     },
     {
@@ -56,13 +56,13 @@ export default function ServicesPage() {
       title: 'Public Sector',
       tagline: 'Modernize Civic Engagement and Project Documentation',
       icon: '🏛️',
-      description: 'Empower government agencies and municipalities with advanced documentation tools for infrastructure projects and public initiatives. Our virtual tour platform helps create comprehensive visual records that enhance community engagement, improve transparency, and streamline project communication with citizens and stakeholders.',
-      image: '/360-real-mountain.jpg',
+      description: 'Transform how government agencies and municipalities document public buildings, heritage sites, and civic infrastructure with immersive 360° virtual tours. Our platform enables public sector organizations to create engaging visual records of government facilities, historical landmarks, community centers, and public spaces. Enhance transparency, improve citizen access, and preserve important civic assets for future generations.',
+      image: '/public-sector-building.jpg',
       features: [
-        'Comprehensive documentation - Create detailed visual records of infrastructure and development projects',
-        'Community transparency - Share project progress with citizens through accessible virtual tours',
-        'Enhanced civic communication - Explain complex initiatives using intuitive visual formats',
-        'Budget-friendly solution - Achieve professional documentation without expensive specialized equipment',
+        'Historic preservation - Document and showcase heritage buildings and culturally significant sites',
+        'Public facility access - Provide virtual tours of government buildings and community spaces',
+        'Civic transparency - Share infrastructure projects and developments with citizens digitally',
+        'Cultural education - Create immersive experiences that educate and engage the public',
       ],
     },
     {
@@ -70,13 +70,13 @@ export default function ServicesPage() {
       title: 'Insurance',
       tagline: 'Optimize Claims Processing with Visual Documentation',
       icon: '🛡️',
-      description: 'Streamline insurance workflows with comprehensive 360° visual documentation. Our platform provides insurance professionals with powerful tools to capture accurate property conditions, document claim details, and conduct remote assessments, improving efficiency while maintaining the highest standards of accuracy and security.',
-      image: '/360-real-ocean.jpg',
+      description: 'Revolutionize insurance documentation with detailed 360° virtual tours for property assessment and claims processing. Our platform enables insurance professionals to conduct thorough remote inspections, document property conditions accurately, and create comprehensive visual records for residential and commercial properties. Streamline workflows, reduce site visit costs, and maintain detailed documentation for risk assessment and claim verification.',
+      image: '/insurance-property.jpg',
       features: [
-        'Precise damage documentation - Create comprehensive visual records for accurate claim processing',
-        'Pre-loss assessments - Document property conditions for risk evaluation and underwriting',
-        'Secure data handling - Control access with password protection and encrypted storage',
-        'Efficient workflow - Reduce processing time and costs compared to traditional methods',
+        'Remote property inspections - Conduct detailed assessments without physical site visits',
+        'Accurate condition documentation - Create comprehensive visual records for underwriting and claims',
+        'Claim verification efficiency - Review property damage and validate claims with immersive documentation',
+        'Risk assessment tools - Evaluate properties thoroughly for accurate insurance coverage decisions',
       ],
     },
     {
@@ -84,13 +84,13 @@ export default function ServicesPage() {
       title: 'Construction',
       tagline: 'Document Project Evolution from Start to Finish',
       icon: '🏗️',
-      description: 'Keep construction projects on track with comprehensive visual documentation at every stage. Our platform enables project managers and construction teams to create organized progress records that keep all stakeholders informed, facilitate better decision-making, and provide valuable project archives.',
-      image: '/360-real-city.jpg',
+      description: 'Transform construction project documentation with immersive 360° virtual tours that capture every phase of development. Our platform empowers construction managers, contractors, and developers to create detailed visual records of active construction sites, track progress systematically, and maintain comprehensive project archives. Document structural work, site conditions, and project milestones with professional virtual tours that keep teams aligned and stakeholders informed.',
+      image: '/construction-site.jpg',
       features: [
-        'Organized progress tracking - Document each construction phase with clear visual records',
-        'Stakeholder communication - Keep investors and managers updated with immersive progress reports',
-        'Cost-effective documentation - Achieve professional results without complex systems',
-        'Complete project lifecycle - Capture before, during, and after construction phases',
+        'Site progress documentation - Capture detailed visual records of construction phases and milestones',
+        'Remote site monitoring - Enable stakeholders to review project status without site visits',
+        'Quality control tracking - Document work quality and identify issues early in the process',
+        'Project timeline archive - Create comprehensive records from groundbreaking to completion',
       ],
     },
     {
@@ -98,13 +98,13 @@ export default function ServicesPage() {
       title: 'Luxury Vehicles',
       tagline: 'Premium Presentations for High-End Transportation',
       icon: '🚗',
-      description: 'Elevate the presentation of luxury vehicles with immersive virtual showcases. Our platform enables dealers and brokers to create sophisticated interactive tours of high-end RVs, yachts, and aircraft, providing discerning buyers with the premium experience they expect while generating qualified interest.',
-      image: '/360-real-interior.jpg',
+      description: 'Showcase luxury automobiles with stunning 360° virtual tours that capture every detail of premium vehicles. Our platform enables dealerships, collectors, and luxury car brokers to present high-end vehicles with immersive experiences that highlight exquisite exteriors, refined interiors, and exceptional craftsmanship. Create sophisticated virtual showrooms that attract discerning buyers and elevate your luxury automotive brand.',
+      image: '/luxury-vehicle.jpg',
       features: [
-        'Premium buyer experience - Match the luxury of your inventory with sophisticated presentations',
-        'Interior detail showcase - Highlight craftsmanship, amenities, and design elements comprehensively',
-        'Qualified lead generation - Attract serious buyers through detailed virtual previews',
-        'Professional branding - Present inventory with polished, customizable tour experiences',
+        'Exquisite vehicle presentation - Showcase luxury cars with immersive detail and premium quality',
+        'Interior craftsmanship focus - Highlight fine materials, design elements, and luxury features',
+        'Remote showroom experience - Enable buyers to explore vehicles from anywhere in the world',
+        'Exclusive buyer engagement - Attract qualified collectors and enthusiasts with premium presentations',
       ],
     },
     {
@@ -112,13 +112,13 @@ export default function ServicesPage() {
       title: 'Education',
       tagline: 'Create Engaging Learning Experiences Beyond Classrooms',
       icon: '🎓',
-      description: 'Transform educational content with interactive 360° learning experiences. Our platform empowers educators to create immersive lessons that bring subjects to life, from virtual science labs to historical site explorations, making learning more engaging and accessible for students everywhere.',
-      image: '/360-real-nature.jpg',
+      description: 'Transform education with immersive 360° virtual tours that bring learning spaces and educational environments to life. Our platform enables schools, universities, and educational institutions to create engaging virtual experiences of classrooms, laboratories, libraries, and learning facilities. Enhance student engagement through interactive exploration of educational spaces, making learning more accessible and inspiring for students worldwide.',
+      image: '/education-learning.jpg',
       features: [
-        'Enhanced student engagement - Make learning memorable through interactive virtual experiences',
-        'Rich multimedia integration - Incorporate quizzes, videos, and informational overlays seamlessly',
-        'Universal accessibility - Enable students to explore locations regardless of physical limitations',
-        'Educational preservation - Archive important sites and research for future learning applications',
+        'Virtual learning spaces - Showcase educational facilities and create immersive classroom experiences',
+        'Interactive exploration - Enable students to explore labs, libraries, and learning environments virtually',
+        'Distance learning enhancement - Provide remote students with authentic campus and facility experiences',
+        'Educational accessibility - Make learning spaces available to students regardless of physical location',
       ],
     },
     {
@@ -126,13 +126,13 @@ export default function ServicesPage() {
       title: 'Small Business',
       tagline: 'Amplify Your Local Presence and Attract Customers',
       icon: '🏪',
-      description: 'Give your business space the spotlight it deserves with professional virtual tours. Our platform helps small businesses create engaging online experiences that showcase their unique environment, integrate with Google Street View for enhanced visibility, and convert online browsers into walk-in customers.',
-      image: '/360-real-interior.jpg',
+      description: 'Showcase your small business with inviting 360° virtual tours that highlight your unique storefront, retail space, or service location. Our platform helps local businesses, boutiques, cafes, and shops create engaging online experiences that attract customers and build trust. Display your business atmosphere, products, and services with professional virtual tours that drive foot traffic and increase local visibility.',
+      image: '/small-business.jpg',
       features: [
-        'Boosted online visibility - Integrate with Google Maps and Business to reach more local customers',
-        'Customer confidence - Let prospects explore your space before visiting in person',
-        'Custom brand experience - Design tours that authentically represent your business atmosphere',
-        'Accessible marketing - Professional marketing tools at small business-friendly pricing',
+        'Storefront showcase - Display your business space and create inviting first impressions online',
+        'Local customer attraction - Convert online browsers into walk-in customers with virtual previews',
+        'Google Business integration - Enhance local search visibility and discoverability',
+        'Authentic brand presence - Show customers your unique atmosphere and business personality',
       ],
     },
     {
@@ -140,13 +140,13 @@ export default function ServicesPage() {
       title: 'Art Galleries & Museums',
       tagline: 'Share Cultural Experiences with the World',
       icon: '🎨',
-      description: 'Break down geographical barriers and share your exhibitions globally through virtual tours. Our platform enables galleries and museums to create immersive digital experiences that complement physical visits, preserve temporary exhibitions, and engage art enthusiasts from around the world.',
-      image: '/360-real-city.jpg',
+      description: 'Transform how art galleries and museums present exhibitions with immersive 360° virtual tours that capture the beauty of displayed artwork and curated spaces. Our platform enables cultural institutions to create engaging digital experiences that showcase paintings, sculptures, installations, and gallery environments. Share your collections with global audiences, preserve exhibitions digitally, and inspire art lovers worldwide with stunning virtual gallery experiences.',
+      image: '/art-gallery.jpg',
       features: [
-        'Worldwide accessibility - Share exhibitions with international audiences instantly',
-        'Digital preservation - Create lasting records of temporary or traveling exhibits',
-        'Enhanced storytelling - Add context with audio narration, artist information, and multimedia',
-        'Visitor inspiration - Preview exhibitions to encourage future in-person attendance',
+        'Exhibition showcase - Present artwork and gallery spaces in immersive, high-quality detail',
+        'Global audience reach - Share collections with art enthusiasts worldwide instantly',
+        'Digital exhibition archive - Preserve temporary shows and create permanent digital records',
+        'Enhanced visitor engagement - Inspire future visits with beautiful virtual gallery experiences',
       ],
     },
     {
@@ -154,13 +154,13 @@ export default function ServicesPage() {
       title: 'Colleges & Universities',
       tagline: 'Connect with Future Students Through Virtual Campus Experiences',
       icon: '🏫',
-      description: 'Bring your campus to prospective students wherever they are with comprehensive virtual tours. Our platform enables universities to create engaging digital experiences that showcase facilities, campus culture, and student life, helping families make informed decisions from any location.',
-      image: '/360-real-nature.jpg',
+      description: 'Showcase your university campus with immersive 360° virtual tours that capture beautiful architecture, historic buildings, and vibrant campus environments. Our platform enables colleges and universities to create engaging virtual experiences that highlight academic facilities, student spaces, campus landmarks, and the unique character of your institution. Connect with prospective students worldwide and inspire them to envision their future on your campus.',
+      image: '/university-campus.jpg',
       features: [
-        'Extended recruitment reach - Connect with prospective students globally through virtual visits',
-        'Comprehensive facility showcase - Highlight academic buildings, dormitories, and campus amenities',
-        'Always-on availability - Provide campus tours anytime, accommodating different schedules and time zones',
-        'Recruitment efficiency - Supplement traditional campus tours with scalable digital alternatives',
+        'Campus beauty showcase - Display stunning architecture and historic campus buildings in detail',
+        'Global student recruitment - Reach prospective students worldwide with accessible virtual tours',
+        'Complete campus experience - Showcase academic buildings, student facilities, and campus atmosphere',
+        '24/7 virtual access - Enable families to explore campus anytime from anywhere in the world',
       ],
     },
   ]
@@ -168,14 +168,14 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="section bg-[#CFE0DA]/30">
+      <section className="section bg-background-light">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-[#173142] mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-primary-900 mb-6">
               Virtual Tour Platform for Any Industry
             </h1>
             <p className="text-lg md:text-xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
@@ -227,13 +227,10 @@ export default function ServicesPage() {
                 transition={{ duration: 0.6 }}
                 className={index % 2 === 1 ? 'lg:order-1' : ''}
               >
-                <h2 className="text-3xl md:text-4xl font-sans font-bold text-[#173142] mb-4">
+                <h2 className="text-3xl md:text-4xl font-sans font-bold text-primary-900 mb-4">
                   {service.title}
                 </h2>
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="text-2xl">{service.icon}</span>
-                  <p className="text-lg font-semibold text-neutral-700">{service.tagline}</p>
-                </div>
+                <p className="text-lg font-semibold text-primary-700 mb-4">{service.tagline}</p>
                 <p className="text-neutral-600 mb-6 leading-relaxed">
                   {service.description}
                 </p>
@@ -243,7 +240,7 @@ export default function ServicesPage() {
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <svg
-                        className="w-6 h-6 text-[#7DAD3F] flex-shrink-0 mt-0.5"
+                        className="w-6 h-6 text-accent-500 flex-shrink-0 mt-0.5"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -267,26 +264,26 @@ export default function ServicesPage() {
       ))}
 
       {/* CTA Section */}
-      <section className="section bg-gradient-to-br from-[#236476] to-[#1a5060] text-white">
+      <section className="section bg-background-light">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-sans font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-sans font-bold mb-6 text-primary-900">
               Ready to Transform Your Industry?
             </h2>
-            <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
+            <p className="text-xl mb-8 text-neutral-600 max-w-2xl mx-auto">
               Join thousands of professionals creating stunning 360° virtual experiences across every industry.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/register" className="bg-[#7DAD3F] text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-[#6a9636] transition-colors">
+              <a href="/register" className="bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-800 transition-colors">
                 Start Free Trial
               </a>
               <a
                 href="/explore"
-                className="px-8 py-4 bg-[#236476] text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-[#1a4f5e] transition-colors"
+                className="px-8 py-4 bg-accent-500 text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-accent-600 transition-colors border-2 border-accent-600"
               >
                 View Examples
               </a>

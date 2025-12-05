@@ -16,7 +16,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
-  title: "Virtualii - Immersive 360° Virtual Tours",
+  title: "Virtulee - Immersive 360° Virtual Tours",
   description: "Explore breathtaking 360° virtual tours from anywhere. Step into stunning locations with our immersive VR experience.",
   keywords: "virtual tours, 360 tours, VR tours, virtual reality, 360 video, panoramic tours",
   viewport: {

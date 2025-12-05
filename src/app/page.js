@@ -30,7 +30,7 @@ export default function HomePage() {
 
   const testimonials = [
     {
-      quote: "Virtualii helped us sell properties 3x faster. The 360° tours are incredibly easy to create and our clients love them!",
+      quote: "Virtulee helped us sell properties 3x faster. The 360° tours are incredibly easy to create and our clients love them!",
       author: "Sarah Johnson",
       role: "Real Estate Agent",
       company: "Premier Properties"
@@ -70,7 +70,7 @@ export default function HomePage() {
   }, [testimonials.length])
 
   return (
-    <div className="w-full max-w-full overflow-x-hidden">
+    <div className="w-full max-w-full overflow-x-hidden" suppressHydrationWarning>
       {/* Hero Section - Kuula Style with Stunning 360° Background */}
       <Hero360 imageUrl="/hero-360.jpg" />
 
@@ -84,7 +84,7 @@ export default function HomePage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative h-96 bg-gradient-to-br from-primary-500/20 to-accent-500/20 rounded-2xl overflow-hidden group cursor-pointer shadow-xl"
+              className="relative h-96 cursor-pointer"
               onClick={() => setSelectedTour({
                 id: 'feature-1',
                 title: 'The Rooster Restaurant - 360° Tour',
@@ -97,20 +97,12 @@ export default function HomePage() {
                 ],
               })}
             >
-              <Image
-                src="/360-real-interior.jpg"
-                alt="Virtual Tour Preview"
-                fill
-                unoptimized
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              {/* Play Icon */}
-              <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
-                <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
-                  <svg className="w-10 h-10 text-[#173142] ml-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                  </svg>
-                </div>
+              <div className="relative h-full overflow-hidden group shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-3xl">
+                <img
+                  src="/360-real-interior.jpg"
+                  alt="Virtual Tour Preview"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
               </div>
             </motion.div>
 
@@ -120,34 +112,37 @@ export default function HomePage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="text-center lg:text-left"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#173142] mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#4a3424] mb-4 sm:mb-6">
                 Create Virtual Tours that engage your audience
               </h2>
               <p className="text-base sm:text-lg text-neutral-600 mb-4 sm:mb-6 leading-relaxed">
                 Our editor is simple but packed with powerful features. With the{' '}
-                <span className="font-semibold text-[#173142]">PRO</span> and{' '}
-                <span className="font-semibold text-[#173142]">BUSINESS</span> plans
+                <span className="font-semibold text-[#85603F]">PRO</span> and{' '}
+                <span className="font-semibold text-[#85603F]">BUSINESS</span> plans
                 you can create unlimited tours, add labels, custom hotspots, nadir and zenith patches,
                 background audio, interactive cards and floor plans. Create beautiful 3D 360 tours that your
                 users won't easily forget!
               </p>
-              <button
-                onClick={() => setSelectedTour({
-                  id: 'feature-1',
-                  title: 'The Rooster Restaurant - 360° Tour',
-                  description: 'Experience our interactive virtual tour',
-                  url: '/360-real-interior.jpg',
-                  type: 'photo',
-                  hotspots: [
-                    { position: [100, 0, 0], title: 'Dining Area', description: 'Modern restaurant seating' },
-                    { position: [-80, 0, 50], title: 'Bar Section', description: 'Full-service bar' },
-                  ],
-                })}
-                className="inline-block px-8 py-3 border-2 border-[#236476] text-[#236476] rounded-lg font-medium hover:bg-[#236476] hover:text-white transition-colors"
-              >
-                WATCH INTRO VIDEO
-              </button>
+              <div className="flex justify-center lg:justify-start">
+                <button
+                  onClick={() => setSelectedTour({
+                    id: 'feature-1',
+                    title: 'The Rooster Restaurant - 360° Tour',
+                    description: 'Experience our interactive virtual tour',
+                    url: '/360-real-interior.jpg',
+                    type: 'photo',
+                    hotspots: [
+                      { position: [100, 0, 0], title: 'Dining Area', description: 'Modern restaurant seating' },
+                      { position: [-80, 0, 50], title: 'Bar Section', description: 'Full-service bar' },
+                    ],
+                  })}
+                  className="w-full sm:w-auto px-8 py-3 bg-[#85603F] text-white rounded-lg font-medium hover:bg-[#6b4d32] transition-colors shadow-md hover:shadow-lg text-center"
+                >
+                  WATCH VIRTUAL TOUR
+                </button>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -163,14 +158,33 @@ export default function HomePage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="text-center lg:text-left"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#173142] mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#4a3424] mb-4 sm:mb-6">
                 The smoothest and most efficient 3D 360 Virtual Tour player on the web
               </h2>
-              <p className="text-base sm:text-lg text-neutral-600 leading-relaxed">
+              <p className="text-base sm:text-lg text-neutral-600 mb-4 sm:mb-6 leading-relaxed">
                 Don't just show images to your clients - give them an experience! Kuula offers the smoothest
                 and most efficient 3D 360 Virtual Tour player on the web. Perfect to the last detail.
               </p>
+              <div className="flex justify-center lg:justify-start">
+                <button
+                  onClick={() => setSelectedTour({
+                    id: 'feature-2',
+                    title: 'Modern Living Space - 360° Experience',
+                    description: 'Explore this stunning interior',
+                    url: '/360-real-city.jpg',
+                    type: 'photo',
+                    hotspots: [
+                      { position: [100, 0, 0], title: 'Living Area', description: 'Spacious and modern' },
+                      { position: [-80, 20, 50], title: 'Outdoor View', description: 'Beautiful scenery' },
+                    ],
+                  })}
+                  className="w-full sm:w-auto px-8 py-3 bg-[#85603F] text-white rounded-lg font-medium hover:bg-[#6b4d32] transition-colors shadow-md hover:shadow-lg text-center"
+                >
+                  WATCH VIRTUAL TOUR
+                </button>
+              </div>
             </motion.div>
 
             {/* Right - 360° Tour Preview */}
@@ -179,7 +193,7 @@ export default function HomePage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative h-96 bg-gradient-to-br from-primary-500/20 to-accent-500/20 rounded-2xl overflow-hidden group cursor-pointer shadow-xl"
+              className="relative h-96 cursor-pointer"
               onClick={() => setSelectedTour({
                 id: 'feature-2',
                 title: 'Modern Living Space - 360° Experience',
@@ -192,20 +206,12 @@ export default function HomePage() {
                 ],
               })}
             >
-              <Image
-                src="/360-real-city.jpg"
-                alt="Virtual Tour Preview"
-                fill
-                unoptimized
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              {/* Play Icon */}
-              <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
-                <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
-                  <svg className="w-10 h-10 text-primary-600 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                  </svg>
-                </div>
+              <div className="relative h-full overflow-hidden group shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-3xl">
+                <img
+                  src="/360-real-city.jpg"
+                  alt="Virtual Tour Preview"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
               </div>
             </motion.div>
           </div>
@@ -222,7 +228,7 @@ export default function HomePage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative h-96 bg-gradient-to-br from-accent-500/20 to-primary-500/20 rounded-2xl overflow-hidden group cursor-pointer shadow-xl"
+              className="relative h-96 cursor-pointer"
               onClick={() => setSelectedTour({
                 id: 'feature-3',
                 title: 'Mountain Paradise - 360° Video Experience',
@@ -236,24 +242,12 @@ export default function HomePage() {
                 ],
               })}
             >
-              <Image
-                src="/360-real-mountain.jpg"
-                alt="360 Video Tour Preview"
-                fill
-                unoptimized
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              {/* Play Icon */}
-              <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
-                <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
-                  <svg className="w-10 h-10 text-[#173142] ml-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                  </svg>
-                </div>
-              </div>
-              {/* Video Badge */}
-              <div className="absolute top-4 right-4 bg-[#7DAD3F] text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                360° VIDEO
+              <div className="relative h-full overflow-hidden group shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-3xl">
+                <img
+                  src="/360-real-mountain.jpg"
+                  alt="360 Video Tour Preview"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
               </div>
             </motion.div>
 
@@ -263,39 +257,42 @@ export default function HomePage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="text-center lg:text-left"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#173142] mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#4a3424] mb-4 sm:mb-6">
                 Experience immersive 360° video tours like never before
               </h2>
               <p className="text-base sm:text-lg text-neutral-600 mb-4 sm:mb-6 leading-relaxed">
                 Take your virtual tours to the next level with{' '}
-                <span className="font-semibold text-[#173142]">360° video support</span>.
+                <span className="font-semibold text-[#4a3424]">360° video support</span>.
                 Showcase dynamic environments, moving scenes, and real-time experiences that static
                 images simply cannot capture. Perfect for tourism, events, and experiential marketing.
               </p>
               <p className="text-base sm:text-lg text-neutral-600 mb-4 sm:mb-6 leading-relaxed">
                 Our advanced video player supports{' '}
-                <span className="font-semibold text-[#173142]">4K resolution</span>,
+                <span className="font-semibold text-[#4a3424]">4K resolution</span>,
                 smooth playback, and interactive hotspots - all optimized for both desktop and mobile devices.
                 Create unforgettable experiences that truly transport your audience.
               </p>
-              <button
-                onClick={() => setSelectedTour({
-                  id: 'feature-3',
-                  title: 'Mountain Paradise - 360° Video Experience',
-                  description: 'Immersive video tour of breathtaking landscapes',
-                  url: '/360-real-mountain.jpg',
-                  type: 'photo',
-                  hotspots: [
-                    { position: [120, 30, 0], title: 'Mountain Peak', description: 'Stunning panoramic views' },
-                    { position: [-100, -20, 60], title: 'Valley View', description: 'Natural beauty at its finest' },
-                    { position: [0, 40, -100], title: 'Sky View', description: 'Clear blue skies' },
-                  ],
-                })}
-                className="inline-block px-8 py-3 bg-[#7DAD3F] text-white rounded-lg font-medium hover:bg-[#6a9636] transition-colors shadow-md hover:shadow-lg"
-              >
-                EXPLORE VIDEO TOUR
-              </button>
+              <div className="flex justify-center lg:justify-start">
+                <button
+                  onClick={() => setSelectedTour({
+                    id: 'feature-3',
+                    title: 'Mountain Paradise - 360° Video Experience',
+                    description: 'Immersive video tour of breathtaking landscapes',
+                    url: '/360-real-mountain.jpg',
+                    type: 'photo',
+                    hotspots: [
+                      { position: [120, 30, 0], title: 'Mountain Peak', description: 'Stunning panoramic views' },
+                      { position: [-100, -20, 60], title: 'Valley View', description: 'Natural beauty at its finest' },
+                      { position: [0, 40, -100], title: 'Sky View', description: 'Clear blue skies' },
+                    ],
+                  })}
+                  className="w-full sm:w-auto px-8 py-3 bg-[#85603F] text-white rounded-lg font-medium hover:bg-[#6b4d32] transition-colors shadow-md hover:shadow-lg text-center"
+                >
+                  WATCH VIRTUAL TOUR
+                </button>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -310,7 +307,7 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#173142] mb-3 sm:mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#4a3424] mb-4 sm:mb-6">
               Create Your First Tour in 3 Simple Steps
             </h2>
             <p className="text-base sm:text-lg text-neutral-600 max-w-2xl mx-auto">
@@ -325,7 +322,16 @@ export default function HomePage() {
                 title: 'Capture',
                 description: 'Use any 360° camera or our mobile app to capture your space. We support all major 360° cameras.',
                 features: ['Any 360° camera', 'Mobile app', 'DSLR panoramas'],
-                gradient: 'from-blue-500 to-cyan-500',
+                gradient: 'from-[#bd9354] to-[#9e7540]',
+                image: (
+                  <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden shadow-lg group">
+                    <img
+                      src="/capture-camera.jpg"
+                      alt="Capture with 360 camera"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                ),
                 icon: (
                   <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -338,7 +344,16 @@ export default function HomePage() {
                 title: 'Create',
                 description: 'Upload and customize your tour with our drag-and-drop editor. Add hotspots, info cards, and branding.',
                 features: ['Drag-and-drop', 'Hotspots', 'Custom branding'],
-                gradient: 'from-blue-500 to-cyan-500',
+                gradient: 'from-[#9e7540] to-[#85603f]',
+                image: (
+                  <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden shadow-lg group">
+                    <img
+                      src="/create-software.jpg"
+                      alt="Create and customize your tour"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                ),
                 icon: (
                   <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -350,7 +365,16 @@ export default function HomePage() {
                 title: 'Publish',
                 description: 'Share your tour instantly with a single link. Embed on your website or share on social media.',
                 features: ['Instant hosting', 'Embed anywhere', 'Social sharing'],
-                gradient: 'from-green-500 to-emerald-500',
+                gradient: 'from-[#85603f] to-[#6b4d32]',
+                image: (
+                  <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden shadow-lg group">
+                    <img
+                      src="/publish-share.webp"
+                      alt="Publish and share your tour"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                ),
                 icon: (
                   <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
@@ -364,29 +388,19 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="relative group"
+                className="relative"
               >
-                <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-neutral-100">
-                  {/* Gradient Background on Hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
+                <div className="relative bg-white rounded-2xl p-8 shadow-lg overflow-hidden border border-neutral-100">
+                  {/* Illustration Image */}
+                  {item.image && item.image}
 
-                  {/* Step Number Badge */}
-                  <div className={`absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br ${item.gradient} rounded-full flex items-center justify-center font-bold text-2xl text-white opacity-10 group-hover:opacity-20 transition-opacity`}>
-                    {item.step}
-                  </div>
-
-                  {/* Icon with Gradient Background */}
-                  <div className="relative inline-flex p-4 bg-[#236476] rounded-2xl text-white mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    {item.icon}
-                  </div>
-
-                  <h3 className="text-2xl font-bold text-[#173142] mb-3">{item.title}</h3>
+                  <h3 className="text-2xl font-bold text-[#4a3424] mb-3">{item.title}</h3>
                   <p className="text-neutral-600 mb-6 leading-relaxed">{item.description}</p>
 
                   <ul className="space-y-3">
                     {item.features.map((feature, idx) => (
                       <li key={idx} className="text-sm text-neutral-700 flex items-center gap-3">
-                        <div className="w-5 h-5 rounded-full bg-[#7DAD3F] flex items-center justify-center flex-shrink-0">
+                        <div className="w-5 h-5 rounded-full bg-[#85603F] flex items-center justify-center flex-shrink-0">
                           <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
@@ -411,11 +425,11 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#173142] mb-3 sm:mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#4a3424] mb-4 sm:mb-6">
               Trusted Across Every Industry
             </h2>
             <p className="text-base sm:text-lg text-neutral-600 max-w-2xl mx-auto">
-              From real estate to education, businesses worldwide rely on Virtualii.
+              From real estate to education, businesses worldwide rely on Virtulee.
             </p>
           </motion.div>
 
@@ -512,11 +526,11 @@ export default function HomePage() {
                 className="group"
               >
                 <div className="bg-white rounded-xl p-5 shadow hover:shadow-lg transition-all duration-300 border border-neutral-100 text-center h-full">
-                  <div className="inline-flex p-3 rounded-lg bg-[#236476] text-white mb-3 group-hover:scale-110 transition-transform">
+                  <div className="inline-flex p-3 rounded-lg bg-[#9e7540] text-white mb-3 group-hover:scale-110 transition-transform">
                     {industry.icon}
                   </div>
-                  <h3 className="font-bold text-[#173142] mb-1 text-sm">{industry.title}</h3>
-                  <p className="text-xs text-neutral-600">{industry.desc}</p>
+                  <h3 className="font-bold text-[#4a3424] mb-2 text-lg">{industry.title}</h3>
+                  <p className="text-sm text-neutral-600">{industry.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -533,7 +547,7 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#173142] mb-3 sm:mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#4a3424] mb-4 sm:mb-6">
               What Our Customers Say
             </h2>
           </motion.div>
@@ -564,13 +578,13 @@ export default function HomePage() {
 
               {/* Author */}
               <div className="text-center">
-                <div className="font-bold text-[#173142] text-lg">
+                <div className="font-bold text-[#4a3424] text-lg">
                   {testimonials[currentTestimonial].author}
                 </div>
                 <div className="text-sm text-neutral-600">
                   {testimonials[currentTestimonial].role}
                 </div>
-                <div className="text-sm text-[#236476] font-medium">
+                <div className="text-sm text-[#bd9354] font-medium">
                   {testimonials[currentTestimonial].company}
                 </div>
               </div>
@@ -579,7 +593,7 @@ export default function HomePage() {
             {/* Navigation Arrows */}
             <button
               onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-              className="absolute -left-2 sm:left-0 md:-left-16 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-full flex items-center justify-center text-[#173142] hover:bg-[#236476] hover:text-white hover:border-[#236476] transition-all z-10"
+              className="absolute -left-2 sm:left-0 md:-left-16 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-full flex items-center justify-center text-[#4a3424] hover:bg-[#9e7540] hover:text-white hover:border-[#236476] transition-all z-10"
               aria-label="Previous testimonial"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
@@ -589,7 +603,7 @@ export default function HomePage() {
 
             <button
               onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
-              className="absolute -right-2 sm:right-0 md:-right-16 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-full flex items-center justify-center text-[#173142] hover:bg-[#236476] hover:text-white hover:border-[#236476] transition-all z-10"
+              className="absolute -right-2 sm:right-0 md:-right-16 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-full flex items-center justify-center text-[#4a3424] hover:bg-[#9e7540] hover:text-white hover:border-[#236476] transition-all z-10"
               aria-label="Next testimonial"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
@@ -605,7 +619,7 @@ export default function HomePage() {
                   onClick={() => setCurrentTestimonial(index)}
                   className={`w-2 h-2 rounded-full transition-all ${
                     currentTestimonial === index
-                      ? 'w-8 bg-[#236476]'
+                      ? 'w-8 bg-[#9e7540]'
                       : 'bg-gray-300 hover:bg-gray-400'
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
@@ -617,88 +631,34 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section bg-gradient-to-br from-[#236476] to-[#1a5060] w-full max-w-full">
+      <section className="section bg-white w-full max-w-full">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
-            {/* Left Side - Text Content */}
+          <div className="max-w-3xl mx-auto text-center">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sans font-bold text-[#4a3424] mb-4 sm:mb-6">
                 Start Creating Amazing Virtual Tours Today
               </h2>
-              <p className="text-base sm:text-lg md:text-xl text-white/80 mb-6 sm:mb-8">
+              <p className="text-base sm:text-lg md:text-xl text-neutral-600 mb-8">
                 Join over 70,000 professionals using our platform to create stunning 360° experiences
               </p>
 
-              {/* Benefits List */}
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-full bg-[#7DAD3F] flex items-center justify-center flex-shrink-0">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <span className="text-white text-lg">No credit card required</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-full bg-[#7DAD3F] flex items-center justify-center flex-shrink-0">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <span className="text-white text-lg">14-day free trial</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-full bg-[#7DAD3F] flex items-center justify-center flex-shrink-0">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <span className="text-white text-lg">Cancel anytime</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/register"
-                  className="bg-[#7DAD3F] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#6a9636] transition-colors text-center"
+                  className="bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-800 transition-colors text-center"
                 >
                   Start Free Trial
                 </Link>
                 <Link
                   href="/pricing"
-                  className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-[#173142] transition-colors text-center"
+                  className="px-8 py-4 bg-accent-500 text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-accent-600 transition-colors text-center"
                 >
                   View Pricing
                 </Link>
-              </div>
-            </motion.div>
-
-            {/* Right Side - Feature Cards */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="grid grid-cols-2 gap-3 sm:gap-4"
-            >
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#7DAD3F] mb-1 sm:mb-2">70K+</div>
-                <div className="text-white/80 text-sm sm:text-base">Active Users</div>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#7DAD3F] mb-1 sm:mb-2">200K+</div>
-                <div className="text-white/80 text-sm sm:text-base">Tours Created</div>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#7DAD3F] mb-1 sm:mb-2">4.9/5</div>
-                <div className="text-white/80 text-sm sm:text-base">User Rating</div>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#7DAD3F] mb-1 sm:mb-2">99.9%</div>
-                <div className="text-white/80 text-sm sm:text-base">Uptime</div>
               </div>
             </motion.div>
           </div>

@@ -1,17 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(pkill:*)",
-      "Bash(cp:*)",
-      "WebSearch",
-      "Bash(python3:*)",
-      "Bash(pip3 install:*)",
-      "Bash(find:*)",
-      "WebFetch(domain:matterport.com)",
-      "Bash(npm run dev:*)",
-      "WebFetch(domain:pixabay.com)",
-      "WebFetch(domain:www.airpano.com)",
-      "Bash(sort:*)"
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []

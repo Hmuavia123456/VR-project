@@ -8,21 +8,21 @@
   /* Browser extension attributes won't affect layout */
 }
 
-/* Custom CSS Variables for VR Tour Theme - Earth Tone Palette */
+/* Custom CSS Variables for VR Tour Theme - Warm Earth Tone Palette */
 :root {
-  --background: #ffffff;
-  --foreground: #173142;
-  --primary: #173142;
-  --secondary: #236476;
-  --accent: #7DAD3F;
-  --light-bg: #CFE0DA;
-  --dark-green: #4A6C2F;
+  --background: #faf7ed;
+  --foreground: #4a3424;
+  --primary: #85603f;
+  --secondary: #9e7540;
+  --accent: #bd9354;
+  --light-bg: #f5efd8;
+  --dark-brown: #6b4d32;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #ffffff;
-    --foreground: #173142;
+    --background: #faf7ed;
+    --foreground: #4a3424;
   }
 }
 
@@ -123,16 +123,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f5efd8;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #236476;
+  background: #9e7540;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #1a4f5e;
+  background: #85603f;
 }
 
 /* Smooth Transitions */
@@ -140,8 +140,11 @@ a, button {
   transition: all 0.3s ease;
 }
 
-/* Canvas for Three.js - prevent selection issues */
+/* Canvas for Three.js - optimized for mobile touch */
 canvas {
-  touch-action: none;
+  touch-action: pan-x pan-y pinch-zoom;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  outline: none;
 }

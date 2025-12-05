@@ -70,7 +70,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen pt-20 flex items-center justify-center bg-background-gray">
+    <div className="min-h-screen pt-20 flex items-center justify-center bg-gradient-to-br from-primary-50 via-background-light to-accent-50">
       <div className="container-custom py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -80,22 +80,22 @@ export default function LoginPage() {
         >
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-sans font-bold text-neutral-900 mb-2">
+            <h1 className="text-3xl md:text-4xl font-sans font-bold text-primary-900 mb-2">
               Welcome Back
             </h1>
             <p className="text-neutral-600">
-              Sign in to your Virtualii account
+              Sign in to your Virtulee account
             </p>
           </div>
 
           {/* Login Form */}
-          <div className="bg-white rounded-2xl shadow-medium p-8">
+          <div className="bg-white rounded-2xl shadow-xl p-8 border border-primary-100">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Email Field */}
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-neutral-900 mb-2"
+                  className="block text-sm font-medium text-primary-900 mb-2"
                 >
                   Email Address
                 </label>
@@ -105,7 +105,7 @@ export default function LoginPage() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`input ${errors.email ? 'border-red-500' : ''}`}
+                  className={`input focus:border-primary-500 focus:ring-primary-500 ${errors.email ? 'border-red-500' : ''}`}
                   placeholder="you@example.com"
                 />
                 {errors.email && (
@@ -117,7 +117,7 @@ export default function LoginPage() {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-neutral-900 mb-2"
+                  className="block text-sm font-medium text-primary-900 mb-2"
                 >
                   Password
                 </label>
@@ -127,7 +127,7 @@ export default function LoginPage() {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className={`input ${errors.password ? 'border-red-500' : ''}`}
+                  className={`input focus:border-primary-500 focus:ring-primary-500 ${errors.password ? 'border-red-500' : ''}`}
                   placeholder="Enter your password"
                 />
                 {errors.password && (
@@ -140,13 +140,13 @@ export default function LoginPage() {
                 <label className="flex items-center">
                   <input
                     type="checkbox"
-                    className="w-4 h-4 text-primary-600 border-neutral-300 rounded focus:ring-primary-500"
+                    className="w-4 h-4 text-primary-700 border-neutral-300 rounded focus:ring-primary-500"
                   />
                   <span className="ml-2 text-sm text-neutral-700">Remember me</span>
                 </label>
                 <Link
                   href="#"
-                  className="text-sm text-primary-600 hover:text-primary-700"
+                  className="text-sm text-accent-600 hover:text-accent-700 font-medium"
                 >
                   Forgot password?
                 </Link>
@@ -156,7 +156,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-primary-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? 'Signing in...' : 'Sign In'}
               </button>
@@ -165,7 +165,7 @@ export default function LoginPage() {
             {/* Divider */}
             <div className="relative my-6">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-neutral-300" />
+                <div className="w-full border-t border-neutral-200" />
               </div>
               <div className="relative flex justify-center text-sm">
                 <span className="px-2 bg-white text-neutral-500">Or continue with</span>
@@ -174,13 +174,13 @@ export default function LoginPage() {
 
             {/* Social Login Buttons */}
             <div className="grid grid-cols-2 gap-4">
-              <button className="flex items-center justify-center px-4 py-2 border border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors">
+              <button className="flex items-center justify-center px-4 py-2 border border-primary-200 rounded-lg hover:bg-primary-50 transition-colors">
                 <span className="mr-2">🔵</span>
-                <span className="text-sm font-medium">Google</span>
+                <span className="text-sm font-medium text-primary-800">Google</span>
               </button>
-              <button className="flex items-center justify-center px-4 py-2 border border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors">
+              <button className="flex items-center justify-center px-4 py-2 border border-primary-200 rounded-lg hover:bg-primary-50 transition-colors">
                 <span className="mr-2">⚫</span>
-                <span className="text-sm font-medium">GitHub</span>
+                <span className="text-sm font-medium text-primary-800">GitHub</span>
               </button>
             </div>
 
@@ -189,7 +189,7 @@ export default function LoginPage() {
               Don't have an account?{' '}
               <Link
                 href="/register"
-                className="font-medium text-primary-600 hover:text-primary-700"
+                className="font-semibold text-accent-600 hover:text-accent-700"
               >
                 Sign up for free
               </Link>
@@ -197,8 +197,8 @@ export default function LoginPage() {
           </div>
 
           {/* Demo Credentials */}
-          <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <p className="text-sm text-blue-800">
+          <div className="mt-6 p-4 bg-accent-50 border border-accent-200 rounded-lg">
+            <p className="text-sm text-accent-800">
               <strong>Demo:</strong> Use any email and password (min 6 chars) to test the login.
             </p>
           </div>

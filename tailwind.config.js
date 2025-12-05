@@ -8,30 +8,30 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Custom VR Tour color palette - deep, immersive, modern
+        // Custom VR Tour color palette - Warm earth tones
         primary: {
-          50: '#f0f4ff',
-          100: '#e0e7ff',
-          200: '#c7d2fe',
-          300: '#a5b4fc',
-          400: '#818cf8',
-          500: '#6366f1', // Main primary
-          600: '#4f46e5',
-          700: '#4338ca',
-          800: '#3730a3',
-          900: '#312e81',
+          50: '#faf7ed',
+          100: '#f5efd8',
+          200: '#ede5bf',
+          300: '#e3d18a',
+          400: '#bd9354',
+          500: '#9e7540',
+          600: '#85603f',
+          700: '#6b4d32',
+          800: '#593f2a',
+          900: '#4a3424',
         },
         accent: {
-          50: '#fff1f2',
-          100: '#ffe4e6',
-          200: '#fecdd3',
-          300: '#fda4af',
-          400: '#fb7185',
-          500: '#f43f5e', // Coral accent
-          600: '#e11d48',
-          700: '#be123c',
-          800: '#9f1239',
-          900: '#881337',
+          50: '#faf7ed',
+          100: '#f5efd8',
+          200: '#ede5bf',
+          300: '#e3d18a',
+          400: '#d4b76a',
+          500: '#bd9354',
+          600: '#9e7540',
+          700: '#85603f',
+          800: '#6b4d32',
+          900: '#593f2a',
         },
         neutral: {
           50: '#fafafa',
@@ -46,9 +46,9 @@ module.exports = {
           900: '#171717',
         },
         background: {
-          light: '#ffffff',
-          dark: '#0a0a0a',
-          gray: '#f9fafb',
+          light: '#faf7ed',
+          dark: '#4a3424',
+          gray: '#f5efd8',
         },
       },
       fontFamily: {

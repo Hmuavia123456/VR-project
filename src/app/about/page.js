@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 
 /**
  * About Page
@@ -9,53 +10,30 @@ import Link from 'next/link'
  */
 export default function AboutPage() {
   const team = [
-    { name: 'Sarah Johnson', role: 'CEO & Founder', avatar: '👩‍💼' },
-    { name: 'Michael Chen', role: 'CTO', avatar: '👨‍💻' },
-    { name: 'Emily Rodriguez', role: 'Head of Design', avatar: '👩‍🎨' },
-    { name: 'David Park', role: 'Lead Developer', avatar: '👨‍🔬' },
+    { name: 'Muhammad Uzair Karghatra', role: 'CEO & Founder', avatar: '👩‍💼', image: '/ceo-uzair.jpg' },
+    { name: 'Michael Chen', role: 'CTO', avatar: '👨‍💻', image: null },
+    { name: 'Habib Rehmani', role: 'Head of Design', avatar: '👩‍🎨', image: '/team-habib.jpg' },
+    { name: 'Muhammad Awais', role: 'Lead Developer', avatar: '👨‍🔬', image: '/team-awais.jpg' },
   ]
 
   const stats = [
-    { number: '73K+', label: 'Active Users' },
-    { number: '200K+', label: 'Tours Created' },
-    { number: '81+', label: 'Countries' },
+    { number: '285K+', label: 'Active Users' },
+    { number: '420K+', label: 'Tours Created' },
+    { number: '145+', label: 'Countries' },
     { number: '99.9%', label: 'Uptime' },
-  ]
-
-  const values = [
-    {
-      icon: '🎯',
-      title: 'Innovation',
-      description: 'Pushing the boundaries of virtual reality and immersive technology.',
-    },
-    {
-      icon: '🤝',
-      title: 'Customer First',
-      description: 'Your success is our success. We listen, adapt, and deliver.',
-    },
-    {
-      icon: '🌍',
-      title: 'Accessibility',
-      description: 'Making virtual tours available to everyone, everywhere.',
-    },
-    {
-      icon: '⚡',
-      title: 'Excellence',
-      description: 'Committed to delivering the highest quality experiences.',
-    },
   ]
 
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="section bg-[#CFE0DA]/30">
+      <section className="section bg-[#f5efd8]/50">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-[#173142] mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-[#4a3424] mb-6">
               Transforming How People Experience Spaces
             </h1>
             <p className="text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto">
@@ -79,7 +57,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="text-4xl md:text-5xl font-bold text-[#173142] mb-2">
+                <div className="text-4xl md:text-5xl font-bold text-[#4a3424] mb-2">
                   {stat.number}
                 </div>
                 <div className="text-neutral-600 font-medium">{stat.label}</div>
@@ -98,12 +76,12 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl md:text-4xl font-sans font-bold text-[#173142] mb-6">
+              <h2 className="text-3xl md:text-4xl font-sans font-bold text-[#4a3424] mb-6">
                 Our Story
               </h2>
               <div className="space-y-4 text-neutral-600">
                 <p>
-                  Virtualii was founded in 2020 with a simple idea: what if anyone could
+                  Virtulee was founded in 2020 with a simple idea: what if anyone could
                   create stunning, immersive virtual experiences without needing expensive
                   equipment or technical expertise?
                 </p>
@@ -123,46 +101,16 @@ export default function AboutPage() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="relative h-96 bg-gradient-to-br from-primary-500/20 to-accent-500/20 rounded-2xl"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="section">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-sans font-bold text-[#173142] mb-4">
-              Our Values
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              These principles guide everything we do
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="card text-center"
-              >
-                <div className="text-5xl mb-4">{value.icon}</div>
-                <h3 className="text-xl font-bold text-[#173142] mb-2">
-                  {value.title}
-                </h3>
-                <p className="text-neutral-600">{value.description}</p>
-              </motion.div>
-            ))}
+              className="relative h-96 bg-gradient-to-br from-primary-500/20 to-accent-500/20 rounded-2xl overflow-hidden shadow-xl"
+            >
+              <Image
+                src="/360-neuer-zollhof-bright.jpg"
+                alt="Our Story"
+                fill
+                unoptimized
+                className="object-cover"
+              />
+            </motion.div>
           </div>
         </div>
       </section>
@@ -176,11 +124,11 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-sans font-bold text-[#173142] mb-4">
+            <h2 className="text-3xl md:text-4xl font-sans font-bold text-[#4a3424] mb-4">
               Meet Our Team
             </h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              The passionate people behind Virtualii
+              The passionate people behind Virtulee
             </p>
           </motion.div>
 
@@ -194,8 +142,18 @@ export default function AboutPage() {
                 transition={{ delay: index * 0.1 }}
                 className="card text-center"
               >
-                <div className="text-7xl mb-4">{member.avatar}</div>
-                <h3 className="text-xl font-bold text-[#173142] mb-1">
+                {member.image ? (
+                  <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden shadow-lg">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="text-7xl mb-4">{member.avatar}</div>
+                )}
+                <h3 className="text-xl font-bold text-[#4a3424] mb-1">
                   {member.name}
                 </h3>
                 <p className="text-neutral-600">{member.role}</p>
@@ -206,25 +164,25 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section bg-gradient-to-br from-[#4A9FB3] to-[#236476] text-white">
+      <section className="section bg-white">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-sans font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-sans font-bold text-[#4a3424] mb-6">
               Join Us on This Journey
             </h2>
-            <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
+            <p className="text-xl mb-8 text-neutral-600 max-w-2xl mx-auto">
               Whether you're a creator, business owner, or just curious about virtual tours,
               we'd love to have you on board.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/register" className="bg-[#7DAD3F] text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-[#6a9636] transition-colors">
+              <Link href="/register" className="bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-800 transition-colors">
                 Get Started Today
               </Link>
-              <Link href="/pricing" className="bg-[#236476] text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-[#1a4f5e] transition-colors">
+              <Link href="/pricing" className="px-8 py-4 bg-accent-500 text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-accent-600 transition-colors">
                 View Pricing
               </Link>
             </div>
