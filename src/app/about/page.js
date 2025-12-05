@@ -13,7 +13,7 @@ export default function AboutPage() {
     { name: 'Muhammad Uzair Karghatra', role: 'CEO & Founder', avatar: '👩‍💼', image: '/ceo-uzair.jpg' },
     { name: 'Michael Chen', role: 'CTO', avatar: '👨‍💻', image: null },
     { name: 'Habib Rehmani', role: 'Head of Design', avatar: '👩‍🎨', image: '/team-habib.jpg' },
-    { name: 'Muhammad Awais', role: 'Lead Developer', avatar: '👨‍🔬', image: '/team-awais.jpg' },
+    { name: 'Muhammad Awais', role: 'Head of Project', avatar: '👨‍🔬', image: '/team-awais.jpg' },
   ]
 
   const stats = [
