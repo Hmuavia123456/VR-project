@@ -727,7 +727,7 @@ export default function ExplorePage() {
                 className={`relative px-3 sm:px-4 py-4 sm:py-5 font-medium text-sm sm:text-[15px] transition-all duration-300 whitespace-nowrap flex-shrink-0 ${
                   activeTab === tab.id
                     ? 'text-primary-600'
-                    : 'text-neutral-600 hover:text-neutral-900'
+                    : 'text-neutral-600 hover:text-primary-500'
                 }`}
               >
                 {tab.label}

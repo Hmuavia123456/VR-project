@@ -25,7 +25,7 @@ function Hotspot({ position, title, description, onClick }) {
     >
       <sphereGeometry args={[2, 16, 16]} />
       <meshBasicMaterial
-        color={hovered ? '#bd9354' : '#9e7540'}
+        color={hovered ? '#CBA35C' : '#CBA35C'}
         opacity={0.8}
         transparent
       />
@@ -226,7 +226,8 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
   const [showInfo, setShowInfo] = useState(true)
   const [currentSceneIndex, setCurrentSceneIndex] = useState(0)
   const [showThumbnails, setShowThumbnails] = useState(true)
-  const [showSidebar, setShowSidebar] = useState(true)
+  // Check if mobile device - hide sidebar by default on mobile
+  const [showSidebar, setShowSidebar] = useState(typeof window !== 'undefined' ? window.innerWidth >= 768 : true)
   const [liked, setLiked] = useState(false)
   const [bookmarked, setBookmarked] = useState(false)
   const containerRef = useRef()
@@ -461,47 +462,101 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
         </div>
       )}
 
-      {/* Instructions Overlay - Mobile friendly */}
-      <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 text-white text-center bg-black/70 px-4 sm:px-6 py-2 sm:py-3 rounded-xl backdrop-blur-sm border border-white/20 shadow-xl max-w-[90%] sm:max-w-none">
-        <p className="text-xs sm:text-sm md:text-base font-medium mb-1">
+      {/* Instructions Overlay - Mobile friendly - Positioned above thumbnails */}
+      <div className={`absolute left-1/2 transform -translate-x-1/2 text-white text-center bg-black/80 px-3 sm:px-5 py-2 rounded-xl backdrop-blur-md border border-white/30 shadow-xl max-w-[85%] sm:max-w-none z-[12] ${
+        hasMultipleScenes && showThumbnails ? 'bottom-32 md:bottom-24' : 'bottom-24'
+      }`}>
+        <p className="text-xs sm:text-sm font-medium">
           <span className="hidden sm:inline">🖱️ Drag to look around • 🔍 Scroll to zoom</span>
           <span className="sm:hidden">👆 Drag to look • 👌 Pinch to zoom</span>
         </p>
-        <p className="text-xs text-white/70 hidden sm:block">
-          Use mouse wheel, trackpad, or pinch gesture
-        </p>
       </div>
 
-        {/* Zoom Buttons - Mobile Only with Proper Controls */}
-        <div className="absolute right-4 bottom-32 flex flex-col gap-3 lg:hidden z-20">
+        {/* Zoom Buttons - Mobile Only - Repositioned to avoid overlaps */}
+        <div className={`absolute right-4 flex flex-col gap-2.5 lg:hidden z-[20] ${
+          hasMultipleScenes && showThumbnails ? 'bottom-28' : 'bottom-20'
+        }`}>
           <button
             onClick={handleZoomIn}
-            className="w-14 h-14 bg-white/20 hover:bg-white/30 active:bg-white/40 backdrop-blur-sm rounded-full flex items-center justify-center text-white text-3xl font-bold border-2 border-white/30 shadow-lg transition-all active:scale-95"
+            className="w-11 h-11 bg-black/80 hover:bg-black/90 active:bg-black backdrop-blur-lg rounded-full flex items-center justify-center text-white text-2xl font-bold border-2 border-white/40 shadow-xl transition-all active:scale-90"
             title="Zoom In"
           >
             +
           </button>
           <button
             onClick={handleZoomOut}
-            className="w-14 h-14 bg-white/20 hover:bg-white/30 active:bg-white/40 backdrop-blur-sm rounded-full flex items-center justify-center text-white text-3xl font-bold border-2 border-white/30 shadow-lg transition-all active:scale-95"
+            className="w-11 h-11 bg-black/80 hover:bg-black/90 active:bg-black backdrop-blur-lg rounded-full flex items-center justify-center text-white text-2xl font-bold border-2 border-white/40 shadow-xl transition-all active:scale-90"
             title="Zoom Out"
           >
             −
           </button>
         </div>
 
-        {/* Bottom Thumbnail Strip - Horizontal */}
+        {/* Bottom Thumbnail Strip - Horizontal - Mobile Optimized */}
         {hasMultipleScenes && showThumbnails && (
-          <div className="absolute bottom-0 left-0 right-0 bg-black/90 backdrop-blur-sm z-20 p-4 border-t border-white/10">
-            <div className="flex gap-3 overflow-x-auto scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent pb-2">
+          <div className="absolute bottom-0 left-0 right-0 bg-black/95 backdrop-blur-md z-[15] p-3 md:p-4 border-t border-white/20 md:hidden">
+            <div className="flex gap-2 md:gap-3 overflow-x-auto scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent pb-1">
               {scenes.map((scene, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSceneIndex(index)}
-                  className={`relative w-24 h-16 flex-shrink-0 rounded-lg overflow-hidden transition-all duration-300 border-2 ${
+                  className={`relative w-20 h-14 md:w-24 md:h-16 flex-shrink-0 rounded-lg overflow-hidden transition-all duration-300 border-2 active:scale-95 ${
                     currentSceneIndex === index
                       ? 'border-blue-500 ring-2 ring-blue-500/50 scale-105'
-                      : 'border-white/20 hover:border-white/50 hover:scale-105'
+                      : 'border-white/20 hover:border-white/50'
+                  }`}
+                  title={scene.title || `Scene ${index + 1}`}
+                >
+                  {/* Thumbnail Image */}
+                  <img
+                    src={scene.thumbnail || getSceneUrl(scene)}
+                    alt={scene.title || `Scene ${index + 1}`}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.src = '/360-real-nature.jpg'
+                    }}
+                  />
+
+                  {/* Overlay on active */}
+                  {currentSceneIndex === index && (
+                    <div className="absolute inset-0 bg-gradient-to-t from-blue-500/30 to-transparent" />
+                  )}
+
+                  {/* Scene number badge */}
+                  <div className={`absolute top-1 left-1 text-xs font-bold px-1.5 py-0.5 rounded ${
+                    currentSceneIndex === index
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-black/70 text-white'
+                  }`}>
+                    {index + 1}
+                  </div>
+
+                  {/* Video indicator */}
+                  {scene.type === 'video' && (
+                    <div className="absolute bottom-1 right-1 text-white">
+                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" />
+                      </svg>
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Desktop Thumbnail Strip - Vertical on larger screens */}
+        {hasMultipleScenes && showThumbnails && (
+          <div className="hidden md:block absolute left-4 top-24 bottom-4 w-20 bg-black/90 backdrop-blur-md z-[15] p-2 border border-white/20 rounded-lg overflow-y-auto scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent">
+            <div className="flex flex-col gap-3">
+              {scenes.map((scene, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSceneIndex(index)}
+                  className={`relative w-full aspect-square flex-shrink-0 rounded-lg overflow-hidden transition-all duration-300 border-2 ${
+                    currentSceneIndex === index
+                      ? 'border-blue-500 ring-2 ring-blue-500/50 scale-105'
+                      : 'border-white/20 hover:border-white/50'
                   }`}
                   title={scene.title || `Scene ${index + 1}`}
                 >
@@ -544,9 +599,9 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
         )}
       </div>
 
-      {/* Right Sidebar - Tour Info & Description (SOLID BLACK) */}
+      {/* Right Sidebar - Tour Info & Description - COMPLETELY MOBILE RESPONSIVE */}
       {showSidebar && (
-        <div className="w-80 md:w-96 bg-black text-white overflow-y-auto scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-900 border-l border-neutral-800">
+        <div className="hidden md:block md:w-80 lg:w-96 bg-black text-white overflow-y-auto scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-900 border-l border-neutral-800">
           <div className="p-6">
             {/* Close Sidebar Button */}
             <button
@@ -562,7 +617,7 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
             {/* User Info */}
             {tour.user && (
               <div className="flex items-center gap-3 mb-6">
-                <div className={`w-10 h-10 rounded-full ${tour.user.color || 'bg-[#9e7540]'} flex items-center justify-center text-white text-sm font-bold`}>
+                <div className={`w-10 h-10 rounded-full ${tour.user.color || 'bg-[#CBA35C]'} flex items-center justify-center text-white text-sm font-bold`}>
                   {tour.user.initials || tour.user.name?.charAt(0) || 'U'}
                 </div>
                 <div>
@@ -579,7 +634,7 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
 
             {/* Scene Title */}
             {currentScene.title && currentScene.title !== tour.title && (
-              <p className="text-xs text-neutral-400 mb-3 flex items-center gap-1.5">
+              <p className="text-xs text-white/70 mb-3 flex items-center gap-1.5">
                 <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                 </svg>
@@ -589,7 +644,7 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
 
             {/* Scene Counter */}
             {hasMultipleScenes && (
-              <p className="text-xs text-neutral-500 mb-4">
+              <p className="text-xs text-white/60 mb-4">
                 Scene {currentSceneIndex + 1} of {scenes.length}
               </p>
             )}
@@ -614,7 +669,7 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
                 onClick={() => setBookmarked(!bookmarked)}
                 className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   bookmarked
-                    ? 'bg-[#9e7540] hover:bg-[#85603f] text-white'
+                    ? 'bg-[#CBA35C] hover:bg-[#754E1A] text-white'
                     : 'bg-neutral-800 hover:bg-neutral-700 text-white'
                 }`}
               >
@@ -656,7 +711,7 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
             {/* Description */}
             <div className="mb-5">
               <h3 className="text-sm font-semibold mb-2 text-white">About this tour</h3>
-              <p className="text-xs text-neutral-400 leading-relaxed">
+              <p className="text-xs text-white/85 leading-relaxed">
                 {currentScene.description || tour.description || 'Explore this amazing 360° virtual tour. Look around by dragging your mouse or using touch gestures on mobile devices. Zoom in and out to see details.'}
               </p>
             </div>
@@ -664,8 +719,8 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
             {/* Additional Info */}
             {tour.category && (
               <div className="mb-4">
-                <h4 className="text-xs font-semibold text-neutral-500 mb-2">Category</h4>
-                <span className="inline-block px-2.5 py-1 bg-neutral-800 rounded-md text-xs font-medium text-neutral-300">
+                <h4 className="text-xs font-semibold text-white/70 mb-2">Category</h4>
+                <span className="inline-block px-2.5 py-1 bg-[#CBA35C]/90 rounded-md text-xs font-medium text-white shadow-md">
                   {tour.category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
                 </span>
               </div>
@@ -674,16 +729,16 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
             {/* Hotspots Info */}
             {currentScene.hotspots && currentScene.hotspots.length > 0 && (
               <div className="mb-5">
-                <h4 className="text-xs font-semibold text-neutral-500 mb-2">Points of Interest</h4>
+                <h4 className="text-xs font-semibold text-white/70 mb-2">Points of Interest</h4>
                 <div className="space-y-1.5">
                   {currentScene.hotspots.map((hotspot, index) => (
-                    <div key={index} className="flex items-start gap-2 p-2 bg-neutral-900 rounded-lg hover:bg-neutral-800 transition-colors cursor-pointer">
-                      <svg className="w-3.5 h-3.5 mt-0.5 text-[#9e7540] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <div key={index} className="flex items-start gap-2 p-2 bg-neutral-800/80 rounded-lg hover:bg-neutral-800 transition-colors cursor-pointer border border-neutral-700/50">
+                      <svg className="w-3.5 h-3.5 mt-0.5 text-[#CBA35C] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                       </svg>
                       <div className="flex-1 min-w-0">
                         <p className="text-xs font-medium text-white">{hotspot.title}</p>
-                        <p className="text-xs text-neutral-500">{hotspot.description}</p>
+                        <p className="text-xs text-white/70">{hotspot.description}</p>
                       </div>
                     </div>
                   ))}
@@ -692,7 +747,7 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
             )}
 
             {/* Tour Type Badge */}
-            <div className="flex items-center gap-1.5 text-xs text-neutral-500">
+            <div className="flex items-center gap-1.5 text-xs text-white/60">
               <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
               </svg>
@@ -702,11 +757,168 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
         </div>
       )}
 
-      {/* Show Sidebar Toggle Button */}
+      {/* Mobile-Only Bottom Info Sheet - FULLY RESPONSIVE */}
+      <div className="md:hidden">
+        {showSidebar && (
+          <div className="fixed bottom-0 left-0 right-0 w-full h-auto max-h-[60vh] bg-black backdrop-blur-lg overflow-y-auto overscroll-contain border-t-2 border-neutral-800 z-[60] rounded-t-3xl shadow-2xl">
+            {/* Mobile Drag Handle */}
+            <div className="sticky top-0 bg-black z-10 flex justify-center pt-3 pb-2">
+              <div className="w-12 h-1 bg-neutral-600 rounded-full"></div>
+            </div>
+
+            <div className="px-5 pb-8 pt-2">
+              {/* Close Button - Mobile Optimized */}
+              <button
+                onClick={() => setShowSidebar(false)}
+                className="absolute top-4 right-4 p-2.5 bg-neutral-800/90 hover:bg-neutral-700 rounded-full transition-colors z-20 shadow-lg active:scale-95"
+                title="Close"
+              >
+                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </button>
+
+              {/* Tour Title - Mobile Optimized */}
+              <h2 className="text-lg font-bold mb-4 text-white pr-12 leading-snug">
+                {tour.title}
+              </h2>
+
+              {/* User Info - Mobile Optimized */}
+              {tour.user && (
+                <div className="flex items-center gap-2 mb-3">
+                  <div className={`w-7 h-7 rounded-full ${tour.user.color || 'bg-[#CBA35C]'} flex items-center justify-center text-white text-xs font-bold flex-shrink-0`}>
+                    {tour.user.initials || tour.user.name?.charAt(0) || 'U'}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-xs font-semibold text-white truncate">{tour.user.name || 'Anonymous'}</h3>
+                    <p className="text-xs text-neutral-400">Tour Creator</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Scene Title - Mobile Optimized */}
+              {currentScene.title && currentScene.title !== tour.title && (
+                <p className="text-xs text-white/70 mb-3 flex items-center gap-1 truncate">
+                  <svg className="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="truncate">{currentScene.title}</span>
+                </p>
+              )}
+
+              {/* Action Buttons - Mobile Optimized */}
+              <div className="flex items-center gap-2 mb-3">
+                <button
+                  onClick={() => setLiked(!liked)}
+                  className={`flex-1 flex items-center justify-center gap-1 py-2.5 rounded-lg text-xs font-medium transition-all active:scale-95 ${
+                    liked
+                      ? 'bg-red-500 hover:bg-red-600 text-white'
+                      : 'bg-neutral-800 hover:bg-neutral-700 text-white'
+                  }`}
+                >
+                  <svg className="w-4 h-4" fill={liked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                  {liked ? 'Liked' : 'Like'}
+                </button>
+
+                <button
+                  onClick={() => setBookmarked(!bookmarked)}
+                  className={`flex-1 flex items-center justify-center gap-1 py-2.5 rounded-lg text-xs font-medium transition-all active:scale-95 ${
+                    bookmarked
+                      ? 'bg-[#CBA35C] hover:bg-[#754E1A] text-white'
+                      : 'bg-neutral-800 hover:bg-neutral-700 text-white'
+                  }`}
+                >
+                  <svg className="w-4 h-4" fill={bookmarked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                  </svg>
+                  Save
+                </button>
+              </div>
+
+              {/* Stats - Mobile Optimized */}
+              {tour.stats && (
+                <div className="flex items-center gap-4 mb-3 pb-3 border-b border-neutral-800">
+                  <div className="flex items-center gap-1">
+                    <svg className="w-3.5 h-3.5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-xs font-medium text-neutral-300">{tour.stats.reactions || 0}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <svg className="w-3.5 h-3.5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                      <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-xs font-medium text-neutral-300">{tour.stats.views?.toLocaleString() || 0}</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Description - Mobile Optimized */}
+              <div className="mb-4">
+                <h3 className="text-sm font-semibold mb-2 text-white">About this tour</h3>
+                <p className="text-sm text-white/85 leading-relaxed">
+                  {currentScene.description || tour.description || 'Explore this amazing 360° virtual tour. Drag to look around and pinch to zoom.'}
+                </p>
+              </div>
+
+              {/* Category - Mobile Optimized */}
+              {tour.category && (
+                <div className="mb-4">
+                  <h4 className="text-xs font-semibold text-white/70 mb-2 uppercase tracking-wide">Category</h4>
+                  <span className="inline-block px-3 py-1.5 bg-[#CBA35C]/90 rounded-lg text-sm font-medium text-white shadow-md">
+                    {tour.category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                  </span>
+                </div>
+              )}
+
+              {/* Hotspots Info - Mobile */}
+              {currentScene.hotspots && currentScene.hotspots.length > 0 && (
+                <div className="mb-4">
+                  <h4 className="text-xs font-semibold text-white/70 mb-2 uppercase tracking-wide">Points of Interest</h4>
+                  <div className="space-y-2">
+                    {currentScene.hotspots.map((hotspot, index) => (
+                      <div key={index} className="flex items-start gap-2 p-2.5 bg-neutral-800/80 rounded-lg border border-neutral-700/50">
+                        <svg className="w-4 h-4 mt-0.5 text-[#CBA35C] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                        </svg>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-white">{hotspot.title}</p>
+                          <p className="text-xs text-white/70 mt-0.5">{hotspot.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Show Info Button - Mobile Only - Bottom Center - Positioned above thumbnails */}
       {!showSidebar && (
         <button
           onClick={() => setShowSidebar(true)}
-          className="absolute right-4 top-24 z-20 p-3 bg-black/50 hover:bg-black/70 backdrop-blur-sm text-white rounded-lg transition-all border border-white/20"
+          className={`md:hidden fixed left-1/2 -translate-x-1/2 z-[25] px-4 py-2.5 bg-black/90 hover:bg-black active:scale-95 backdrop-blur-lg text-white rounded-full transition-all border-2 border-white/50 shadow-2xl flex items-center gap-2 ${
+            hasMultipleScenes && showThumbnails ? 'bottom-24' : 'bottom-6'
+          }`}
+          title="Show Info"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span className="text-sm font-medium">Tour Info</span>
+        </button>
+      )}
+
+      {/* Show Sidebar Toggle Button - Desktop Only */}
+      {!showSidebar && (
+        <button
+          onClick={() => setShowSidebar(true)}
+          className="hidden md:block absolute right-4 top-24 z-20 p-3 bg-black/70 hover:bg-black/90 backdrop-blur-sm text-white rounded-lg transition-all border border-white/30 shadow-lg"
           title="Show Info Panel"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

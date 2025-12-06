@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtulee - Updated Color Palette 2024</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #faf7ed 0%, #f5efd8 100%);
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #9e7540, #14b8a6, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #737373;
+            font-size: 20px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #f0fdfa, #fff7ed);
+            border: 3px solid #14b8a6;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+
+        .highlight-box h2 {
+            color: #0f766e;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .color-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .showcase-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .showcase-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .showcase-color {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .showcase-info {
+            padding: 20px;
+        }
+
+        .showcase-name {
+            font-weight: 700;
+            font-size: 16px;
+            color: #171717;
+            margin-bottom: 8px;
+        }
+
+        .showcase-code {
+            font-family: 'Courier New', monospace;
+            color: #737373;
+            font-size: 14px;
+            background: #f5f5f5;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+        }
+
+        .showcase-usage {
+            font-size: 13px;
+            color: #525252;
+            line-height: 1.5;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            color: #4a3424;
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: 700;
+            border-bottom: 4px solid;
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .color-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s;
+        }
+
+        .color-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .color-box {
+            height: 80px;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .color-info {
+            padding: 10px;
+            background: #fafafa;
+        }
+
+        .color-name {
+            font-weight: 600;
+            color: #262626;
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+
+        .color-code {
+            font-family: 'Courier New', monospace;
+            color: #737373;
+            font-size: 11px;
+        }
+
+        .usage-badge {
+            background: #14b8a6;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            color: white;
+            padding: 18px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(20, 184, 166, 0.4);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            z-index: 1000;
+            font-weight: 600;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .emoji {
+            font-size: 32px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 Virtulee Color Palette v2.0</h1>
+            <p class="subtitle">Updated Modern Color Scheme - 2024</p>
+        </div>
+
+        <!-- WHAT'S NEW -->
+        <div class="highlight-box">
+            <h2>✨ What's New in This Update</h2>
+            <div class="color-showcase">
+                <div class="showcase-card">
+                    <div class="showcase-color" style="background: #14b8a6" onclick="copyColor('#14b8a6', 'Teal Accent')">
+                        🌊 TEAL
+                    </div>
+                    <div class="showcase-info">
+                        <div class="showcase-name">Teal Accent (NEW!)</div>
+                        <div class="showcase-code">#14b8a6</div>
+                        <div class="showcase-usage">Modern VR/Technology feel for tabs, links, and interactive elements</div>
+                    </div>
+                </div>
+                <div class="showcase-card">
+                    <div class="showcase-color" style="background: #f97316" onclick="copyColor('#f97316', 'Coral CTA')">
+                        🔥 CORAL
+                    </div>
+                    <div class="showcase-info">
+                        <div class="showcase-name">Coral Orange (NEW!)</div>
+                        <div class="showcase-code">#f97316</div>
+                        <div class="showcase-usage">Eye-catching CTA buttons like "Start Free Trial" and "Get Started"</div>
+                    </div>
+                </div>
+                <div class="showcase-card">
+                    <div class="showcase-color" style="background: #9333ea" onclick="copyColor('#9333ea', 'Premium Purple')">
+                        👑 PURPLE
+                    </div>
+                    <div class="showcase-info">
+                        <div class="showcase-name">Premium Purple (NEW!)</div>
+                        <div class="showcase-code">#9333ea</div>
+                        <div class="showcase-usage">Premium features, "Most Popular" badges, and special highlights</div>
+                    </div>
+                </div>
+                <div class="showcase-card">
+                    <div class="showcase-color" style="background: #9e7540" onclick="copyColor('#9e7540', 'Brand Primary')">
+                        🎯 BRAND
+                    </div>
+                    <div class="showcase-info">
+                        <div class="showcase-name">Brand Primary (Original)</div>
+                        <div class="showcase-code">#9e7540</div>
+                        <div class="showcase-usage">Your signature golden brown - still the main brand color</div>
+                    </div>
+                </div>
+            </div>
+            <span class="usage-badge">🎨 3 NEW COLOR FAMILIES ADDED</span>
+        </div>
+
+        <!-- PRIMARY COLORS -->
+        <div class="section">
+            <h2 class="section-title" style="border-color: #9e7540;">
+                <span class="emoji">🟤</span> Primary Colors (Brand - Golden Brown)
+            </h2>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-box" style="background: #faf7ed; color: #4a3424" onclick="copyColor('#faf7ed', 'Primary 50')">50</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary 50</div>
+                        <div class="color-code">#faf7ed</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #f5efd8; color: #4a3424" onclick="copyColor('#f5efd8', 'Primary 100')">100</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary 100</div>
+                        <div class="color-code">#f5efd8</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #ede5bf; color: #4a3424" onclick="copyColor('#ede5bf', 'Primary 200')">200</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary 200</div>
+                        <div class="color-code">#ede5bf</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #e3d18a; color: #4a3424" onclick="copyColor('#e3d18a', 'Primary 300')">300</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary 300</div>
+                        <div class="color-code">#e3d18a</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #bd9354; color: white" onclick="copyColor('#bd9354', 'Primary 400')">400 ⭐</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary 400</div>
+                        <div class="color-code">#bd9354</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #9e7540; color: white" onclick="copyColor('#9e7540', 'Primary 500')">500 ⭐</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary 500</div>
+                        <div class="color-code">#9e7540</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #85603f; color: white" onclick="copyColor('#85603f', 'Primary 600')">600 ⭐</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary 600</div>
+                        <div class="color-code">#85603f</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #6b4d32; color: white" onclick="copyColor('#6b4d32', 'Primary 700')">700</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary 700</div>
+                        <div class="color-code">#6b4d32</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #593f2a; color: white" onclick="copyColor('#593f2a', 'Primary 800')">800</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary 800</div>
+                        <div class="color-code">#593f2a</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #4a3424; color: white" onclick="copyColor('#4a3424', 'Primary 900')">900 ⭐</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary 900</div>
+                        <div class="color-code">#4a3424</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TEAL ACCENT -->
+        <div class="section">
+            <h2 class="section-title" style="border-color: #14b8a6;">
+                <span class="emoji">🌊</span> Accent - Teal (NEW! VR/Tech Elements)
+            </h2>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-box" style="background: #f0fdfa; color: #115e59" onclick="copyColor('#f0fdfa', 'Accent 50')">50</div>
+                    <div class="color-info">
+                        <div class="color-name">Accent 50</div>
+                        <div class="color-code">#f0fdfa</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #ccfbf1; color: #115e59" onclick="copyColor('#ccfbf1', 'Accent 100')">100</div>
+                    <div class="color-info">
+                        <div class="color-name">Accent 100</div>
+                        <div class="color-code">#ccfbf1</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #99f6e4; color: #115e59" onclick="copyColor('#99f6e4', 'Accent 200')">200</div>
+                    <div class="color-info">
+                        <div class="color-name">Accent 200</div>
+                        <div class="color-code">#99f6e4</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #5eead4; color: #115e59" onclick="copyColor('#5eead4', 'Accent 300')">300</div>
+                    <div class="color-info">
+                        <div class="color-name">Accent 300</div>
+                        <div class="color-code">#5eead4</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #2dd4bf; color: white" onclick="copyColor('#2dd4bf', 'Accent 400')">400</div>
+                    <div class="color-info">
+                        <div class="color-name">Accent 400</div>
+                        <div class="color-code">#2dd4bf</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #14b8a6; color: white" onclick="copyColor('#14b8a6', 'Accent 500')">500 ⭐</div>
+                    <div class="color-info">
+                        <div class="color-name">Accent 500</div>
+                        <div class="color-code">#14b8a6</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #0d9488; color: white" onclick="copyColor('#0d9488', 'Accent 600')">600 ⭐</div>
+                    <div class="color-info">
+                        <div class="color-name">Accent 600</div>
+                        <div class="color-code">#0d9488</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #0f766e; color: white" onclick="copyColor('#0f766e', 'Accent 700')">700</div>
+                    <div class="color-info">
+                        <div class="color-name">Accent 700</div>
+                        <div class="color-code">#0f766e</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #115e59; color: white" onclick="copyColor('#115e59', 'Accent 800')">800</div>
+                    <div class="color-info">
+                        <div class="color-name">Accent 800</div>
+                        <div class="color-code">#115e59</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #134e4a; color: white" onclick="copyColor('#134e4a', 'Accent 900')">900</div>
+                    <div class="color-info">
+                        <div class="color-name">Accent 900</div>
+                        <div class="color-code">#134e4a</div>
+                    </div>
+                </div>
+            </div>
+            <span class="usage-badge">Used in: Explore page tabs, View Pricing buttons, Links</span>
+        </div>
+
+        <!-- CORAL -->
+        <div class="section">
+            <h2 class="section-title" style="border-color: #f97316;">
+                <span class="emoji">🔥</span> Coral - Orange (NEW! CTA Buttons)
+            </h2>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-box" style="background: #fff7ed; color: #7c2d12" onclick="copyColor('#fff7ed', 'Coral 50')">50</div>
+                    <div class="color-info">
+                        <div class="color-name">Coral 50</div>
+                        <div class="color-code">#fff7ed</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #ffedd5; color: #7c2d12" onclick="copyColor('#ffedd5', 'Coral 100')">100</div>
+                    <div class="color-info">
+                        <div class="color-name">Coral 100</div>
+                        <div class="color-code">#ffedd5</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #fed7aa; color: #7c2d12" onclick="copyColor('#fed7aa', 'Coral 200')">200</div>
+                    <div class="color-info">
+                        <div class="color-name">Coral 200</div>
+                        <div class="color-code">#fed7aa</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #fdba74; color: #7c2d12" onclick="copyColor('#fdba74', 'Coral 300')">300</div>
+                    <div class="color-info">
+                        <div class="color-name">Coral 300</div>
+                        <div class="color-code">#fdba74</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #fb923c; color: white" onclick="copyColor('#fb923c', 'Coral 400')">400</div>
+                    <div class="color-info">
+                        <div class="color-name">Coral 400</div>
+                        <div class="color-code">#fb923c</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #f97316; color: white" onclick="copyColor('#f97316', 'Coral 500')">500 ⭐</div>
+                    <div class="color-info">
+                        <div class="color-name">Coral 500</div>
+                        <div class="color-code">#f97316</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #ea580c; color: white" onclick="copyColor('#ea580c', 'Coral 600')">600 ⭐</div>
+                    <div class="color-info">
+                        <div class="color-name">Coral 600</div>
+                        <div class="color-code">#ea580c</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #c2410c; color: white" onclick="copyColor('#c2410c', 'Coral 700')">700</div>
+                    <div class="color-info">
+                        <div class="color-name">Coral 700</div>
+                        <div class="color-code">#c2410c</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #9a3412; color: white" onclick="copyColor('#9a3412', 'Coral 800')">800</div>
+                    <div class="color-info">
+                        <div class="color-name">Coral 800</div>
+                        <div class="color-code">#9a3412</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #7c2d12; color: white" onclick="copyColor('#7c2d12', 'Coral 900')">900</div>
+                    <div class="color-info">
+                        <div class="color-name">Coral 900</div>
+                        <div class="color-code">#7c2d12</div>
+                    </div>
+                </div>
+            </div>
+            <span class="usage-badge">Used in: "Start Free Trial", "Get Started Today" buttons</span>
+        </div>
+
+        <!-- PREMIUM PURPLE -->
+        <div class="section">
+            <h2 class="section-title" style="border-color: #9333ea;">
+                <span class="emoji">👑</span> Premium - Purple (NEW! Special Features)
+            </h2>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-box" style="background: #faf5ff; color: #581c87" onclick="copyColor('#faf5ff', 'Premium 50')">50</div>
+                    <div class="color-info">
+                        <div class="color-name">Premium 50</div>
+                        <div class="color-code">#faf5ff</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #f3e8ff; color: #581c87" onclick="copyColor('#f3e8ff', 'Premium 100')">100</div>
+                    <div class="color-info">
+                        <div class="color-name">Premium 100</div>
+                        <div class="color-code">#f3e8ff</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #e9d5ff; color: #581c87" onclick="copyColor('#e9d5ff', 'Premium 200')">200</div>
+                    <div class="color-info">
+                        <div class="color-name">Premium 200</div>
+                        <div class="color-code">#e9d5ff</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #d8b4fe; color: #581c87" onclick="copyColor('#d8b4fe', 'Premium 300')">300</div>
+                    <div class="color-info">
+                        <div class="color-name">Premium 300</div>
+                        <div class="color-code">#d8b4fe</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #c084fc; color: white" onclick="copyColor('#c084fc', 'Premium 400')">400</div>
+                    <div class="color-info">
+                        <div class="color-name">Premium 400</div>
+                        <div class="color-code">#c084fc</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #a855f7; color: white" onclick="copyColor('#a855f7', 'Premium 500')">500</div>
+                    <div class="color-info">
+                        <div class="color-name">Premium 500</div>
+                        <div class="color-code">#a855f7</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #9333ea; color: white" onclick="copyColor('#9333ea', 'Premium 600')">600 ⭐</div>
+                    <div class="color-info">
+                        <div class="color-name">Premium 600</div>
+                        <div class="color-code">#9333ea</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #7e22ce; color: white" onclick="copyColor('#7e22ce', 'Premium 700')">700</div>
+                    <div class="color-info">
+                        <div class="color-name">Premium 700</div>
+                        <div class="color-code">#7e22ce</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #6b21a8; color: white" onclick="copyColor('#6b21a8', 'Premium 800')">800</div>
+                    <div class="color-info">
+                        <div class="color-name">Premium 800</div>
+                        <div class="color-code">#6b21a8</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-box" style="background: #581c87; color: white" onclick="copyColor('#581c87', 'Premium 900')">900</div>
+                    <div class="color-info">
+                        <div class="color-name">Premium 900</div>
+                        <div class="color-code">#581c87</div>
+                    </div>
+                </div>
+            </div>
+            <span class="usage-badge">Used in: "Most Popular" badges on pricing plans</span>
+        </div>
+
+        <!-- SUMMARY -->
+        <div class="highlight-box" style="background: linear-gradient(135deg, #faf7ed, #f0fdfa, #fff7ed); border-color: #9e7540;">
+            <h2 style="color: #4a3424;">📋 Color Usage Summary</h2>
+            <div style="line-height: 2; color: #4a3424; font-size: 16px;">
+                <p><strong>🟤 Primary (#9e7540):</strong> Brand logo, main text, navbar elements</p>
+                <p><strong>🌊 Teal Accent (#14b8a6):</strong> Active tabs, secondary buttons, links, modern tech feel</p>
+                <p><strong>🔥 Coral (#f97316):</strong> Primary CTA buttons (Start Trial, Get Started)</p>
+                <p><strong>👑 Purple (#9333ea):</strong> Premium badges, special highlights</p>
+                <p><strong>⚫ Neutrals (#262626, #000):</strong> Dark backgrounds, tour panels</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">Color copied! ✓</div>
+
+    <script>
+        function copyColor(colorCode, colorName) {
+            navigator.clipboard.writeText(colorCode).then(() => {
+                const toast = document.getElementById('toast');
+                toast.textContent = `${colorName} (${colorCode}) copied! ✓`;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2500);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+    </script>
+</body>
+</html>

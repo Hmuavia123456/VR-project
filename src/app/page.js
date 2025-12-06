@@ -10,7 +10,7 @@ import Image from 'next/image'
 const Hero360 = dynamic(() => import('@/components/Hero360'), {
   ssr: false,
   loading: () => (
-    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-primary-900 to-accent-900">
+    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-primary-900 to-primary-900">
       <div className="text-white text-2xl">Loading experience...</div>
     </div>
   ),
@@ -75,7 +75,7 @@ export default function HomePage() {
       <Hero360 imageUrl="/hero-360.jpg" />
 
       {/* Split Section 1 - Like Kuula (Left: Tour, Right: Text) */}
-      <section className="section bg-white w-full max-w-full">
+      <section className="section bg-primary-50 w-full max-w-full">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             {/* Left - 360° Tour Preview */}
@@ -114,13 +114,13 @@ export default function HomePage() {
               transition={{ duration: 0.6 }}
               className="text-center lg:text-left"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#4a3424] mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#754E1A] mb-4 sm:mb-6">
                 Create Virtual Tours that engage your audience
               </h2>
               <p className="text-base sm:text-lg text-neutral-600 mb-4 sm:mb-6 leading-relaxed">
                 Our editor is simple but packed with powerful features. With the{' '}
-                <span className="font-semibold text-[#85603F]">PRO</span> and{' '}
-                <span className="font-semibold text-[#85603F]">BUSINESS</span> plans
+                <span className="font-semibold text-[#CBA35C]">PRO</span> and{' '}
+                <span className="font-semibold text-[#CBA35C]">BUSINESS</span> plans
                 you can create unlimited tours, add labels, custom hotspots, nadir and zenith patches,
                 background audio, interactive cards and floor plans. Create beautiful 3D 360 tours that your
                 users won't easily forget!
@@ -138,7 +138,7 @@ export default function HomePage() {
                       { position: [-80, 0, 50], title: 'Bar Section', description: 'Full-service bar' },
                     ],
                   })}
-                  className="w-full sm:w-auto px-8 py-3 bg-[#85603F] text-white rounded-lg font-medium hover:bg-[#6b4d32] transition-colors shadow-md hover:shadow-lg text-center"
+                  className="w-full sm:w-auto px-8 py-3 bg-[#CBA35C] text-white rounded-lg font-medium hover:bg-[#754E1A] transition-colors shadow-md hover:shadow-lg text-center"
                 >
                   WATCH VIRTUAL TOUR
                 </button>
@@ -149,7 +149,7 @@ export default function HomePage() {
       </section>
 
       {/* Split Section 2 - Reverse Layout (Left: Text, Right: Tour) */}
-      <section className="section bg-background-gray w-full max-w-full">
+      <section className="section bg-primary-50 w-full max-w-full">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             {/* Left - Text Content */}
@@ -160,7 +160,7 @@ export default function HomePage() {
               transition={{ duration: 0.6 }}
               className="text-center lg:text-left"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#4a3424] mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#754E1A] mb-4 sm:mb-6">
                 The smoothest and most efficient 3D 360 Virtual Tour player on the web
               </h2>
               <p className="text-base sm:text-lg text-neutral-600 mb-4 sm:mb-6 leading-relaxed">
@@ -180,7 +180,7 @@ export default function HomePage() {
                       { position: [-80, 20, 50], title: 'Outdoor View', description: 'Beautiful scenery' },
                     ],
                   })}
-                  className="w-full sm:w-auto px-8 py-3 bg-[#85603F] text-white rounded-lg font-medium hover:bg-[#6b4d32] transition-colors shadow-md hover:shadow-lg text-center"
+                  className="w-full sm:w-auto px-8 py-3 bg-[#CBA35C] text-white rounded-lg font-medium hover:bg-[#754E1A] transition-colors shadow-md hover:shadow-lg text-center"
                 >
                   WATCH VIRTUAL TOUR
                 </button>
@@ -219,7 +219,7 @@ export default function HomePage() {
       </section>
 
       {/* Split Section 3 - NEW: Advanced Features (Left: Tour, Right: Text) */}
-      <section className="section bg-white w-full max-w-full">
+      <section className="section bg-primary-50 w-full max-w-full">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             {/* Left - 360° Video Tour Preview */}
@@ -259,18 +259,18 @@ export default function HomePage() {
               transition={{ duration: 0.6 }}
               className="text-center lg:text-left"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#4a3424] mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#754E1A] mb-4 sm:mb-6">
                 Experience immersive 360° video tours like never before
               </h2>
               <p className="text-base sm:text-lg text-neutral-600 mb-4 sm:mb-6 leading-relaxed">
                 Take your virtual tours to the next level with{' '}
-                <span className="font-semibold text-[#4a3424]">360° video support</span>.
+                <span className="font-semibold text-[#754E1A]">360° video support</span>.
                 Showcase dynamic environments, moving scenes, and real-time experiences that static
                 images simply cannot capture. Perfect for tourism, events, and experiential marketing.
               </p>
               <p className="text-base sm:text-lg text-neutral-600 mb-4 sm:mb-6 leading-relaxed">
                 Our advanced video player supports{' '}
-                <span className="font-semibold text-[#4a3424]">4K resolution</span>,
+                <span className="font-semibold text-[#754E1A]">4K resolution</span>,
                 smooth playback, and interactive hotspots - all optimized for both desktop and mobile devices.
                 Create unforgettable experiences that truly transport your audience.
               </p>
@@ -288,7 +288,7 @@ export default function HomePage() {
                       { position: [0, 40, -100], title: 'Sky View', description: 'Clear blue skies' },
                     ],
                   })}
-                  className="w-full sm:w-auto px-8 py-3 bg-[#85603F] text-white rounded-lg font-medium hover:bg-[#6b4d32] transition-colors shadow-md hover:shadow-lg text-center"
+                  className="w-full sm:w-auto px-8 py-3 bg-[#CBA35C] text-white rounded-lg font-medium hover:bg-[#754E1A] transition-colors shadow-md hover:shadow-lg text-center"
                 >
                   WATCH VIRTUAL TOUR
                 </button>
@@ -299,7 +299,7 @@ export default function HomePage() {
       </section>
 
       {/* 3-Step Process Section */}
-      <section className="section bg-background-gray w-full max-w-full">
+      <section className="section bg-primary-50 w-full max-w-full">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -307,7 +307,7 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#4a3424] mb-4 sm:mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#754E1A] mb-4 sm:mb-6">
               Create Your First Tour in 3 Simple Steps
             </h2>
             <p className="text-base sm:text-lg text-neutral-600 max-w-2xl mx-auto">
@@ -322,7 +322,7 @@ export default function HomePage() {
                 title: 'Capture',
                 description: 'Use any 360° camera or our mobile app to capture your space. We support all major 360° cameras.',
                 features: ['Any 360° camera', 'Mobile app', 'DSLR panoramas'],
-                gradient: 'from-[#bd9354] to-[#9e7540]',
+                gradient: 'from-[#CBA35C] to-[#CBA35C]',
                 image: (
                   <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden shadow-lg group">
                     <img
@@ -344,7 +344,7 @@ export default function HomePage() {
                 title: 'Create',
                 description: 'Upload and customize your tour with our drag-and-drop editor. Add hotspots, info cards, and branding.',
                 features: ['Drag-and-drop', 'Hotspots', 'Custom branding'],
-                gradient: 'from-[#9e7540] to-[#85603f]',
+                gradient: 'from-[#CBA35C] to-[#CBA35C]',
                 image: (
                   <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden shadow-lg group">
                     <img
@@ -365,7 +365,7 @@ export default function HomePage() {
                 title: 'Publish',
                 description: 'Share your tour instantly with a single link. Embed on your website or share on social media.',
                 features: ['Instant hosting', 'Embed anywhere', 'Social sharing'],
-                gradient: 'from-[#85603f] to-[#6b4d32]',
+                gradient: 'from-[#CBA35C] to-[#754E1A]',
                 image: (
                   <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden shadow-lg group">
                     <img
@@ -394,13 +394,13 @@ export default function HomePage() {
                   {/* Illustration Image */}
                   {item.image && item.image}
 
-                  <h3 className="text-2xl font-bold text-[#4a3424] mb-3">{item.title}</h3>
+                  <h3 className="text-2xl font-bold text-[#754E1A] mb-3">{item.title}</h3>
                   <p className="text-neutral-600 mb-6 leading-relaxed">{item.description}</p>
 
                   <ul className="space-y-3">
                     {item.features.map((feature, idx) => (
                       <li key={idx} className="text-sm text-neutral-700 flex items-center gap-3">
-                        <div className="w-5 h-5 rounded-full bg-[#85603F] flex items-center justify-center flex-shrink-0">
+                        <div className="w-5 h-5 rounded-full bg-[#CBA35C] flex items-center justify-center flex-shrink-0">
                           <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
@@ -417,7 +417,7 @@ export default function HomePage() {
       </section>
 
       {/* Industries Section */}
-      <section className="section bg-background-gray w-full max-w-full">
+      <section className="section bg-primary-50 w-full max-w-full">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -425,7 +425,7 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#4a3424] mb-4 sm:mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#754E1A] mb-4 sm:mb-6">
               Trusted Across Every Industry
             </h2>
             <p className="text-base sm:text-lg text-neutral-600 max-w-2xl mx-auto">
@@ -526,10 +526,10 @@ export default function HomePage() {
                 className="group"
               >
                 <div className="bg-white rounded-xl p-5 shadow hover:shadow-lg transition-all duration-300 border border-neutral-100 text-center h-full">
-                  <div className="inline-flex p-3 rounded-lg bg-[#9e7540] text-white mb-3 group-hover:scale-110 transition-transform">
+                  <div className="inline-flex p-3 rounded-lg bg-[#CBA35C] text-white mb-3 group-hover:scale-110 transition-transform">
                     {industry.icon}
                   </div>
-                  <h3 className="font-bold text-[#4a3424] mb-2 text-lg">{industry.title}</h3>
+                  <h3 className="font-bold text-[#CBA35C] mb-2 text-lg">{industry.title}</h3>
                   <p className="text-sm text-neutral-600">{industry.desc}</p>
                 </div>
               </motion.div>
@@ -539,7 +539,7 @@ export default function HomePage() {
       </section>
 
       {/* Social Proof Section - Slideshow */}
-      <section className="section bg-white w-full max-w-full">
+      <section className="section bg-primary-50 w-full max-w-full">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -547,7 +547,7 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#4a3424] mb-4 sm:mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#754E1A] mb-4 sm:mb-6">
               What Our Customers Say
             </h2>
           </motion.div>
@@ -578,13 +578,13 @@ export default function HomePage() {
 
               {/* Author */}
               <div className="text-center">
-                <div className="font-bold text-[#4a3424] text-lg">
+                <div className="font-bold text-[#754E1A] text-lg">
                   {testimonials[currentTestimonial].author}
                 </div>
                 <div className="text-sm text-neutral-600">
                   {testimonials[currentTestimonial].role}
                 </div>
-                <div className="text-sm text-[#bd9354] font-medium">
+                <div className="text-sm text-[#CBA35C] font-medium">
                   {testimonials[currentTestimonial].company}
                 </div>
               </div>
@@ -593,7 +593,7 @@ export default function HomePage() {
             {/* Navigation Arrows */}
             <button
               onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-              className="absolute -left-2 sm:left-0 md:-left-16 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-full flex items-center justify-center text-[#4a3424] hover:bg-[#9e7540] hover:text-white hover:border-[#236476] transition-all z-10"
+              className="absolute -left-2 sm:left-0 md:-left-16 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-full flex items-center justify-center text-[#754E1A] hover:bg-[#CBA35C] hover:text-white hover:border-[#236476] transition-all z-10"
               aria-label="Previous testimonial"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
@@ -603,7 +603,7 @@ export default function HomePage() {
 
             <button
               onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
-              className="absolute -right-2 sm:right-0 md:-right-16 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-full flex items-center justify-center text-[#4a3424] hover:bg-[#9e7540] hover:text-white hover:border-[#236476] transition-all z-10"
+              className="absolute -right-2 sm:right-0 md:-right-16 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-full flex items-center justify-center text-[#754E1A] hover:bg-[#CBA35C] hover:text-white hover:border-[#236476] transition-all z-10"
               aria-label="Next testimonial"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
@@ -619,7 +619,7 @@ export default function HomePage() {
                   onClick={() => setCurrentTestimonial(index)}
                   className={`w-2 h-2 rounded-full transition-all ${
                     currentTestimonial === index
-                      ? 'w-8 bg-[#9e7540]'
+                      ? 'w-8 bg-[#CBA35C]'
                       : 'bg-gray-300 hover:bg-gray-400'
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
@@ -631,7 +631,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section bg-white w-full max-w-full">
+      <section className="section bg-primary-50 w-full max-w-full">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center">
             <motion.div
@@ -639,7 +639,7 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sans font-bold text-[#4a3424] mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sans font-bold text-[#754E1A] mb-4 sm:mb-6">
                 Start Creating Amazing Virtual Tours Today
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-neutral-600 mb-8">
@@ -649,13 +649,13 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/register"
-                  className="bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-800 transition-colors text-center"
+                  className="bg-primary-400 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-700 transition-all hover:scale-105 text-center"
                 >
                   Start Free Trial
                 </Link>
                 <Link
                   href="/pricing"
-                  className="px-8 py-4 bg-accent-500 text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-accent-600 transition-colors text-center"
+                  className="px-8 py-4 bg-primary-600 text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-700 transition-all hover:scale-105 text-center"
                 >
                   View Pricing
                 </Link>

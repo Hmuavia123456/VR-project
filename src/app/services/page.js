@@ -192,7 +192,7 @@ export default function ServicesPage() {
       {services.map((service, index) => (
         <section
           key={service.id}
-          className={index % 2 === 0 ? 'section bg-white' : 'section bg-background-gray'}
+          className={index % 2 === 0 ? 'section bg-primary-50' : 'section bg-primary-50'}
         >
           <div className="container-custom">
             <div
@@ -206,7 +206,7 @@ export default function ServicesPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className={`relative h-96 bg-gradient-to-br from-primary-500/20 to-accent-500/20 rounded-2xl overflow-hidden shadow-xl ${
+                className={`relative h-96 bg-gradient-to-br from-primary-500/20 to-primary-500/20 rounded-2xl overflow-hidden shadow-xl ${
                   index % 2 === 1 ? 'lg:order-2' : ''
                 }`}
               >
@@ -240,7 +240,7 @@ export default function ServicesPage() {
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <svg
-                        className="w-6 h-6 text-accent-500 flex-shrink-0 mt-0.5"
+                        className="w-6 h-6 text-primary-500 flex-shrink-0 mt-0.5"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -283,7 +283,7 @@ export default function ServicesPage() {
               </a>
               <a
                 href="/explore"
-                className="px-8 py-4 bg-accent-500 text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-accent-600 transition-colors border-2 border-accent-600"
+                className="px-8 py-4 bg-primary-500 text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-600 transition-colors border-2 border-primary-600"
               >
                 View Examples
               </a>

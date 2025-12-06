@@ -57,32 +57,32 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="bg-[#4a3424] text-white w-full max-w-full overflow-x-hidden" suppressHydrationWarning>
-      <div className="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-8 md:py-10" suppressHydrationWarning>
-        {/* Top Section - Newsletter - FIXED FOR MOBILE */}
-        <div className="mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-white/20">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-start md:items-center">
+    <footer className="bg-footer text-white w-full max-w-full overflow-x-hidden" suppressHydrationWarning>
+      <div className="w-full px-2 sm:px-6 lg:px-8 max-w-7xl mx-auto py-2 sm:py-5 md:py-6" suppressHydrationWarning>
+        {/* Top Section - Newsletter - MOBILE OPTIMIZED */}
+        <div className="mb-2 sm:mb-4 md:mb-5 pb-2 sm:pb-4 md:pb-5 border-b border-white/20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5 sm:gap-3 md:gap-4 items-start md:items-center">
             <div className="text-center md:text-left">
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-sans font-bold text-white mb-2">
+              <h3 className="text-xs sm:text-lg md:text-xl font-sans font-bold text-white mb-0 sm:mb-1">
                 Stay in the Loop
               </h3>
-              <p className="text-sm sm:text-base text-white/80">
-                Get the latest tours, features, and VR news delivered to your inbox.
+              <p className="text-xs sm:text-sm text-white/80 hidden sm:block">
+                Get the latest tours and VR news.
               </p>
             </div>
             <div>
-              <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3">
+              <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-1 sm:gap-2">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white text-sm sm:text-base"
+                  placeholder="Your email"
+                  className="flex-1 px-2 py-1 sm:px-3 sm:py-2 bg-white/20 border border-white/30 rounded text-white placeholder-white/60 focus:outline-none focus:ring-1 focus:ring-white text-[10px] sm:text-sm"
                   required
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-[#85603f] text-white rounded-lg font-medium hover:bg-[#6b4d32] transition-colors whitespace-nowrap text-sm sm:text-base"
+                  className="px-2 py-1 sm:px-4 sm:py-2 bg-[#CBA35C] text-white rounded font-medium hover:bg-[#754E1A] transition-colors whitespace-nowrap text-[10px] sm:text-sm"
                 >
                   {subscribed ? '✓ Subscribed!' : 'Subscribe'}
                 </button>
@@ -91,66 +91,74 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Middle Section - Links - FIXED FOR MOBILE */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        {/* Middle Section - Links - MOBILE OPTIMIZED */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1.5 sm:gap-3 md:gap-4 mb-2 sm:mb-4 md:mb-5">
           {/* Brand Column */}
-          <div className="col-span-2 sm:col-span-3 lg:col-span-1 mb-4 sm:mb-0 text-center sm:text-left">
-            <div className="flex items-center justify-center sm:justify-start space-x-2 mb-3">
+          <div className="col-span-2 sm:col-span-3 lg:col-span-1 mb-1.5 sm:mb-3 md:mb-0 text-center sm:text-left">
+            <div className="flex items-center justify-center sm:justify-start space-x-1 sm:space-x-2 mb-1 sm:mb-2">
               {/* Beautiful Logo */}
-              <div className="relative w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-[#bd9354] via-[#9e7540] to-[#85603f] rounded-xl flex items-center justify-center shadow-xl flex-shrink-0">
-                <div className="absolute inset-0.5 bg-gradient-to-br from-[#6b4d32] to-[#85603f] rounded-xl"></div>
-                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-white relative z-10" fill="currentColor" viewBox="0 0 24 24">
+              <div className="relative w-6 h-6 sm:w-9 sm:h-9 bg-gradient-to-br from-[#CBA35C] via-[#CBA35C] to-[#754E1A] rounded flex items-center justify-center shadow-lg flex-shrink-0">
+                <div className="absolute inset-0.5 bg-gradient-to-br from-[#754E1A] to-[#CBA35C] rounded"></div>
+                <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-white relative z-10" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
                 </svg>
               </div>
-              <span className="text-lg sm:text-xl font-sans font-bold text-white">
+              <span className="text-xs sm:text-base md:text-lg font-sans font-bold text-white">
                 Virtulee
               </span>
             </div>
-            <p className="text-xs sm:text-sm text-white/80 mb-3 sm:mb-4 px-4 sm:px-0">
-              Immersive 360° virtual tours that transport you anywhere.
+            <p className="text-xs text-white/80 mb-1 sm:mb-2 px-2 sm:px-0 hidden sm:block">
+              Immersive 360° tours.
             </p>
             {/* Social Links */}
-            <div className="flex justify-center sm:justify-start space-x-2 sm:space-x-3">
+            <div className="flex justify-center sm:justify-start space-x-0.5 sm:space-x-1.5">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
                   aria-label={social.name}
-                  className="w-8 h-8 sm:w-9 sm:h-9 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30 transition-colors"
+                  className="w-5 h-5 sm:w-7 sm:h-7 bg-white/20 rounded flex items-center justify-center hover:bg-white/30 transition-colors"
                 >
-                  <span className="text-xs sm:text-sm">{social.icon}</span>
+                  <span className="text-[10px] sm:text-xs">{social.icon}</span>
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Link Columns - BETTER MOBILE LAYOUT */}
+          {/* Link Columns - MOBILE OPTIMIZED */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category} className="text-center sm:text-left">
-              <h4 className="text-white font-semibold mb-2 sm:mb-3 text-sm sm:text-base">{category}</h4>
-              <ul className="space-y-1 sm:space-y-1.5">
-                {links.map((link) => (
+              <h4 className="text-white font-semibold mb-0.5 sm:mb-1.5 text-[10px] sm:text-sm">{category}</h4>
+              <ul className="space-y-0">
+                {links.slice(0, 3).map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-xs sm:text-sm text-white/80 hover:text-white transition-colors inline-block"
+                      className="text-[10px] sm:text-xs text-white/80 hover:text-white transition-colors inline-block"
                     >
                       {link.label}
                     </Link>
                   </li>
                 ))}
+                <li className="hidden sm:block">
+                  <Link
+                    href={links[3]?.href || '#'}
+                    className="text-xs text-white/80 hover:text-white transition-colors inline-block"
+                  >
+                    {links[3]?.label}
+                  </Link>
+                </li>
               </ul>
             </div>
           ))}
         </div>
 
-        {/* Bottom Section - Copyright - FIXED FOR MOBILE */}
-        <div className="pt-4 sm:pt-6 border-t border-white/20 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
-          <p className="text-xs sm:text-sm text-white/80 text-center sm:text-left">
+        {/* Bottom Section - Copyright - MOBILE OPTIMIZED */}
+        <div className="pt-1.5 sm:pt-3 md:pt-4 border-t border-white/20 flex flex-col sm:flex-row justify-between items-center gap-1 sm:gap-2 md:gap-3">
+          <p className="text-[9px] sm:text-xs text-white/80 text-center sm:text-left">
             © {new Date().getFullYear()} Virtulee. All rights reserved.
           </p>
-          <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm">
+          <div className="flex gap-1.5 sm:gap-3 md:gap-4 text-[9px] sm:text-xs">
             <Link href="#" className="text-white/80 hover:text-white transition-colors">
               Privacy
             </Link>

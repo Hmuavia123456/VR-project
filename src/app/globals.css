@@ -10,19 +10,19 @@
 
 /* Custom CSS Variables for VR Tour Theme - Warm Earth Tone Palette */
 :root {
-  --background: #faf7ed;
-  --foreground: #4a3424;
-  --primary: #85603f;
-  --secondary: #9e7540;
-  --accent: #bd9354;
-  --light-bg: #f5efd8;
-  --dark-brown: #6b4d32;
+  --background: #FEF9F0;
+  --foreground: #754E1A;
+  --primary: #CBA35C;
+  --secondary: #CBA35C;
+  --accent: #CBA35C;
+  --light-bg: #FEF9F0;
+  --dark-brown: #754E1A;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #faf7ed;
-    --foreground: #4a3424;
+    --background: #FEF9F0;
+    --foreground: #754E1A;
   }
 }
 
@@ -75,7 +75,7 @@ body {
   }
 
   .btn-accent {
-    @apply px-6 py-3 bg-accent-500 text-white rounded-lg font-medium hover:bg-accent-600 transition-all duration-300 shadow-md hover:shadow-lg active:scale-95;
+    @apply px-6 py-3 bg-primary-400 text-white rounded-lg font-medium hover:bg-primary-700 transition-all duration-300 shadow-md hover:shadow-lg active:scale-95;
   }
 
   /* Card Styles */
@@ -103,7 +103,7 @@ body {
 
   /* Gradient Text */
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-700 to-primary-400;
   }
 
   /* Hide Scrollbar - for horizontal scrolling tabs on mobile */
@@ -123,16 +123,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f5efd8;
+  background: #FEF9F0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #9e7540;
+  background: #CBA35C;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #85603f;
+  background: #CBA35C;
 }
 
 /* Smooth Transitions */

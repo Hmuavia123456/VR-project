@@ -34,7 +34,7 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen pt-20 bg-gradient-to-br from-primary-50 via-background-light to-accent-50">
+    <div className="min-h-screen pt-20 bg-gradient-to-br from-primary-50 via-background-light to-primary-50">
       {/* Header */}
       <section className="py-16">
         <div className="container-custom text-center">
@@ -70,8 +70,8 @@ export default function ContactPage() {
                 </h2>
 
                 {submitted && (
-                  <div className="mb-6 p-4 bg-accent-50 border border-accent-200 rounded-lg">
-                    <p className="text-accent-800 font-medium">
+                  <div className="mb-6 p-4 bg-primary-50 border border-primary-200 rounded-lg">
+                    <p className="text-primary-800 font-medium">
                       ✓ Thank you! We'll get back to you soon.
                     </p>
                   </div>
@@ -192,14 +192,14 @@ export default function ContactPage() {
                 </div>
 
                 {/* Phone */}
-                <div className="flex items-center gap-4 p-5 bg-white rounded-xl border border-accent-200 hover:shadow-lg hover:border-accent-300 transition-all group">
-                  <div className="flex-shrink-0 w-11 h-11 bg-accent-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="flex items-center gap-4 p-5 bg-white rounded-xl border border-primary-200 hover:shadow-lg hover:border-primary-300 transition-all group">
+                  <div className="flex-shrink-0 w-11 h-11 bg-primary-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-accent-900 text-sm">Phone</h3>
+                    <h3 className="font-semibold text-primary-900 text-sm">Phone</h3>
                     <p className="text-neutral-600 text-sm">+1 (888) 993-8990</p>
                   </div>
                 </div>
@@ -219,14 +219,14 @@ export default function ContactPage() {
                 </div>
 
                 {/* Business Hours */}
-                <div className="flex items-center gap-4 p-5 bg-white rounded-xl border border-accent-200 hover:shadow-lg hover:border-accent-300 transition-all group">
-                  <div className="flex-shrink-0 w-11 h-11 bg-accent-700 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="flex items-center gap-4 p-5 bg-white rounded-xl border border-primary-200 hover:shadow-lg hover:border-primary-300 transition-all group">
+                  <div className="flex-shrink-0 w-11 h-11 bg-primary-700 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-accent-900 text-sm">Business Hours</h3>
+                    <h3 className="font-semibold text-primary-900 text-sm">Business Hours</h3>
                     <p className="text-neutral-600 text-sm">Mon-Fri: 9 AM - 6 PM</p>
                   </div>
                 </div>

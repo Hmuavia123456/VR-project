@@ -125,7 +125,7 @@ export default function PricingPage() {
                 <span className={`ml-2 text-xs px-2 py-1 rounded-full font-semibold ${
                   billingCycle === 'yearly'
                     ? 'bg-white/20 text-white'
-                    : 'bg-accent-500/20 text-accent-600'
+                    : 'bg-primary-500/20 text-primary-600'
                 }`}>
                   Save 20%
                 </span>
@@ -150,13 +150,13 @@ export default function PricingPage() {
                     ? 'bg-gradient-to-br from-primary-700 to-primary-900 text-white shadow-strong'
                     : index === 0
                     ? 'bg-gradient-to-br from-primary-500 to-primary-700 text-white shadow-medium'
-                    : 'bg-gradient-to-br from-accent-500 to-accent-700 text-white shadow-medium'
+                    : 'bg-gradient-to-br from-primary-500 to-primary-700 text-white shadow-medium'
                 }`}
               >
                 {/* Popular Badge */}
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-accent-500 text-white px-4 py-1 rounded-full text-sm font-medium shadow-md">
-                    Most Popular
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary-600 text-white px-4 py-1 rounded-full text-sm font-medium shadow-lg shadow-primary-500/50">
+                    Most Popular ⭐
                   </div>
                 )}
 
@@ -222,7 +222,7 @@ export default function PricingPage() {
       </section>
 
       {/* Comparison Table */}
-      <section className="section bg-background-gray">
+      <section className="section bg-primary-50">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -311,7 +311,7 @@ export default function PricingPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="section bg-white">
+      <section className="section bg-primary-50">
         <div className="container-custom max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -368,7 +368,7 @@ export default function PricingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section bg-white">
+      <section className="section bg-primary-50">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -387,7 +387,7 @@ export default function PricingPage() {
               </Link>
               <Link
                 href="/explore"
-                className="px-8 py-4 bg-accent-500 text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-accent-600 transition-colors"
+                className="px-8 py-4 bg-primary-500 text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-600 transition-colors"
               >
                 View Demo Tours
               </Link>

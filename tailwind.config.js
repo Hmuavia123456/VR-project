@@ -8,30 +8,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Custom VR Tour color palette - Warm earth tones
+        // Final 3-Color Palette - Simple & Clean
         primary: {
-          50: '#faf7ed',
-          100: '#f5efd8',
-          200: '#ede5bf',
-          300: '#e3d18a',
-          400: '#bd9354',
-          500: '#9e7540',
-          600: '#85603f',
-          700: '#6b4d32',
-          800: '#593f2a',
-          900: '#4a3424',
-        },
-        accent: {
-          50: '#faf7ed',
-          100: '#f5efd8',
-          200: '#ede5bf',
-          300: '#e3d18a',
-          400: '#d4b76a',
-          500: '#bd9354',
-          600: '#9e7540',
-          700: '#85603f',
-          800: '#6b4d32',
-          900: '#593f2a',
+          50: '#FEF9F0',    // Cream - Lightest (Background)
+          100: '#f5dec4',
+          200: '#efd4a8',
+          300: '#e5c78e',
+          400: '#CBA35C',   // Golden Tan - Mid-tone (Accents)
+          500: '#b8904d',
+          600: '#9d7a3f',
+          700: '#754E1A',   // Deep Brown - Darkest (Text/Borders)
+          800: '#5f4016',
+          900: '#4a3211',
         },
         neutral: {
           50: '#fafafa',
@@ -46,9 +34,12 @@ module.exports = {
           900: '#171717',
         },
         background: {
-          light: '#faf7ed',
-          dark: '#4a3424',
-          gray: '#f5efd8',
+          light: '#FEF9F0',  // Cream - Main Background
+          dark: '#754E1A',   // Deep Brown
+          accent: '#CBA35C', // Golden Tan
+        },
+        footer: {
+          DEFAULT: '#4a3424', // Footer Dark Brown
         },
       },
       fontFamily: {

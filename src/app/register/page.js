@@ -97,7 +97,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen pt-20 flex items-center justify-center bg-gradient-to-br from-primary-50 via-background-light to-accent-50 py-12">
+    <div className="min-h-screen pt-20 flex items-center justify-center bg-gradient-to-br from-primary-50 via-background-light to-primary-50 py-12">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -223,11 +223,11 @@ export default function RegisterPage() {
                   />
                   <span className="ml-2 text-sm text-neutral-700">
                     I agree to the{' '}
-                    <Link href="#" className="font-medium text-accent-600 hover:text-accent-700">
+                    <Link href="#" className="font-medium text-primary-600 hover:text-primary-700">
                       Terms of Service
                     </Link>{' '}
                     and{' '}
-                    <Link href="#" className="font-medium text-accent-600 hover:text-accent-700">
+                    <Link href="#" className="font-medium text-primary-600 hover:text-primary-700">
                       Privacy Policy
                     </Link>
                   </span>
@@ -274,7 +274,7 @@ export default function RegisterPage() {
               Already have an account?{' '}
               <Link
                 href="/login"
-                className="font-semibold text-accent-600 hover:text-accent-700"
+                className="font-semibold text-primary-600 hover:text-primary-700"
               >
                 Sign in
               </Link>

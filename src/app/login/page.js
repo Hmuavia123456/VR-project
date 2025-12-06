@@ -70,7 +70,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen pt-20 flex items-center justify-center bg-gradient-to-br from-primary-50 via-background-light to-accent-50">
+    <div className="min-h-screen pt-20 flex items-center justify-center bg-gradient-to-br from-primary-50 via-background-light to-primary-50">
       <div className="container-custom py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -146,7 +146,7 @@ export default function LoginPage() {
                 </label>
                 <Link
                   href="#"
-                  className="text-sm text-accent-600 hover:text-accent-700 font-medium"
+                  className="text-sm text-primary-600 hover:text-primary-700 font-medium"
                 >
                   Forgot password?
                 </Link>
@@ -189,7 +189,7 @@ export default function LoginPage() {
               Don't have an account?{' '}
               <Link
                 href="/register"
-                className="font-semibold text-accent-600 hover:text-accent-700"
+                className="font-semibold text-primary-600 hover:text-primary-700"
               >
                 Sign up for free
               </Link>
@@ -197,8 +197,8 @@ export default function LoginPage() {
           </div>
 
           {/* Demo Credentials */}
-          <div className="mt-6 p-4 bg-accent-50 border border-accent-200 rounded-lg">
-            <p className="text-sm text-accent-800">
+          <div className="mt-6 p-4 bg-primary-50 border border-primary-200 rounded-lg">
+            <p className="text-sm text-primary-800">
               <strong>Demo:</strong> Use any email and password (min 6 chars) to test the login.
             </p>
           </div>

@@ -122,7 +122,7 @@ function CanvasFallback() {
     <div className="absolute inset-0">
       {/* Theme-based gradient background */}
       <div
-        className="absolute inset-0 bg-gradient-to-br from-[#9e7540] via-[#4a3424] to-[#6b4d32]"
+        className="absolute inset-0 bg-gradient-to-br from-[#CBA35C] via-[#754E1A] to-[#FEF9F0]"
         style={{
           animation: 'gradientShift 8s ease infinite',
         }}
@@ -182,7 +182,7 @@ export default function Hero360({ imageUrl = '/360-hero.jpg', videoUrl = null })
   return (
     <div className="relative min-h-[100vh] sm:h-[90vh] md:h-[85vh] w-full max-w-full overflow-hidden">
       {/* 360 Background Canvas */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#9e7540] via-[#4a3424] to-[#6b4d32] w-full max-w-full">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#CBA35C] via-[#754E1A] to-[#FEF9F0] w-full max-w-full">
         <Suspense fallback={<CanvasFallback />}>
           <Canvas
             camera={{ position: [0, 0, 0.1], fov: 75 }}
@@ -195,8 +195,8 @@ export default function Hero360({ imageUrl = '/360-hero.jpg', videoUrl = null })
             }}
             dpr={[1, 2]}
             onCreated={({ gl, scene }) => {
-              gl.setClearColor('#9e7540')
-              scene.background = new THREE.Color('#9e7540')
+              gl.setClearColor('#CBA35C')
+              scene.background = new THREE.Color('#CBA35C')
             }}
           >
             <Hero360Sphere mediaUrl={mediaUrl} isVideo={isVideo} />
@@ -262,7 +262,7 @@ export default function Hero360({ imageUrl = '/360-hero.jpg', videoUrl = null })
           >
             <Link
               href="/register"
-              className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-[#85603f] backdrop-blur-xl text-white rounded-2xl font-semibold text-base sm:text-lg shadow-2xl hover:shadow-3xl hover:bg-[#6b4d32] transition-all duration-300 transform hover:scale-105 border border-[#bd9354]/30"
+              className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-[#CBA35C] backdrop-blur-xl text-white rounded-2xl font-semibold text-base sm:text-lg shadow-2xl hover:shadow-3xl hover:bg-[#754E1A] transition-all duration-300 transform hover:scale-105 border-2 border-white"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 Start Free Trial
@@ -274,7 +274,7 @@ export default function Hero360({ imageUrl = '/360-hero.jpg', videoUrl = null })
 
             <Link
               href="/explore"
-              className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white/10 backdrop-blur-xl text-white rounded-2xl font-semibold text-base sm:text-lg border-2 border-[#bd9354]/50 hover:bg-[#bd9354]/20 hover:border-[#bd9354] transition-all duration-300 shadow-lg"
+              className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-[#754E1A] backdrop-blur-xl text-white rounded-2xl font-semibold text-base sm:text-lg border-2 border-white hover:bg-[#CBA35C] transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105"
             >
               <span className="flex items-center justify-center gap-2">
                 Explore Tours
