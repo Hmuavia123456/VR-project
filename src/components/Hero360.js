@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useRef } from 'react'
+import { Suspense, useRef, useEffect } from 'react'
 import * as React from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Sphere } from '@react-three/drei'
@@ -170,6 +170,14 @@ function CanvasFallback() {
 export default function Hero360({ imageUrl = '/360-hero.jpg', videoUrl = null }) {
   const mediaUrl = videoUrl || imageUrl
   const isVideo = !!videoUrl
+  const controlsRef = useRef()
+  const [isCtrlPressed, setIsCtrlPressed] = React.useState(false)
+  const [isTouchDevice, setIsTouchDevice] = React.useState(false)
+
+  // Detect touch device
+  useEffect(() => {
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0)
+  }, [])
 
   // Preload image/video for faster loading
   React.useEffect(() => {
@@ -179,10 +187,53 @@ export default function Hero360({ imageUrl = '/360-hero.jpg', videoUrl = null })
     }
   }, [mediaUrl, isVideo])
 
+  // Track Ctrl key for conditional zoom
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.ctrlKey || e.metaKey) {
+        setIsCtrlPressed(true)
+      }
+    }
+
+    const handleKeyUp = (e) => {
+      if (!e.ctrlKey && !e.metaKey) {
+        setIsCtrlPressed(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('keyup', handleKeyUp)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('keyup', handleKeyUp)
+    }
+  }, [])
+
+  // Enable zoom for touch devices or when Ctrl is pressed
+  const zoomEnabled = isTouchDevice || isCtrlPressed
+
   return (
     <div className="relative min-h-[100vh] sm:h-[90vh] md:h-[85vh] w-full max-w-full overflow-hidden">
+      {/* Zoom Instruction Hint - Bottom Right (Desktop only) */}
+      <div className="hidden md:block absolute bottom-4 right-4 z-50 bg-black/60 text-white px-3 py-2 rounded-lg text-xs font-medium backdrop-blur-sm border border-white/20">
+        💡 Hold <kbd className="px-2 py-1 bg-white/20 rounded mx-1 font-bold">Ctrl</kbd> + Scroll to Zoom
+      </div>
+
+      {/* Mobile Zoom Hint */}
+      <div className="md:hidden absolute bottom-4 right-4 z-50 bg-black/60 text-white px-3 py-2 rounded-lg text-xs font-medium backdrop-blur-sm border border-white/20">
+        🤏 Pinch to Zoom
+      </div>
+
+      {/* Active Zoom Tooltip */}
+      {isCtrlPressed && (
+        <div className="absolute top-24 left-1/2 transform -translate-x-1/2 z-50 bg-green-500/90 text-white px-4 py-2 rounded-lg text-sm font-bold backdrop-blur-sm animate-pulse">
+          🔍 Zoom Active - Scroll Now!
+        </div>
+      )}
+
       {/* 360 Background Canvas */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#CBA35C] via-[#754E1A] to-[#FEF9F0] w-full max-w-full">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#CBA35C] via-[#754E1A] to-[#FEF9F0] w-full max-w-full" style={{ touchAction: 'pan-y' }}>
         <Suspense fallback={<CanvasFallback />}>
           <Canvas
             camera={{ position: [0, 0, 0.1], fov: 75 }}
@@ -194,6 +245,7 @@ export default function Hero360({ imageUrl = '/360-hero.jpg', videoUrl = null })
               stencil: false
             }}
             dpr={[1, 2]}
+            style={{ touchAction: 'pan-y' }}
             onCreated={({ gl, scene }) => {
               gl.setClearColor('#CBA35C')
               scene.background = new THREE.Color('#CBA35C')
@@ -202,7 +254,8 @@ export default function Hero360({ imageUrl = '/360-hero.jpg', videoUrl = null })
             <Hero360Sphere mediaUrl={mediaUrl} isVideo={isVideo} />
             {/* OrbitControls for ultra-smooth 360° interaction with mobile support */}
             <OrbitControls
-              enableZoom={true}
+              ref={controlsRef}
+              enableZoom={zoomEnabled}
               enablePan={false}
               enableDamping={true}
               dampingFactor={0.03}
@@ -218,7 +271,7 @@ export default function Hero360({ imageUrl = '/360-hero.jpg', videoUrl = null })
               makeDefault={true}
               touches={{
                 ONE: THREE.TOUCH.ROTATE,
-                TWO: THREE.TOUCH.DOLLY_PAN
+                TWO: THREE.TOUCH.DOLLY_ROTATE
               }}
             />
           </Canvas>

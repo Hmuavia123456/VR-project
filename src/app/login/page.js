@@ -156,7 +156,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-primary-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-primary-700 text-white px-8 py-3 font-semibold text-lg shadow-xl hover:bg-primary-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? 'Signing in...' : 'Sign In'}
               </button>
@@ -174,11 +174,11 @@ export default function LoginPage() {
 
             {/* Social Login Buttons */}
             <div className="grid grid-cols-2 gap-4">
-              <button className="flex items-center justify-center px-4 py-2 border border-primary-200 rounded-lg hover:bg-primary-50 transition-colors">
+              <button className="flex items-center justify-center px-4 py-2 border border-primary-200 hover:bg-primary-50 transition-colors">
                 <span className="mr-2">🔵</span>
                 <span className="text-sm font-medium text-primary-800">Google</span>
               </button>
-              <button className="flex items-center justify-center px-4 py-2 border border-primary-200 rounded-lg hover:bg-primary-50 transition-colors">
+              <button className="flex items-center justify-center px-4 py-2 border border-primary-200 hover:bg-primary-50 transition-colors">
                 <span className="mr-2">⚫</span>
                 <span className="text-sm font-medium text-primary-800">GitHub</span>
               </button>

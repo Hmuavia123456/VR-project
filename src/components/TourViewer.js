@@ -4,6 +4,7 @@ import { Suspense, useRef, useState, useEffect } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, Sphere, Html } from '@react-three/drei'
 import * as THREE from 'three'
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
 
 /**
  * Hotspot Component
@@ -61,48 +62,97 @@ function PhotoSphere({ imageUrl, hotspots, onHotspotClick, opacity = 1 }) {
     setLoading(true)
     setTexture(null) // Clear previous texture
 
-    const loader = new THREE.TextureLoader()
+    // Detect if the image is an HDR file
+    const isHDR = imageUrl.toLowerCase().endsWith('.hdr') || imageUrl.toLowerCase().endsWith('.exr')
 
     // Add a small delay to ensure DOM is ready
     const timeoutId = setTimeout(() => {
-      loader.load(
-        imageUrl,
-        (loadedTexture) => {
-          // Optimize texture for better performance
-          loadedTexture.minFilter = THREE.LinearFilter
-          loadedTexture.magFilter = THREE.LinearFilter
-          loadedTexture.generateMipmaps = false
-          loadedTexture.colorSpace = THREE.SRGBColorSpace
-          setTexture(loadedTexture)
-          setLoading(false)
-        },
-        undefined,
-        (error) => {
-          console.error('Failed to load 360° image:', imageUrl)
-          console.error('Error details:', error)
-          setLoading(false)
+      if (isHDR) {
+        // Use RGBELoader for HDR files
+        const hdrLoader = new RGBELoader()
+        hdrLoader.load(
+          imageUrl,
+          (loadedTexture) => {
+            // Optimize texture for better performance
+            loadedTexture.minFilter = THREE.LinearFilter
+            loadedTexture.magFilter = THREE.LinearFilter
+            loadedTexture.generateMipmaps = false
+            loadedTexture.mapping = THREE.EquirectangularReflectionMapping
+            loadedTexture.colorSpace = THREE.LinearSRGBColorSpace
+            setTexture(loadedTexture)
+            setLoading(false)
+            console.log('HDR texture loaded successfully:', imageUrl)
+          },
+          undefined,
+          (error) => {
+            console.error('Failed to load HDR 360° image:', imageUrl)
+            console.error('Error details:', error)
+            setLoading(false)
 
-          // Try loading a fallback image
-          const fallbackUrl = '/360-real-nature.jpg'
-          if (imageUrl !== fallbackUrl) {
-            console.log('Attempting to load fallback image...')
-            loader.load(
-              fallbackUrl,
-              (fallbackTexture) => {
-                fallbackTexture.minFilter = THREE.LinearFilter
-                fallbackTexture.magFilter = THREE.LinearFilter
-                fallbackTexture.generateMipmaps = false
-                fallbackTexture.colorSpace = THREE.SRGBColorSpace
-                setTexture(fallbackTexture)
-              },
-              undefined,
-              (fallbackError) => {
-                console.error('Fallback image also failed to load')
-              }
-            )
+            // Try loading a fallback image
+            const fallbackUrl = '/360-real-nature.jpg'
+            if (imageUrl !== fallbackUrl) {
+              console.log('Attempting to load fallback image...')
+              const fallbackLoader = new THREE.TextureLoader()
+              fallbackLoader.load(
+                fallbackUrl,
+                (fallbackTexture) => {
+                  fallbackTexture.minFilter = THREE.LinearFilter
+                  fallbackTexture.magFilter = THREE.LinearFilter
+                  fallbackTexture.generateMipmaps = false
+                  fallbackTexture.colorSpace = THREE.SRGBColorSpace
+                  setTexture(fallbackTexture)
+                },
+                undefined,
+                (fallbackError) => {
+                  console.error('Fallback image also failed to load')
+                }
+              )
+            }
           }
-        }
-      )
+        )
+      } else {
+        // Use TextureLoader for standard images (JPG, PNG, etc.)
+        const loader = new THREE.TextureLoader()
+        loader.load(
+          imageUrl,
+          (loadedTexture) => {
+            // Optimize texture for better performance
+            loadedTexture.minFilter = THREE.LinearFilter
+            loadedTexture.magFilter = THREE.LinearFilter
+            loadedTexture.generateMipmaps = false
+            loadedTexture.colorSpace = THREE.SRGBColorSpace
+            setTexture(loadedTexture)
+            setLoading(false)
+          },
+          undefined,
+          (error) => {
+            console.error('Failed to load 360° image:', imageUrl)
+            console.error('Error details:', error)
+            setLoading(false)
+
+            // Try loading a fallback image
+            const fallbackUrl = '/360-real-nature.jpg'
+            if (imageUrl !== fallbackUrl) {
+              console.log('Attempting to load fallback image...')
+              loader.load(
+                fallbackUrl,
+                (fallbackTexture) => {
+                  fallbackTexture.minFilter = THREE.LinearFilter
+                  fallbackTexture.magFilter = THREE.LinearFilter
+                  fallbackTexture.generateMipmaps = false
+                  fallbackTexture.colorSpace = THREE.SRGBColorSpace
+                  setTexture(fallbackTexture)
+                },
+                undefined,
+                (fallbackError) => {
+                  console.error('Fallback image also failed to load')
+                }
+              )
+            }
+          }
+        )
+      }
     }, 100)
 
     return () => {
@@ -230,8 +280,28 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
   const [showSidebar, setShowSidebar] = useState(typeof window !== 'undefined' ? window.innerWidth >= 768 : true)
   const [liked, setLiked] = useState(false)
   const [bookmarked, setBookmarked] = useState(false)
+  const [showShareMenu, setShowShareMenu] = useState(false)
+  const [showToast, setShowToast] = useState(null)
   const containerRef = useRef()
   const controlsRef = useRef()
+
+  // Load saved likes and bookmarks from localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined' && tour.id) {
+      const savedLikes = localStorage.getItem('virtulee_liked_tours')
+      const savedBookmarks = localStorage.getItem('virtulee_bookmarks')
+
+      if (savedLikes) {
+        const likesObj = JSON.parse(savedLikes)
+        setLiked(!!likesObj[tour.id])
+      }
+
+      if (savedBookmarks) {
+        const bookmarksObj = JSON.parse(savedBookmarks)
+        setBookmarked(!!bookmarksObj[tour.id])
+      }
+    }
+  }, [tour.id])
 
   // Support both old single-scene format and new multi-scene format
   const scenes = tour.scenes || [tour]
@@ -242,6 +312,89 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
   const getSceneUrl = (scene) => {
     return scene.url || scene.image || tour.image || tour.url || '/360-real-nature.jpg'
   }
+
+  // Toast notification helper
+  const showNotification = (message, type = 'success') => {
+    setShowToast({ message, type })
+    setTimeout(() => setShowToast(null), 3000)
+  }
+
+  // Like handler with localStorage
+  const handleLike = () => {
+    if (!tour.id) return
+
+    const savedLikes = localStorage.getItem('virtulee_liked_tours')
+    const likesObj = savedLikes ? JSON.parse(savedLikes) : {}
+
+    if (liked) {
+      delete likesObj[tour.id]
+      setLiked(false)
+      showNotification('Removed from favorites', 'info')
+    } else {
+      likesObj[tour.id] = true
+      setLiked(true)
+      showNotification('Added to favorites!', 'success')
+    }
+
+    localStorage.setItem('virtulee_liked_tours', JSON.stringify(likesObj))
+  }
+
+  // Bookmark handler with localStorage
+  const handleBookmark = () => {
+    if (!tour.id) return
+
+    const savedBookmarks = localStorage.getItem('virtulee_bookmarks')
+    const bookmarksObj = savedBookmarks ? JSON.parse(savedBookmarks) : {}
+
+    if (bookmarked) {
+      delete bookmarksObj[tour.id]
+      setBookmarked(false)
+      showNotification('Removed from saved tours', 'info')
+    } else {
+      bookmarksObj[tour.id] = true
+      setBookmarked(true)
+      showNotification('Tour saved!', 'success')
+    }
+
+    localStorage.setItem('virtulee_bookmarks', JSON.stringify(bookmarksObj))
+  }
+
+  // Share handler
+  const handleShare = async (method) => {
+    const shareUrl = `${window.location.origin}/tour/${tour.id || 'preview'}`
+    const shareText = `Check out this 360° tour: ${tour.title || 'Virtual Tour'}`
+
+    try {
+      if (method === 'copy') {
+        await navigator.clipboard.writeText(shareUrl)
+        showNotification('Link copied to clipboard!', 'success')
+      } else if (method === 'whatsapp') {
+        window.open(`https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`, '_blank')
+        showNotification('Opening WhatsApp...', 'info')
+      } else if (method === 'facebook') {
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank')
+        showNotification('Opening Facebook...', 'info')
+      } else if (method === 'twitter') {
+        window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`, '_blank')
+        showNotification('Opening Twitter...', 'info')
+      }
+      setShowShareMenu(false)
+    } catch (error) {
+      showNotification('Failed to share', 'error')
+    }
+  }
+
+  // Close share menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (showShareMenu && !e.target.closest('.share-menu-container')) {
+        setShowShareMenu(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [showShareMenu])
 
   // Keyboard navigation for scenes
   useEffect(() => {
@@ -339,15 +492,20 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
               enableZoom={true}
               enablePan={false}
               enableDamping={true}
-              dampingFactor={0.05}
+              dampingFactor={0.08}
               rotateSpeed={-0.5}
-              zoomSpeed={1.2}
-              minDistance={10}
-              maxDistance={200}
+              zoomSpeed={2.5}
+              minDistance={1}
+              maxDistance={400}
               target={[0, 0, 0]}
               touches={{
                 ONE: THREE.TOUCH.ROTATE,
                 TWO: THREE.TOUCH.DOLLY_PAN
+              }}
+              mouseButtons={{
+                LEFT: THREE.MOUSE.ROTATE,
+                MIDDLE: THREE.MOUSE.DOLLY,
+                RIGHT: THREE.MOUSE.ROTATE
               }}
             />
           </Canvas>
@@ -652,12 +810,13 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
             {/* Action Buttons */}
             <div className="flex items-center gap-2 mb-5">
               <button
-                onClick={() => setLiked(!liked)}
+                onClick={handleLike}
                 className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   liked
                     ? 'bg-red-500 hover:bg-red-600 text-white'
                     : 'bg-neutral-800 hover:bg-neutral-700 text-white'
                 }`}
+                title={liked ? 'Unlike' : 'Like'}
               >
                 <svg className="w-4 h-4" fill={liked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -666,12 +825,13 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
               </button>
 
               <button
-                onClick={() => setBookmarked(!bookmarked)}
+                onClick={handleBookmark}
                 className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   bookmarked
                     ? 'bg-[#CBA35C] hover:bg-[#754E1A] text-white'
                     : 'bg-neutral-800 hover:bg-neutral-700 text-white'
                 }`}
+                title={bookmarked ? 'Unsave' : 'Save'}
               >
                 <svg className="w-4 h-4" fill={bookmarked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
@@ -679,14 +839,59 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
                 Save
               </button>
 
-              <button
-                className="p-2.5 bg-neutral-800 hover:bg-neutral-700 rounded-lg transition-colors"
-                title="Share"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                </svg>
-              </button>
+              <div className="relative share-menu-container">
+                <button
+                  onClick={() => setShowShareMenu(!showShareMenu)}
+                  className="p-2.5 bg-neutral-800 hover:bg-neutral-700 rounded-lg transition-colors"
+                  title="Share"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                  </svg>
+                </button>
+
+                {/* Share Dropdown Menu */}
+                {showShareMenu && (
+                  <div className="absolute right-0 mt-2 w-48 bg-neutral-800 rounded-lg shadow-xl border border-neutral-700 py-1 z-[100]">
+                    <button
+                      onClick={() => handleShare('copy')}
+                      className="w-full px-4 py-2 text-left text-sm text-white hover:bg-neutral-700 flex items-center gap-2"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                      Copy Link
+                    </button>
+                    <button
+                      onClick={() => handleShare('whatsapp')}
+                      className="w-full px-4 py-2 text-left text-sm text-white hover:bg-neutral-700 flex items-center gap-2"
+                    >
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                      </svg>
+                      WhatsApp
+                    </button>
+                    <button
+                      onClick={() => handleShare('facebook')}
+                      className="w-full px-4 py-2 text-left text-sm text-white hover:bg-neutral-700 flex items-center gap-2"
+                    >
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                      </svg>
+                      Facebook
+                    </button>
+                    <button
+                      onClick={() => handleShare('twitter')}
+                      className="w-full px-4 py-2 text-left text-sm text-white hover:bg-neutral-700 flex items-center gap-2"
+                    >
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                      </svg>
+                      Twitter
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Stats */}
@@ -809,12 +1014,13 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
               {/* Action Buttons - Mobile Optimized */}
               <div className="flex items-center gap-2 mb-3">
                 <button
-                  onClick={() => setLiked(!liked)}
+                  onClick={handleLike}
                   className={`flex-1 flex items-center justify-center gap-1 py-2.5 rounded-lg text-xs font-medium transition-all active:scale-95 ${
                     liked
                       ? 'bg-red-500 hover:bg-red-600 text-white'
                       : 'bg-neutral-800 hover:bg-neutral-700 text-white'
                   }`}
+                  title={liked ? 'Unlike' : 'Like'}
                 >
                   <svg className="w-4 h-4" fill={liked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -823,12 +1029,13 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
                 </button>
 
                 <button
-                  onClick={() => setBookmarked(!bookmarked)}
+                  onClick={handleBookmark}
                   className={`flex-1 flex items-center justify-center gap-1 py-2.5 rounded-lg text-xs font-medium transition-all active:scale-95 ${
                     bookmarked
                       ? 'bg-[#CBA35C] hover:bg-[#754E1A] text-white'
                       : 'bg-neutral-800 hover:bg-neutral-700 text-white'
                   }`}
+                  title={bookmarked ? 'Unsave' : 'Save'}
                 >
                   <svg className="w-4 h-4" fill={bookmarked ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
@@ -925,6 +1132,53 @@ export default function TourViewer({ tour, onClose, onNext, onPrev }) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </button>
+      )}
+
+      {/* Toast Notification - Top Center */}
+      {showToast && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[100] max-w-sm w-full px-4 animate-fade-in-down">
+          <div className={`rounded-lg shadow-2xl border-2 px-6 py-4 flex items-center gap-3 ${
+            showToast.type === 'success'
+              ? 'bg-green-50 border-green-500 text-green-800'
+              : showToast.type === 'error'
+              ? 'bg-red-50 border-red-500 text-red-800'
+              : 'bg-blue-50 border-blue-500 text-blue-800'
+          }`}>
+            {/* Icon */}
+            <div className="flex-shrink-0">
+              {showToast.type === 'success' && (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+              )}
+              {showToast.type === 'error' && (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+              )}
+              {showToast.type === 'info' && (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                </svg>
+              )}
+            </div>
+
+            {/* Message */}
+            <p className="text-sm font-medium flex-1">
+              {showToast.message}
+            </p>
+
+            {/* Close button */}
+            <button
+              onClick={() => setShowToast(null)}
+              className="flex-shrink-0 hover:opacity-70 transition-opacity"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </button>
+          </div>
+        </div>
       )}
     </div>
   )

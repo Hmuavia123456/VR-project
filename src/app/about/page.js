@@ -1,8 +1,50 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
+
+/**
+ * Animated Counter Component
+ */
+function AnimatedCounter({ value, duration = 2 }) {
+  const [count, setCount] = useState(0)
+  const countRef = useRef(null)
+  const isInView = useInView(countRef, { once: true })
+
+  // Extract number and suffix (K+, %, etc.)
+  const numericValue = parseFloat(value.toString().replace(/[^0-9.]/g, ''))
+  const suffix = value.toString().replace(/[0-9.]/g, '')
+
+  useEffect(() => {
+    if (!isInView) return
+
+    let startTime
+    let animationFrame
+
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp
+      const progress = (timestamp - startTime) / (duration * 1000)
+
+      if (progress < 1) {
+        setCount(numericValue * progress)
+        animationFrame = requestAnimationFrame(animate)
+      } else {
+        setCount(numericValue)
+      }
+    }
+
+    animationFrame = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(animationFrame)
+  }, [isInView, numericValue, duration])
+
+  return (
+    <span ref={countRef}>
+      {Math.floor(count)}{suffix}
+    </span>
+  )
+}
 
 /**
  * About Page
@@ -17,10 +59,30 @@ export default function AboutPage() {
   ]
 
   const stats = [
-    { number: '285K+', label: 'Active Users' },
-    { number: '420K+', label: 'Tours Created' },
-    { number: '145+', label: 'Countries' },
-    { number: '99.9%', label: 'Uptime' },
+    {
+      number: '285K+',
+      label: 'Active Users',
+      gradient: 'from-[#754E1A] to-[#8B6635]',
+      shadowColor: 'shadow-[#754E1A]/20'
+    },
+    {
+      number: '420K+',
+      label: 'Tours Created',
+      gradient: 'from-[#8B6635] to-[#C4975F]',
+      shadowColor: 'shadow-[#8B6635]/20'
+    },
+    {
+      number: '145+',
+      label: 'Countries',
+      gradient: 'from-[#C4975F] to-[#D4A574]',
+      shadowColor: 'shadow-[#C4975F]/20'
+    },
+    {
+      number: '99.9%',
+      label: 'Uptime',
+      gradient: 'from-[#A67C52] to-[#754E1A]',
+      shadowColor: 'shadow-[#A67C52]/20'
+    },
   ]
 
   return (
@@ -44,26 +106,83 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="section bg-primary-50">
-        <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      {/* Stats Section - Enhanced Interactive Design */}
+      <section className="section bg-gradient-to-br from-[#FEF9F0] via-white to-[#FFF5E6] relative overflow-hidden">
+        {/* Background Decorative Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 w-72 h-72 bg-[#754E1A] rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#C4975F] rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="container-custom relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-[#754E1A] mb-3">
+              Our Impact in Numbers
+            </h2>
+            <p className="text-neutral-600 text-lg">
+              Trusted by thousands worldwide
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-center"
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+                className="relative"
               >
-                <div className="text-4xl md:text-5xl font-bold text-[#754E1A] mb-2">
-                  {stat.number}
+                {/* Card */}
+                <div className="relative p-8 rounded-2xl bg-white border-2 border-[#754E1A]/10 shadow-lg overflow-hidden backdrop-blur-sm">
+                  {/* Subtle Background Gradient */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-5`}></div>
+
+                  {/* Content */}
+                  <div className="relative z-10 text-center">
+                    {/* Animated Number */}
+                    <div className={`
+                      text-4xl md:text-5xl lg:text-6xl font-extrabold
+                      bg-gradient-to-r ${stat.gradient}
+                      bg-clip-text text-transparent
+                      mb-3
+                    `}>
+                      <AnimatedCounter value={stat.number} duration={2.5} />
+                    </div>
+
+                    {/* Label */}
+                    <div className="text-neutral-700 font-semibold text-base md:text-lg">
+                      {stat.label}
+                    </div>
+
+                    {/* Decorative Line */}
+                    <motion.div
+                      className={`h-1 bg-gradient-to-r ${stat.gradient} mx-auto mt-4 rounded-full`}
+                      initial={{ width: 0 }}
+                      whileInView={{ width: '60%' }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: index * 0.15 + 0.5 }}
+                    ></motion.div>
+                  </div>
                 </div>
-                <div className="text-neutral-600 font-medium">{stat.label}</div>
               </motion.div>
             ))}
           </div>
+
+          {/* Bottom Decorative Wave */}
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 1, scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="h-1 bg-gradient-to-r from-[#754E1A] via-[#C4975F] to-[#754E1A] rounded-full mt-12 max-w-3xl mx-auto"
+          ></motion.div>
         </div>
       </section>
 
@@ -179,10 +298,10 @@ export default function AboutPage() {
               we'd love to have you on board.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/register" className="bg-primary-400 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-700 transition-all hover:scale-105">
+              <Link href="/register" className="bg-primary-400 text-white px-8 py-3 font-semibold text-lg shadow-xl hover:bg-primary-700 transition-all hover:scale-105">
                 Get Started Today
               </Link>
-              <Link href="/pricing" className="px-8 py-4 bg-primary-600 text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-700 transition-all hover:scale-105">
+              <Link href="/pricing" className="px-8 py-3 bg-primary-600 text-white font-semibold text-lg shadow-xl hover:bg-primary-700 transition-all hover:scale-105">
                 View Pricing
               </Link>
             </div>

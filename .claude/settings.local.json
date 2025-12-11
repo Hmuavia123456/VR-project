@@ -16,7 +16,19 @@
       "Bash(git commit:*)",
       "Bash(git push)",
       "Bash(git push:*)",
-      "Bash(git remote get-url:*)"
+      "Bash(git remote get-url:*)",
+      "Bash(gh run list:*)",
+      "Bash(npm update:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm install:*)",
+      "Bash(for id in 27 28)",
+      "Bash(do awk -v id=\"$id\" '/id: / && $2 == id\"\",\"\" {count++; if(count==2) print NR\"\": ID \"\"$2}' /mnt/d/projects/vr-project/src/app/explore/page.js)",
+      "Bash(done)",
+      "Bash(for id in 29 30 31 32)",
+      "Bash(do awk -v id=\"$id\" '/id: / && $2 == id\"\",\"\" {count++; if(count==2) print NR\"\": \"\"$0}' /mnt/d/projects/vr-project/src/app/explore/page.js)",
+      "Bash(for id in 31 32)",
+      "Bash(git checkout:*)",
+      "WebFetch(domain:polyhaven.com)"
     ],
     "deny": [],
     "ask": []

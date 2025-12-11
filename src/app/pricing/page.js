@@ -382,12 +382,12 @@ export default function PricingPage() {
               Start your 14-day free trial. No credit card required.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/register" className="bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-800 transition-colors">
+              <Link href="/register" className="bg-primary-700 text-white px-8 py-3 font-semibold text-lg shadow-xl hover:bg-primary-800 transition-colors">
                 Start Free Trial
               </Link>
               <Link
                 href="/explore"
-                className="px-8 py-4 bg-primary-500 text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-600 transition-colors"
+                className="px-8 py-3 bg-primary-500 text-white font-semibold text-lg shadow-xl hover:bg-primary-600 transition-colors"
               >
                 View Demo Tours
               </Link>

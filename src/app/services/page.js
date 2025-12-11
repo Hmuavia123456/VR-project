@@ -278,12 +278,12 @@ export default function ServicesPage() {
               Join thousands of professionals creating stunning 360° virtual experiences across every industry.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/register" className="bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-800 transition-colors">
+              <a href="/register" className="bg-primary-700 text-white px-8 py-3 font-semibold text-lg shadow-xl hover:bg-primary-800 transition-colors">
                 Start Free Trial
               </a>
               <a
                 href="/explore"
-                className="px-8 py-4 bg-primary-500 text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-600 transition-colors border-2 border-primary-600"
+                className="px-8 py-3 bg-primary-500 text-white font-semibold text-lg shadow-xl hover:bg-primary-600 transition-colors border-2 border-primary-600"
               >
                 View Examples
               </a>

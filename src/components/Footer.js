@@ -96,13 +96,6 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 sm:col-span-3 lg:col-span-1 mb-1.5 sm:mb-3 md:mb-0 text-center sm:text-left">
             <div className="flex items-center justify-center sm:justify-start space-x-1 sm:space-x-2 mb-1 sm:mb-2">
-              {/* Beautiful Logo */}
-              <div className="relative w-6 h-6 sm:w-9 sm:h-9 bg-gradient-to-br from-[#CBA35C] via-[#CBA35C] to-[#754E1A] rounded flex items-center justify-center shadow-lg flex-shrink-0">
-                <div className="absolute inset-0.5 bg-gradient-to-br from-[#754E1A] to-[#CBA35C] rounded"></div>
-                <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-white relative z-10" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                </svg>
-              </div>
               <span className="text-xs sm:text-base md:text-lg font-sans font-bold text-white">
                 Virtulee
               </span>

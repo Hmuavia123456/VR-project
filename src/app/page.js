@@ -26,48 +26,24 @@ const TourViewer = dynamic(() => import('@/components/TourViewer'), {
  */
 export default function HomePage() {
   const [selectedTour, setSelectedTour] = useState(null)
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
 
   const testimonials = [
     {
-      quote: "Virtulee helped us sell properties 3x faster. The 360° tours are incredibly easy to create and our clients love them!",
-      author: "Sarah Johnson",
-      role: "Real Estate Agent",
-      company: "Premier Properties"
+      quote: "Virtulee has transformed how we showcase properties. The 360° virtual tours are intuitive to create and our clients are amazed by the immersive experience. It's a game-changer for our real estate business!",
+      author: "Jennifer Martinez",
+      company: "Luxury Homes Realty"
     },
     {
-      quote: "Best investment for our hotel. Bookings increased by 45% after we added virtual tours to our website.",
-      author: "Michael Chen",
-      role: "Hotel Manager",
-      company: "Ocean View Resort"
+      quote: "The platform is incredibly user-friendly with powerful features. We've seen a 50% increase in online engagement since implementing virtual tours. Highly recommended for any business!",
+      author: "David Thompson",
+      company: "Coastal Resorts Group"
     },
     {
-      quote: "The interface is so simple, even non-tech people on our team can create professional tours in minutes.",
-      author: "Emily Rodriguez",
-      role: "Marketing Director",
-      company: "AutoMax Dealership"
-    },
-    {
-      quote: "Game changer for our museum! We can now reach audiences worldwide and preserve exhibitions digitally.",
-      author: "Dr. Amanda Foster",
-      role: "Museum Director",
-      company: "City Art Museum"
-    },
-    {
-      quote: "Our students love the virtual campus tours. Applications increased by 60% this year!",
-      author: "Robert Williams",
-      role: "Admissions Director",
-      company: "State University"
+      quote: "Outstanding quality and seamless integration. Virtulee has helped us create stunning virtual experiences that set us apart from competitors. The support team is also top-notch!",
+      author: "Rachel Kim",
+      company: "Urban Spaces Gallery"
     }
   ]
-
-  // Auto-rotate testimonials every 5 seconds
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
-    return () => clearInterval(timer)
-  }, [testimonials.length])
 
   return (
     <div className="w-full max-w-full overflow-x-hidden" suppressHydrationWarning>
@@ -138,7 +114,7 @@ export default function HomePage() {
                       { position: [-80, 0, 50], title: 'Bar Section', description: 'Full-service bar' },
                     ],
                   })}
-                  className="w-full sm:w-auto px-8 py-3 bg-[#CBA35C] text-white rounded-lg font-medium hover:bg-[#754E1A] transition-colors shadow-md hover:shadow-lg text-center"
+                  className="w-full sm:w-auto px-8 py-3 bg-[#CBA35C] text-white font-medium hover:bg-[#754E1A] transition-colors shadow-md hover:shadow-lg text-center"
                 >
                   WATCH VIRTUAL TOUR
                 </button>
@@ -180,7 +156,7 @@ export default function HomePage() {
                       { position: [-80, 20, 50], title: 'Outdoor View', description: 'Beautiful scenery' },
                     ],
                   })}
-                  className="w-full sm:w-auto px-8 py-3 bg-[#CBA35C] text-white rounded-lg font-medium hover:bg-[#754E1A] transition-colors shadow-md hover:shadow-lg text-center"
+                  className="w-full sm:w-auto px-8 py-3 bg-[#CBA35C] text-white font-medium hover:bg-[#754E1A] transition-colors shadow-md hover:shadow-lg text-center"
                 >
                   WATCH VIRTUAL TOUR
                 </button>
@@ -288,7 +264,7 @@ export default function HomePage() {
                       { position: [0, 40, -100], title: 'Sky View', description: 'Clear blue skies' },
                     ],
                   })}
-                  className="w-full sm:w-auto px-8 py-3 bg-[#CBA35C] text-white rounded-lg font-medium hover:bg-[#754E1A] transition-colors shadow-md hover:shadow-lg text-center"
+                  className="w-full sm:w-auto px-8 py-3 bg-[#CBA35C] text-white font-medium hover:bg-[#754E1A] transition-colors shadow-md hover:shadow-lg text-center"
                 >
                   WATCH VIRTUAL TOUR
                 </button>
@@ -324,7 +300,7 @@ export default function HomePage() {
                 features: ['Any 360° camera', 'Mobile app', 'DSLR panoramas'],
                 gradient: 'from-[#CBA35C] to-[#CBA35C]',
                 image: (
-                  <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden shadow-lg group">
+                  <div className="relative w-full h-48 mb-6 overflow-hidden shadow-lg group">
                     <img
                       src="/capture-camera.jpg"
                       alt="Capture with 360 camera"
@@ -346,9 +322,9 @@ export default function HomePage() {
                 features: ['Drag-and-drop', 'Hotspots', 'Custom branding'],
                 gradient: 'from-[#CBA35C] to-[#CBA35C]',
                 image: (
-                  <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden shadow-lg group">
+                  <div className="relative w-full h-48 mb-6 overflow-hidden shadow-lg group">
                     <img
-                      src="/create-software.jpg"
+                      src="/create-editor.jpg"
                       alt="Create and customize your tour"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
@@ -367,7 +343,7 @@ export default function HomePage() {
                 features: ['Instant hosting', 'Embed anywhere', 'Social sharing'],
                 gradient: 'from-[#CBA35C] to-[#754E1A]',
                 image: (
-                  <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden shadow-lg group">
+                  <div className="relative w-full h-48 mb-6 overflow-hidden shadow-lg group">
                     <img
                       src="/publish-share.webp"
                       alt="Publish and share your tour"
@@ -390,7 +366,7 @@ export default function HomePage() {
                 transition={{ delay: index * 0.1 }}
                 className="relative"
               >
-                <div className="relative bg-white rounded-2xl p-8 shadow-lg overflow-hidden border border-neutral-100">
+                <div className="relative bg-white p-8 shadow-lg overflow-hidden border border-neutral-100">
                   {/* Illustration Image */}
                   {item.image && item.image}
 
@@ -523,13 +499,12 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="group"
               >
-                <div className="bg-white rounded-xl p-5 shadow hover:shadow-lg transition-all duration-300 border border-neutral-100 text-center h-full">
-                  <div className="inline-flex p-3 rounded-lg bg-[#CBA35C] text-white mb-3 group-hover:scale-110 transition-transform">
+                <div className="bg-white p-5 shadow-md border-2 border-[#CBA35C]/30 hover:border-[#CBA35C]/60 transition-all duration-300 text-center h-full">
+                  <div className="inline-flex p-3 bg-[#CBA35C] text-white mb-3">
                     {industry.icon}
                   </div>
-                  <h3 className="font-bold text-[#CBA35C] mb-2 text-lg">{industry.title}</h3>
+                  <h3 className="font-bold text-[#754E1A] mb-2 text-lg">{industry.title}</h3>
                   <p className="text-sm text-neutral-600">{industry.desc}</p>
                 </div>
               </motion.div>
@@ -538,8 +513,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Social Proof Section - Slideshow */}
-      <section className="section bg-primary-50 w-full max-w-full">
+      {/* Testimonials Section - Kuula Style Cards */}
+      <section className="section bg-gray-50 w-full max-w-full">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -547,86 +522,62 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-[#754E1A] mb-4 sm:mb-6">
-              What Our Customers Say
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans font-bold text-[#754E1A] mb-4">
+              What users say about Virtulee
             </h2>
           </motion.div>
 
-          {/* Testimonial Slideshow */}
-          <div className="relative max-w-4xl mx-auto px-4 sm:px-0">
-            {/* Main Testimonial Card */}
-            <motion.div
-              key={currentTestimonial}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-gray-50 rounded-xl p-6 sm:p-8 md:p-12"
-            >
-              {/* Stars */}
-              <div className="flex gap-1 mb-4 sm:mb-6 justify-center">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
+          {/* Three Testimonial Cards - Kuula Style */}
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.15, duration: 0.5 }}
+                className="flex flex-col"
+              >
+                {/* White Card with Quote */}
+                <div className="bg-white p-6 shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col min-h-[220px] border-2 border-[#CBA35C]/20 hover:border-[#CBA35C]/40">
+                  {/* Golden Quote Mark */}
+                  <div className="text-[#CBA35C] text-4xl font-serif mb-2 leading-none">
+                    "
+                  </div>
 
-              {/* Quote */}
-              <p className="text-base sm:text-lg md:text-xl text-neutral-700 mb-6 sm:mb-8 text-center leading-relaxed">
-                "{testimonials[currentTestimonial].quote}"
-              </p>
-
-              {/* Author */}
-              <div className="text-center">
-                <div className="font-bold text-[#754E1A] text-lg">
-                  {testimonials[currentTestimonial].author}
+                  {/* Quote Text */}
+                  <p className="text-neutral-700 text-sm leading-relaxed flex-grow">
+                    {testimonial.quote}
+                  </p>
                 </div>
-                <div className="text-sm text-neutral-600">
-                  {testimonials[currentTestimonial].role}
+
+                {/* Author Info Below Card */}
+                <div className="mt-4 text-center">
+                  <div className="font-bold text-[#754E1A] text-sm mb-1 hover:underline cursor-pointer">
+                    {testimonial.author}
+                  </div>
+                  <div className="text-xs text-neutral-600 italic">
+                    {testimonial.company}
+                  </div>
                 </div>
-                <div className="text-sm text-[#CBA35C] font-medium">
-                  {testimonials[currentTestimonial].company}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Navigation Arrows */}
-            <button
-              onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-              className="absolute -left-2 sm:left-0 md:-left-16 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-full flex items-center justify-center text-[#754E1A] hover:bg-[#CBA35C] hover:text-white hover:border-[#236476] transition-all z-10"
-              aria-label="Previous testimonial"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-
-            <button
-              onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
-              className="absolute -right-2 sm:right-0 md:-right-16 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white border border-gray-200 rounded-full flex items-center justify-center text-[#754E1A] hover:bg-[#CBA35C] hover:text-white hover:border-[#236476] transition-all z-10"
-              aria-label="Next testimonial"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-
-            {/* Dots Navigation */}
-            <div className="flex justify-center gap-2 mt-8">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentTestimonial(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    currentTestimonial === index
-                      ? 'w-8 bg-[#CBA35C]'
-                      : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
-                />
-              ))}
-            </div>
+              </motion.div>
+            ))}
           </div>
+
+          {/* More Testimonials Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <Link
+              href="/testimonials"
+              className="inline-block px-8 py-3 border-2 border-[#CBA35C] text-[#754E1A] font-semibold hover:bg-[#CBA35C] hover:text-white hover:border-[#CBA35C] transition-all duration-300 uppercase text-sm tracking-wider shadow-md hover:shadow-lg"
+            >
+              More Testimonials
+            </Link>
+          </motion.div>
         </div>
       </section>
 
@@ -649,13 +600,13 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/register"
-                  className="bg-primary-400 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-700 transition-all hover:scale-105 text-center"
+                  className="bg-primary-400 text-white px-8 py-3 font-semibold text-lg shadow-xl hover:bg-primary-700 transition-all hover:scale-105 text-center"
                 >
                   Start Free Trial
                 </Link>
                 <Link
                   href="/pricing"
-                  className="px-8 py-4 bg-primary-600 text-white rounded-lg font-semibold text-lg shadow-xl hover:bg-primary-700 transition-all hover:scale-105 text-center"
+                  className="px-8 py-3 bg-primary-600 text-white font-semibold text-lg shadow-xl hover:bg-primary-700 transition-all hover:scale-105 text-center"
                 >
                   View Pricing
                 </Link>
