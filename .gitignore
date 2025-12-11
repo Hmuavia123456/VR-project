@@ -13,3 +13,10 @@ yarn-error.log*
 pnpm-debug.log*
 /out
 .claude/settings.local.json
+
+# Large HDR and image files (use CDN or Git LFS instead)
+*.hdr
+public/*.jpg
+public/*.png
+!public/*preview*.jpg
+!public/*preview*.png
